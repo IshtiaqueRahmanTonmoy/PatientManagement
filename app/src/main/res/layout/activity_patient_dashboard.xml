@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/sea_opt"
+    tools:context="com.patientmanagement.activity.PatientDashboard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="60dp">
+
+        <Button
+            android:id="@+id/appoinmentScheduleButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Appointment schedule"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+
+        <Button
+            android:id="@+id/paymentHistoryButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Payment history"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/upcommingScheduleButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Upcoming schedule"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/helthNewsButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Health news"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/helthTipsButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Health tips"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

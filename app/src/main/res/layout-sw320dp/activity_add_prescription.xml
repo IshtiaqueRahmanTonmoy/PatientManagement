@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageButton
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-120dp"
+            android:background="@drawable/profile_circular_border_imageview"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:scaleType="centerCrop"/>
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/coloraction"
+            android:elevation="4dp"
+            android:paddingBottom="24dp">
+
+
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient Name"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/user_profile_short_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient Address"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/PrescriptionNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Prescription No"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/medicinename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medicine Name"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/user_profile_name"
+                    android:layout_centerHorizontal="true" />
+
+                <Spinner
+                    android:id="@+id/MedicineName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:letterSpacing="0.025"
+                    android:background="#fff"
+                    android:textSize="16dp"
+                    android:padding="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/medicineunit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medicine Unit"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/user_profile_name"
+                    android:layout_centerHorizontal="true" />
+
+                <Spinner
+                    android:id="@+id/MedicineUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:letterSpacing="0.025"
+                    android:background="#fff"
+                    android:textSize="16dp"
+                    android:padding="12dp"/>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/Quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Quantity"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+            <EditText
+                android:id="@+id/Timeduration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Time Duration"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/afterbefore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medicine Name"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/user_profile_name"
+                    android:layout_centerHorizontal="true" />
+
+                <Spinner
+                    android:id="@+id/AfterorBefore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:letterSpacing="0.025"
+                    android:background="#fff"
+                    android:textSize="16dp"
+                    android:padding="12dp"/>
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/Frequent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Frequent"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+            <EditText
+                android:id="@+id/patientDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="10"
+                android:hint="Add Suggestions for patient"
+                android:minLines="5"
+                android:gravity="top|left"
+                android:maxLines="15" />
+
+            <Button
+                android:id="@+id/AddmoreMedicine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:text="@string/addmedicine"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
