@@ -62,7 +62,7 @@ public class MedicineAdapter extends ArrayAdapter<Medicine> {
             viewholder = new ViewHolder();
             viewholder.medicinename = (TextView) convertView.findViewById(R.id.medicinename);
             viewholder.medicineunit = (TextView) convertView.findViewById(R.id.unit);
-            viewholder.total = (TextView) convertView.findViewById(R.id.total);
+            viewholder.timeduration = (TextView) convertView.findViewById(R.id.timeduration);
 
             convertView.setTag(viewholder);
         }
@@ -74,12 +74,12 @@ public class MedicineAdapter extends ArrayAdapter<Medicine> {
 
         viewholder.medicinename.setText(items.getMedicineName());
         viewholder.medicineunit.setText(items.getUnit());
-        viewholder.total.setText(items.getTotal());
+        viewholder.timeduration.setText(items.getTimeduration());
 
         return convertView;
     }
 
     private static class ViewHolder {
-        public TextView medicinename,medicineunit,total,quantity;
+        public TextView medicinename,medicineunit,timeduration;
     }
 }

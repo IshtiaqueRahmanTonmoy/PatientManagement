@@ -54,7 +54,7 @@ public class PatientDetailActivity extends AppCompatActivity {
     ImageView image;
     TextView name,age,gender,address,mobphone,disease;
     Bitmap bmp1;
-    String namevalue,agevalue,gendervalue,addressvalue,mobphonevalue,diseasevalue;
+    String namevalue,agevalue,gendervalue,addressvalue,mobphonevalue,diseasevalue,doctorid;
     Button addPrescription,viewPrescription;
 
     @Override
@@ -72,6 +72,7 @@ public class PatientDetailActivity extends AppCompatActivity {
 
         if(b!=null) {
             phone =(String) b.get("mobile");
+            doctorid = (String) b.get("doctorid");
             //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
         }
 
@@ -90,6 +91,8 @@ public class PatientDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  Intent intent = new Intent(PatientDetailActivity.this,AddPrescriptionActivity.class);
+                 intent.putExtra("mobilephonevalue",mobphonevalue);
+                 intent.putExtra("doctorid",doctorid);
                  startActivity(intent);
             }
         });

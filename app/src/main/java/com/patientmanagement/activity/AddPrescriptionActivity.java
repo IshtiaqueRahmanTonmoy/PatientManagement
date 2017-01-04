@@ -9,12 +9,15 @@ import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ScrollingTabContainerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,15 +40,21 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Syst
 
 public class AddPrescriptionActivity extends AppCompatActivity {
 
-    EditText prescriptionNo,quantity,timeduration,frequent;
+    EditText prescriptionNo,quantity,timeduration,frequent,Suggestion;
     Spinner Medicinename,MedicineUnit,AfterorBefore;
     Button AddmoreMedicine;
     JSONParser jP = new JSONParser();
     private static final String TAG_MEDICINEURL = "http://darumadhaka.com/patientmanagement/medicineinfo.php";
     private static final String TAG_MediUnitURL = "http://darumadhaka.com/patientmanagement/medicineunit.php";
+    private static final String getmedicineinfo_url = "http://darumadhaka.com/patientmanagement/medicineunitid.php";
+    private static final String getmedicineunit_url = "http://darumadhaka.com/patientmanagement/medicineinfoget.php";
+
     private static final String TAG_MedicineName = "MediName";
     private static final String TAG_MediUnitId = "MediUnitId";
     private static final String TAG_UnitName = "UnitName";
+    private static final String TAG_MEDINFO = "medinfo";
+    private static final String TAG_INFOID = "MediInfoId";
+    private static final String TH = "th";
     String MediName,MediUnitId,MediUnitname,Total,Quantity;
     ArrayList<String> medicineList;
     ArrayList<String> medicineUnit;
@@ -58,11 +67,16 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     SystemClass sys;
     ArrayList<Medicine> result = new ArrayList<Medicine>();
     Medicine medicine;
-    String unitname,tduration;
+    String mobnopatient;
+    String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescription);
+
+        mobnopatient = getIntent().getExtras().getString("mobilephonevalue");
+        doctorid = getIntent().getExtras().getString("doctorid");
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-message-pass"));
@@ -80,6 +94,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         quantity = (EditText) findViewById(R.id.Quantity);
         timeduration = (EditText) findViewById(R.id.Timeduration);
         frequent = (EditText) findViewById(R.id.Frequent);
+        Suggestion = (EditText) findViewById(R.id.addSugestion);
         AddmoreMedicine = (Button) findViewById(R.id.AddmoreMedicine);
 
         cartList = new ArrayList<Medicine>();
@@ -100,27 +115,44 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         new MedicineName().execute();
         new MedicineUnit().execute();
 
+        Medicinename.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MedinnameParam = Medicinename.getSelectedItem().toString();
+                new GetInfoId().execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        MedicineUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MediUnitname = MedicineUnit.getSelectedItem().toString();
+                new GetMedinUnitId().execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         AddmoreMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 MediName = Medicinename.getSelectedItem().toString();
                 MediUnitname = MedicineUnit.getSelectedItem().toString();
+                afterbefore = AfterorBefore.getSelectedItem().toString();
                 Quantity = quantity.getText().toString();
                 tduration = timeduration.getText().toString();
+                frequently = frequent.getText().toString();
+                suggestion = Suggestion.getText().toString();
 
-              /*
-                int mu = Integer.parseInt(MediUnitname);
-                int qt = Integer.parseInt(Quantity);
-
-                double tot = mu * qt;
-                Total = String.valueOf(tot);
-              */
-
-                //Toast.makeText(AddPrescriptionActivity.this, ""+mu, Toast.LENGTH_SHORT).show();
-                // /int res = (int) Integer.parseInt(MediUnitname) * Integer.parseInt(Quantity);
-                //Total = String.valueOf(res);
-
+                Toast.makeText(AddPrescriptionActivity.this, ""+MedinfoId+""+MediUnitIdVal, Toast.LENGTH_SHORT).show();
                 result.add(new Medicine(MediName,MediUnitname,tduration));
 
                 //Toast.makeText(AddPrescriptionActivity.this, ""+MediName, Toast.LENGTH_SHORT).show();
@@ -130,6 +162,14 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
                 intent.putExtra("listget", listSerializedToJson);
                 intent.putExtra("val",values);
+                intent.putExtra("medinfoid",MedinfoId);
+                intent.putExtra("mediunitidval",MediUnitIdVal);
+                intent.putExtra("quantity",Quantity);
+                intent.putExtra("timeduration",tduration);
+                intent.putExtra("afterbefore",afterbefore);
+                intent.putExtra("frequently",frequently);
+                intent.putExtra("suggestion",suggestion);
+                intent.putExtra("mobnopatient",mobnopatient);
                 startActivity(intent);
             }
         });
@@ -258,6 +298,109 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 }
             });
 
+            return null;
+        }
+    }
+
+    private class GetInfoId extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(final String... params) {
+            // updating UI from Background Thread
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    // Check for success tag
+                    int success;
+                    try {
+                        // Building Parameters
+                        List<NameValuePair> params = new ArrayList<NameValuePair>();
+                        params.add(new BasicNameValuePair(TAG_MedicineName,"'"+MedinnameParam+"'"));
+
+                        // getting product details by making HTTP request
+                        // Note that product details url will use GET request
+                        JSONObject json = jP.makeHttpRequest(
+                                getmedicineunit_url, "GET", params);
+
+                        // check your log for json response
+                        Log.d("Single Product Details", json.toString());
+
+                        // json success tag
+                        success = json.getInt(TAG_SUCCESS);
+                        if (success == 1) {
+                            // successfully received product details
+                            JSONArray patientObj = json
+                                    .getJSONArray(TAG_MEDINFO); // JSON Array
+
+                            // get first product object from JSON Array
+                            JSONObject medinfo = patientObj.getJSONObject(0);
+
+                            // product with this pid found
+                            // Edit Text
+                            MedinfoId = medinfo.getString(TAG_INFOID);
+                            Log.d("mediInfoId",MedinfoId);
+                            //main.... text.setText(healthpo.getString(TAG_DETAILS));
+
+
+                        } else {
+                            // product with pid not found
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return null;
+        }
+    }
+
+    private class  GetMedinUnitId extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(final String... params) {
+            // updating UI from Background Thread
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    // Check for success tag
+                    int success;
+                    try {
+                        // Building Parameters
+                        List<NameValuePair> params = new ArrayList<NameValuePair>();
+                        params.add(new BasicNameValuePair(TAG_UnitName, MediUnitname));
+
+                        // getting product details by making HTTP request
+                        // Note that product details url will use GET request
+                        JSONObject json = jP.makeHttpRequest(
+                                getmedicineinfo_url , "GET", params);
+
+                        // check your log for json response
+                        Log.d("Single Product Details", json.toString());
+
+                        // json success tag
+                        success = json.getInt(TAG_SUCCESS);
+                        if (success == 1) {
+                            // successfully received product details
+                            JSONArray patientObj = json
+                                    .getJSONArray(TH); // JSON Array
+
+                            // get first product object from JSON Array
+                            JSONObject mediunit = patientObj.getJSONObject(0);
+
+                            // product with this pid found
+                            // Edit Text
+                            MediUnitIdVal = mediunit.getString(TAG_MediUnitId);
+                            Log.d("mediunitvalue",MediUnitIdVal);
+
+                            //main.... text.setText(healthpo.getString(TAG_DETAILS));
+
+
+                        } else {
+                            // product with pid not found
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             return null;
         }
     }

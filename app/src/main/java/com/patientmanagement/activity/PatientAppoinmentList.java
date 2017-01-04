@@ -116,6 +116,7 @@ public class PatientAppoinmentList extends AppCompatActivity {
                                      //       Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(PatientAppoinmentList.this,PatientDetailActivity.class);
                                     intent.putExtra("mobile",mobilenumber);
+                                    intent.putExtra("doctorid",doctorId);
                                     startActivity(intent);
                                 }
                             });
