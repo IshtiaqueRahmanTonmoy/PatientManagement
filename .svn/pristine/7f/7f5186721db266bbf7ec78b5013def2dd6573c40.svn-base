@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\doctorcustomlist.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\doctorcustomlist.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\activity_main.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\activity_health_tips.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\activity_health_tips.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\patient_appoint_list.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\patient_appoint_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\activity_doctor_list.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\activity_doctor_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\activity_patientlogin_detail.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\activity_patientlogin_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\toolbar.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\toolbar.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\row_item.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\row_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\doctorregistration.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\doctorregistration.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\register_activity.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\register_activity.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\row_header.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\row_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\doctorlogin.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\doctorlogin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw360dp-v13\\activity_patient_dashboard.xml",
+        "source": "C:\\Users\\Administrator\\Desktop\\Development\\PatientsManagementSystem\\app\\src\\main\\res\\layout-sw360dp\\activity_patient_dashboard.xml"
+    }
+]

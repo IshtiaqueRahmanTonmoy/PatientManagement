@@ -1,0 +1,349 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f1f5f8"
+    tools:context="com.patientmanagement.activity.PatientDetailActivity">
+
+    <include layout="@layout/toolbar">
+
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#f1f5f8"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            android:id="@+id/scrolbar1"
+            android:layout_below="@+id/mainlayout1"
+            android:scrollbars="none">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#f1f5f8"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/image_selector1">
+
+                    <LinearLayout
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom"
+                        android:background="#fcfafb">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/imagemain"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/imagev1"
+                        android:padding="2dp"
+                        android:layout_marginRight="10dp"
+                        android:textAlignment="center"
+                        android:background="@drawable/image_selector1"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:layout_gravity="bottom"
+                    android:elevation="6dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center"
+                    android:background="@drawable/cartbutton_selector">
+
+                    <TextView
+                        android:id="@+id/detail1"
+                        android:layout_weight="1"
+                        android:textSize="14dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Details"
+                        android:padding="5dp"
+                        android:textColor="@color/color_menufont"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom">
+                        <TextView
+                            android:id="@+id/tvPatientname"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvPatientnamevalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom">
+                        <TextView
+                            android:id="@+id/tvAge"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Age"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvAgevalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom">
+                        <TextView
+                            android:id="@+id/tvGender"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Gender"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvGendervalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom">
+                        <TextView
+                            android:id="@+id/tvPatientaddress"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Address"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvPatientaddressvalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom"
+
+                        >
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Phone"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvPatientPhonevalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="bottom"
+
+                        >
+                        <TextView
+                            android:id="@+id/tvDisease"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Disease"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                        <TextView
+                            android:id="@+id/tvPatientdiseasevalue"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Value"
+                            android:padding="5dp"
+                            android:textColor="@color/pro_cart_textcolor"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="bottom"
+                        android:background="#f1f5f8"
+                        >
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="bottom">
+
+                        <Button
+                            android:layout_weight="1"
+                            android:id="@+id/btnSimpleSnackbar1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="ADD TOO WISHLIST"
+                            android:layout_gravity="bottom"
+                            android:elevation="6dp"
+                            android:padding="10dp"
+                            android:textSize="15sp"
+                            android:background="@drawable/cartbutton_selector"
+                            android:textColor="@color/color_menufont"/>
+
+
+                        <Button
+                            android:layout_weight="1"
+                            android:id="@+id/btnSimpleSnackbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Add Prescription"
+                            android:layout_gravity="bottom"
+                            android:elevation="6dp"
+                            android:padding="10dp"
+                            android:textSize="13sp"
+                            android:background="@drawable/cartbutton_selector"
+                            android:textColor="@color/color_menufont"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>

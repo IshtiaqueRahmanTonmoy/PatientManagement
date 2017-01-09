@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_afc97467f481648181ea39ed3e672ba7228103bb.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.wdullaer\materialdatetimepicker\2.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a95fd025efad7b05be3d29737bec37652e0fdb9e">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.wdullaer-materialdatetimepicker-2.3.0_2e56980cc66a3973c32ce3545cbfe93b5647bf62.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9_297c2110c0ed5161e4cb188dc01f26df83cc4230.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client\1.22.0\244350c0c845c583717ade13f5666a452fd0cfa\google-api-client-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="0244350c0c845c583717ade13f5666a452fd0cfa">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-api-client-1.22.0_aae20dd85f44d89e8189a3085f88ddf9aa54df5b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.3\f6c3aed1cdfa21b5c1737c915186ea93a95a58bd\jackson-core-2.1.3.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.3_0074c298911108c284104616d1bf9a0770bf8729.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_a96a68fbb9ed339dd0724be44f8cf20835e3d011.jar" />
+    </item>
+    <item
+        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\com\google\code\gson\gson\2.2.4\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\gson-2.2.4_313aff129984a0a45e086871ec03bfcc02e7284e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client-android\1.22.0\7a0fe12b7d8189a821934d6f9d6586d00180e461\google-api-client-android-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="7a0fe12b7d8189a821934d6f9d6586d00180e461">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.22.0_ed67e6aeb982dc0e479ad97ce2d3c8f23e2bfefc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-jackson2\1.22.0\cc014d64ae11117e159d334c99d9c246d9b36f44\google-http-client-jackson2-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cc014d64ae11117e159d334c99d9c246d9b36f44">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-http-client-jackson2-1.22.0_ef7361ec2fb2b3511264916bb2f1ab3b79e6522b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.guava\guava-jdk5\17.0\463f8378feba44df7ba7cd9272d01837dad62b36\guava-jdk5-17.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="463f8378feba44df7ba7cd9272d01837dad62b36">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\guava-jdk5-17.0_3e313cd248a3fcd5cc810872e8c88d25365a8b4b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_85af302fbe8ac006473e59ac541ee1b535efec55.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.22.0\d441fc58329c4a4c067acec04ac361627f66ecc8\google-http-client-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d441fc58329c4a4c067acec04ac361627f66ecc8">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-http-client-1.22.0_33a9dfc7063fd67c8b7d7bba9b7a4f3214727082.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client-gson\1.22.0\ca557a4630f5d4690f008fe32231c7f41701c35d\google-api-client-gson-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ca557a4630f5d4690f008fe32231c7f41701c35d">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-api-client-gson-1.22.0_4d768c2518067b23e10ad7e8676c17fa0e62a296.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-gson\1.22.0\826b874fa410a8135b7094c469951bf0dadb0c10\google-http-client-gson-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="826b874fa410a8135b7094c469951bf0dadb0c10">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-http-client-gson-1.22.0_d2280055f7f6ef01866568e46459249acb7efe8a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.oauth-client\google-oauth-client\1.22.0\1d63f369ac78e4838a3197147012026e791008cb\google-oauth-client-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="1d63f369ac78e4838a3197147012026e791008cb">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.22.0_83c340b0aee83c4fffe8912f213b36e1ae2c0aba.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_dd8d9f5769f70fb105a7459fa571a8b5d1493b95.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_541fba354913c237ddc0554deb553985b28c1cee.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_c9fae43cda2e1c04b2ab0de43a8f148b5b1a92fa.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-android\1.22.0\6d1e1a76a16a244ab2f41775791be1dd0ec2878a\google-http-client-android-1.22.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="6d1e1a76a16a244ab2f41775791be1dd0ec2878a">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.22.0_ff2ae85f23711ac4cb2d4b0ea5e66f533ec3eaca.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_788cb194dc5e09f32641872b8d658364d8f7ea43.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\Administrator\Desktop\Development\PatientsManagementSystem\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_fa9d81057e426a13b543dd416dc8a7dd496bb5ff.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,224 @@
+package com.patientmanagement.activity;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
+
+public class RegistrationActivity extends AppCompatActivity {
+
+    private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/patientinfo.php";
+
+    private int PICK_IMAGE_REQUEST = 1;
+    public static final String KEY_NAME = "name";
+    public static final String KEY_Image = "image";
+    public static final String KEY_Age = "age";
+    public static final String KEY_Gender = "gender";
+    public static final String KEY_Address = "address";
+    public static final String KEY_PatientMobNo = "mobileno";
+    public static final String KEY_Disease = "disease";
+    public static final String KEY_EncryptedPassword = "encryptedpassword";
+    public static final String KEY_DATE = "date";
+
+    ImageView photoimage;
+    TextView uploadimage, signup, loginback;
+    EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,password;
+    String name,image, address, age, gender, mobileno, disease, epassword;
+
+    private static final String TAG_SUCCESS = "success";
+    JSONParser jsonParser = new JSONParser();
+    private Uri filePath;
+    private Bitmap bitmap;
+
+    private ProgressDialog pDialog;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.register_activity);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        photoimage = (ImageView) findViewById(R.id.patientimage);
+
+        uploadimage = (TextView) findViewById(R.id.imageupload);
+        signup = (TextView) findViewById(R.id.signup);
+        loginback = (TextView) findViewById(R.id.login);
+
+        patientname = (EditText) findViewById(R.id.name);
+        patientaddress = (EditText) findViewById(R.id.address);
+        patientage = (EditText) findViewById(R.id.age);
+        patientgender = (EditText) findViewById(R.id.gender);
+        patientmobileno = (EditText) findViewById(R.id.mobileno);
+        diseasename = (EditText) findViewById(R.id.disease);
+        password = (EditText) findViewById(R.id.password);
+
+        uploadimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+
+        patientmobileno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSpinnerDialog();
+            }
+        });
+        
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name = patientname.getText().toString();
+                image = getStringImage(bitmap);
+                address = patientaddress.getText().toString();
+                age = patientage.getText().toString();
+                gender = patientgender.getText().toString();
+                mobileno = patientmobileno.getText().toString();
+                disease = diseasename.getText().toString();
+                epassword = password.getText().toString();
+
+                //Toast.makeText(RegistrationActivity.this, ""+password, Toast.LENGTH_SHORT).show();
+               
+                 new CreateNewUser().execute();
+            }
+        });
+    }
+
+    private void showSpinnerDialog() {
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            filePath = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                photoimage.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+
+    class CreateNewUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(RegistrationActivity.this);
+            pDialog.setMessage("Creating User..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+
+        protected String doInBackground(String... args) {
+
+          runOnUiThread(new Runnable() {
+              @Override
+              public void run() {
+
+                  Toast.makeText(RegistrationActivity.this, ""+name+""+age, Toast.LENGTH_SHORT).show();
+
+                  List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+
+                  params.add(new BasicNameValuePair(KEY_NAME, name));
+                  params.add(new BasicNameValuePair(KEY_Image, image));
+                  params.add(new BasicNameValuePair(KEY_Age, age));
+                  params.add(new BasicNameValuePair(KEY_Gender, gender));
+                  params.add(new BasicNameValuePair(KEY_Address, address));
+                  params.add(new BasicNameValuePair(KEY_PatientMobNo, mobileno));
+                  params.add(new BasicNameValuePair(KEY_Disease, disease));
+                  params.add(new BasicNameValuePair(KEY_EncryptedPassword, epassword));
+                  params.add(new BasicNameValuePair(KEY_DATE, "4/4/16"));
+
+
+                  // getting JSON Object
+                  // Note that create product url accepts POST method
+                  JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
+                  Log.d("json",json.toString());
+                  // check log cat fro response
+                  //Log.d("Create Response", json.toString());
+
+                  // check for success tag
+                  try {
+
+                      int success = json.getInt(TAG_SUCCESS);
+
+                      Toast.makeText(RegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                      if (success == 1) {
+                          // successfully created product
+
+                          Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                          startActivity(i);
+
+                          // closing this screen
+                          finish();
+                      } else {
+                          // failed to create product
+                      }
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+              }
+          });
+                  return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
+    }
+}

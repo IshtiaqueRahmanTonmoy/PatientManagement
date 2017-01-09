@@ -1,0 +1,22 @@
+package com.patientmanagement.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ListView;
+
+import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
+
+public class HealthTips extends AppCompatActivity {
+
+    ListView listview;
+    //String value={}
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_health_tips);
+
+        listview = (ListView) findViewById(R.id.listview);
+
+    }
+}

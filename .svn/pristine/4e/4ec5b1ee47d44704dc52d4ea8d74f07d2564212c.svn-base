@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Patient_Management_System</string>
+    <string name="chamberstarttime">Start Time</string>
+    <string name="chamberendtime">End Time</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="doctorname">Doctorname</string>
+    <string name="address">Address</string>
+    <string name="expertise">Expertise</string>
+</resources>
