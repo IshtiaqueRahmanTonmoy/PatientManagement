@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:background="@color/background"
+    android:id="@+id/relativelayout">
+    <!-- ListRow Left sied Thumbnail image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+        <TextView
+            android:id="@+id/medicinename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dip"
+            android:textColor="@color/titlecolor"
+            android:layout_centerHorizontal="true"
+            android:text="MedicineName"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+        <TextView
+            android:id="@+id/unitmg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dname"
+            android:paddingTop="5dip"
+            android:textColor="@color/designation"
+            android:layout_centerHorizontal="true"
+            android:text="Unit(mg)"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+        <TextView
+            android:id="@+id/frequently"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/designation"
+            android:paddingTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:text="Frequently"
+            android:textStyle="bold"
+            android:textColor="@color/hospital"
+            android:textSize="15dip" />
+
+        <TextView
+            android:id="@+id/afterOrBefore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hospital"
+            android:paddingTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/hospital"
+            android:text="After or Before"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+
+        <TextView
+            android:id="@+id/timeDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hospital"
+            android:paddingTop="5dip"
+            android:textColor="@color/hospital"
+            android:layout_centerHorizontal="true"
+            android:text="Time Duration"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+
+    </LinearLayout>
+    <!-- Rightend Arrow -->
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:textColor="@color/dt"
+        android:id="@+id/time"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageview"
+        android:layout_alignEnd="@+id/imageview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:textColor="@color/dt"
+        android:id="@+id/date"
+        android:layout_alignBaseline="@+id/time"
+        android:layout_alignBottom="@+id/time"
+        android:layout_toLeftOf="@+id/time"
+        android:layout_toStartOf="@+id/time"
+        android:layout_marginRight="34dp"
+        android:layout_marginEnd="34dp" />
+</RelativeLayout>

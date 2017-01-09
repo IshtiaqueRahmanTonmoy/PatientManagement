@@ -114,12 +114,12 @@
                     <TextView
                         android:id="@+id/detail1"
                         android:layout_weight="1"
-                        android:textSize="14dp"
+                        android:textSize="18dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Details"
                         android:padding="5dp"
-                        android:textColor="@color/color_menufont"
+                        android:textColor="#3d3e3e"
                         />
 
                     <LinearLayout
@@ -130,22 +130,22 @@
                         <TextView
                             android:id="@+id/tvPatientname"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Name"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvPatientnamevalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#245644"
                             />
                     </LinearLayout>
 
@@ -157,22 +157,22 @@
                         <TextView
                             android:id="@+id/tvAge"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Age"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvAgevalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#245644"
                             />
                     </LinearLayout>
 
@@ -184,22 +184,22 @@
                         <TextView
                             android:id="@+id/tvGender"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Gender"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvGendervalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#245644"
                             />
                     </LinearLayout>
 
@@ -211,23 +211,22 @@
                         <TextView
                             android:id="@+id/tvPatientaddress"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Address"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvPatientaddressvalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
-                            android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
-                            />
+                            android:textColor="#245644"
+                            android:padding="5dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -240,22 +239,22 @@
                         <TextView
                             android:id="@+id/tvPhone"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Phone"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvPatientPhonevalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#245644"
                             />
                     </LinearLayout>
 
@@ -271,22 +270,22 @@
                         <TextView
                             android:id="@+id/tvDisease"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Disease"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#123150"
                             />
                         <TextView
                             android:id="@+id/tvPatientdiseasevalue"
                             android:layout_weight="1"
-                            android:textSize="12dp"
+                            android:textSize="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Value"
                             android:padding="5dp"
-                            android:textColor="@color/pro_cart_textcolor"
+                            android:textColor="#245644"
                             />
                     </LinearLayout>
 

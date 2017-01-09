@@ -33,7 +33,9 @@
         <activity android:name="com.patientmanagement.activity.PatientAppoinmentList" />
         <activity android:name="com.patientmanagement.activity.PatientDetailActivity" />
         <activity android:name="com.patientmanagement.activity.AddPrescriptionActivity" />
-        <activity android:name="com.patientmanagement.activity.MedicineList"></activity>
+        <activity android:name="com.patientmanagement.activity.MedicineList" />
+        <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity"/>
+
     </application>
 
 </manifest>

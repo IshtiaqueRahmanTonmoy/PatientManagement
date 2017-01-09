@@ -12,4 +12,9 @@
     <string name="submitmedicine">Submit Prescription</string>
     <string name="details">Details</string>
 
+    <string name="mediciniename">Medicine Name</string>
+    <string name="unit">Unit</string>
+    <string name="frequently">Frequentlty</string>
+    <string name="afterbefore">After or Before</string>
+    <string name="timeduration">Time Duration</string>
 </resources>

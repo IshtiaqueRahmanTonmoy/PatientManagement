@@ -399,7 +399,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-
                     params.add(new BasicNameValuePair(KEY_NAME, name));
                     params.add(new BasicNameValuePair(KEY_Image, image));
                     params.add(new BasicNameValuePair(KEY_Address, address));

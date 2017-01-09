@@ -68,16 +68,18 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     ArrayList<Medicine> result = new ArrayList<Medicine>();
     Medicine medicine;
     String mobnopatient;
-    String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid;
-
+    String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid,prescriptionno;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescription);
 
+        i = i +1;
         mobnopatient = getIntent().getExtras().getString("mobilephonevalue");
         doctorid = getIntent().getExtras().getString("doctorid");
 
+        prescriptionno = "00000000".substring(doctorid.length()) + doctorid;
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-message-pass"));
 
@@ -96,6 +98,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         frequent = (EditText) findViewById(R.id.Frequent);
         Suggestion = (EditText) findViewById(R.id.addSugestion);
         AddmoreMedicine = (Button) findViewById(R.id.AddmoreMedicine);
+
+        prescriptionNo.setText(""+prescriptionno);
 
         cartList = new ArrayList<Medicine>();
         sys = new SystemClass();
@@ -152,8 +156,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 frequently = frequent.getText().toString();
                 suggestion = Suggestion.getText().toString();
 
-                Toast.makeText(AddPrescriptionActivity.this, ""+MedinfoId+""+MediUnitIdVal, Toast.LENGTH_SHORT).show();
-                result.add(new Medicine(MediName,MediUnitname,tduration));
+                Toast.makeText(AddPrescriptionActivity.this, "Quantity"+Quantity, Toast.LENGTH_SHORT).show();
+                result.add(new Medicine(MediName,MedinfoId,MediUnitname,MediUnitIdVal,Quantity,tduration,afterbefore,frequently,suggestion));
 
                 //Toast.makeText(AddPrescriptionActivity.this, ""+MediName, Toast.LENGTH_SHORT).show();
 
@@ -161,6 +165,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 String listSerializedToJson = new Gson().toJson(result);
 
                 intent.putExtra("listget", listSerializedToJson);
+                intent.putExtra("prescriptinno",i);
                 intent.putExtra("val",values);
                 intent.putExtra("medinfoid",MedinfoId);
                 intent.putExtra("mediunitidval",MediUnitIdVal);
@@ -169,6 +174,8 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 intent.putExtra("afterbefore",afterbefore);
                 intent.putExtra("frequently",frequently);
                 intent.putExtra("suggestion",suggestion);
+                intent.putExtra("prescriptionno",prescriptionno);
+                intent.putExtra("doctorid",doctorid);
                 intent.putExtra("mobnopatient",mobnopatient);
                 startActivity(intent);
             }
@@ -181,8 +188,6 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
             sys.getMedicine().clear();
             String carListAsString = intent.getStringExtra("listget");
-
-
             Gson gson = new Gson();
             Type type = new TypeToken<List<Medicine>>(){}.getType();
             cartList = gson.fromJson(carListAsString, type);

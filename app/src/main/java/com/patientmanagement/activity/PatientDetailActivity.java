@@ -97,6 +97,14 @@ public class PatientDetailActivity extends AppCompatActivity {
             }
         });
 
+        viewPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientDetailActivity.this,ViewPrescriptionActivity.class);
+                startActivity(intent);
+            }
+        });
+
         getPatientDetail();
     }
 

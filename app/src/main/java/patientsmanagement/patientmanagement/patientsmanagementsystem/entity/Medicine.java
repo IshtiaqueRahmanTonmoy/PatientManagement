@@ -4,18 +4,54 @@ package patientsmanagement.patientmanagement.patientsmanagementsystem.entity;
  * Created by Administrator on 12/28/2016.
  */
 public class Medicine {
-    String medicineName,Unit,quantity;
-    String total,timeduration;
+    String medicineName,Unit,afterbefore,Quantity;
+    String frequently;
+    String timeduration;
+    String medinfo;
+    String suggestion;
+
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
+    }
+
+    public Medicine(String medicineName, String medinfo, String Unit, String unival, String Quantity, String timeduration, String afterbefore, String frequently, String suggestion) {
+        this.medicineName = medicineName;
+        this.medinfo = medinfo;
+        this.Unit = Unit;
+        this.unival = unival;
+        this.Quantity = Quantity;
+        this.timeduration = timeduration;
+        this.afterbefore = afterbefore;
+        this.frequently = frequently;
+        this.suggestion = suggestion;
+    }
 
     public Medicine() {
 
     }
 
-    public Medicine(String medicineName, String Unit,String timeduration){
-        this.medicineName = medicineName;
-        this.Unit = Unit;
-        this.timeduration = timeduration;
+    public String getUnival() {
+        return unival;
     }
+
+    public void setUnival(String unival) {
+        this.unival = unival;
+    }
+
+    public String getMedinfo() {
+        return medinfo;
+    }
+
+    public void setMedinfo(String medinfo) {
+        this.medinfo = medinfo;
+    }
+
+    String unival;
+
 
     public String getTimeduration() {
         return timeduration;
@@ -47,15 +83,27 @@ public class Medicine {
     }
 
     public String getQuantity() {
-        return quantity;
+        return Quantity;
     }
 
-    public String getTotal() {
-        return total;
+    public void setQuantity(String Quantity) {
+        this.Quantity = Quantity;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public String getAfterbefore() {
+        return afterbefore;
+    }
+
+    public void setAfterbefore(String afterbefore) {
+        this.afterbefore = afterbefore;
+    }
+
+    public String getFrequently() {
+        return frequently;
+    }
+
+    public void setFrequently(String frequently) {
+        this.frequently = frequently;
     }
 
     public void setQuantity(int quantity) {
