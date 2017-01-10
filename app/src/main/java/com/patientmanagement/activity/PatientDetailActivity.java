@@ -101,6 +101,8 @@ public class PatientDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PatientDetailActivity.this,ViewPrescriptionActivity.class);
+                intent.putExtra("mobilephonevalue",mobphonevalue);
+                intent.putExtra("doctorid",doctorid);
                 startActivity(intent);
             }
         });

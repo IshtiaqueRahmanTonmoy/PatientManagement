@@ -7,6 +7,7 @@
     android:background="@color/background"
     android:id="@+id/relativelayout">
     <!-- ListRow Left sied Thumbnail image -->
+
     <LinearLayout
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dname"
             android:paddingTop="5dip"
-            android:textColor="@color/designation"
+            android:textColor="@color/titlecolor"
             android:layout_centerHorizontal="true"
             android:text="Unit(mg)"
             android:textStyle="bold"
@@ -45,7 +46,7 @@
             android:layout_centerHorizontal="true"
             android:text="Frequently"
             android:textStyle="bold"
-            android:textColor="@color/hospital"
+            android:textColor="@color/titlecolor"
             android:textSize="15dip" />
 
         <TextView
@@ -55,10 +56,23 @@
             android:layout_below="@+id/hospital"
             android:paddingTop="5dip"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/hospital"
+            android:textColor="@color/titlecolor"
             android:text="After or Before"
             android:textStyle="bold"
             android:textSize="15dip" />
+
+        <TextView
+            android:id="@+id/QuantityMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hospital"
+            android:paddingTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/titlecolor"
+            android:text="Quantity"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+
 
         <TextView
             android:id="@+id/timeDuration"
@@ -66,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/hospital"
             android:paddingTop="5dip"
-            android:textColor="@color/hospital"
+            android:textColor="@color/titlecolor"
             android:layout_centerHorizontal="true"
             android:text="Time Duration"
             android:textStyle="bold"

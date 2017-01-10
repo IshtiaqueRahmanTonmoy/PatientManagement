@@ -61,6 +61,19 @@
             android:textSize="15dip" />
 
         <TextView
+            android:id="@+id/QuantityMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hospital"
+            android:paddingTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/hospital"
+            android:text="Quantity"
+            android:textStyle="bold"
+            android:textSize="15dip" />
+
+
+        <TextView
             android:id="@+id/timeDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
