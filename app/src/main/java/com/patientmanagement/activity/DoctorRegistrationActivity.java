@@ -42,7 +42,6 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
     private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/doctorregistration.php";
-    //private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/AppSchedule.php";
     private int PICK_IMAGE_REQUEST = 1;
     private static final String TAG_SUCCESS = "success";
 
@@ -70,6 +69,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private Uri filePath;
     private Bitmap bitmap;
     private ProgressDialog pDialog;
+    StringBuffer responseText = new StringBuffer();
 
     String[] AlertDialogItems = new String[]{
             "E.N.T Specialist",
@@ -129,7 +129,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         doctorfeeEdt = (EditText) findViewById(R.id.doctorfee);
         followupfeeEdt = (EditText) findViewById(R.id.followupfee);
         passwordEdt = (EditText) findViewById(R.id.password);
-
         doctorimagepic = (ImageView) findViewById(R.id.doctorimage);
 
         signup = (TextView) findViewById(R.id.signup);
@@ -170,14 +169,17 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        StringBuffer responseText = new StringBuffer();
                         int a = 0;
                         while (a < Selectedtruefalse.length) {
                             boolean value = Selectedtruefalse[a];
 
                             if (value) {
-                                expertiseEdt.setText("" + ItemsIntoList.get(a).toString());
+                                String names = ItemsIntoList.get(a);
+                                responseText.append(names);
+                                expertiseEdt.setText("" + responseText);
                             }
-                            a++;
+                              a++;
                         }
                     }
                 });
@@ -214,13 +216,15 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        StringBuffer responseTxt = new StringBuffer();
                         int a = 0;
                         while (a < Selectedtruefalseforday.length) {
                             boolean value = Selectedtruefalseforday[a];
 
                             if (value) {
-                                //Toast.makeText(DoctorRegistrationActivity.this, ""+dayIntoList.get(a).toString(), Toast.LENGTH_SHORT).show();
-                                chamberdayEdt.setText("" + dayIntoList.get(a).toString());
+                                String names = dayIntoList.get(a);
+                                responseTxt.append(names);
+                                chamberdayEdt.setText("" + responseTxt);
                             }
                             a++;
                         }
@@ -334,7 +338,13 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                image = getStringImage(bitmap);
+                if(bitmap!=null) {
+                    image = getStringImage(bitmap);
+                }
+                else{
+                    image = "";
+                }
+
                 name = nameEdt.getText().toString();
                 address = addressEdt.getText().toString();
                 phone = phoneEdt.getText().toString();
@@ -391,12 +401,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    //Toast.makeText(DoctorRegistrationActivity.this, ""+name+""+age, Toast.LENGTH_SHORT).show();
-
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
 
                     params.add(new BasicNameValuePair(KEY_NAME, name));
@@ -410,35 +414,34 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     params.add(new BasicNameValuePair(KEY_Followupfee, followupfee));
                     params.add(new BasicNameValuePair(KEY_Password, password));
 
-                    // getting JSON Object
-                    // Note that create product url accepts POST method
                     JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
-                    //Log.d("json",json.toString());
-                    // check log cat fro response
-                    //Log.d("Create Response", json.toString());
 
-                    // check for success tag
                     try {
 
                         int success = json.getInt(TAG_SUCCESS);
 
-                        Toast.makeText(DoctorRegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DoctorRegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
 
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(i);
+                            DoctorRegistrationActivity.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(DoctorRegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(getApplicationContext(), DoctorLoginActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
 
                             // closing this screen
-                            finish();
+
                         } else {
                             // failed to create product
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
 

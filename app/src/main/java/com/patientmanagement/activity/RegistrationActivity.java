@@ -1,7 +1,9 @@
 package com.patientmanagement.activity;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,6 +26,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
@@ -47,14 +51,37 @@ public class RegistrationActivity extends AppCompatActivity {
     ImageView photoimage;
     TextView uploadimage, signup, loginback;
     EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,password;
-    String name,image, address, age, gender, mobileno, disease, epassword;
+    String name;
+    String image;
+    String address;
+    String age;
+    String gender;
+    String mobileno;
+    String disease;
+    String epassword;
+    String date;
 
     private static final String TAG_SUCCESS = "success";
     JSONParser jsonParser = new JSONParser();
     private Uri filePath;
     private Bitmap bitmap;
-
+    private Calendar calendar;
     private ProgressDialog pDialog;
+    private int year, month, day;
+    AlertDialog.Builder alertdialogbuilder;
+
+    String[] AlertDialogItems = new String[]{
+            "Male",
+            "Female"
+    };
+
+    boolean[] Selectedtruefalse = new boolean[]{
+            false,
+            false
+    };
+
+    List<String> ItemsIntoList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +106,52 @@ public class RegistrationActivity extends AppCompatActivity {
         diseasename = (EditText) findViewById(R.id.disease);
         password = (EditText) findViewById(R.id.password);
 
+        patientgender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertdialogbuilder = new AlertDialog.Builder(RegistrationActivity.this);
+
+                ItemsIntoList = Arrays.asList(AlertDialogItems);
+
+                alertdialogbuilder.setMultiChoiceItems(AlertDialogItems, Selectedtruefalse, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    }
+                });
+
+                alertdialogbuilder.setCancelable(false);
+                alertdialogbuilder.setTitle("Select Gender Here");
+
+                alertdialogbuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        StringBuffer responseText = new StringBuffer();
+                        int a = 0;
+                        while (a < Selectedtruefalse.length) {
+                            boolean value = Selectedtruefalse[a];
+
+                            if (value) {
+                                String names = ItemsIntoList.get(a);
+                                responseText.append(names);
+                                patientgender.setText("" + responseText);
+                            }
+                            a++;
+                        }
+                    }
+                });
+
+                alertdialogbuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = alertdialogbuilder.create();
+                dialog.show();
+            }
+        });
+
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +173,12 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name = patientname.getText().toString();
-                image = getStringImage(bitmap);
+                if(bitmap!=null) {
+                    image = getStringImage(bitmap);
+                }
+                else{
+                    image = "";
+                }
                 address = patientaddress.getText().toString();
                 age = patientage.getText().toString();
                 gender = patientgender.getText().toString();
@@ -108,9 +186,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 disease = diseasename.getText().toString();
                 epassword = password.getText().toString();
 
-                //Toast.makeText(RegistrationActivity.this, ""+password, Toast.LENGTH_SHORT).show();
-               
-                 new CreateNewUser().execute();
+                new CreateNewUser().execute();
             }
         });
     }
@@ -118,7 +194,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private void showSpinnerDialog() {
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,6 +211,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -144,12 +220,8 @@ public class RegistrationActivity extends AppCompatActivity {
         return encodedImage;
     }
 
-
     class CreateNewUser extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -163,14 +235,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-          runOnUiThread(new Runnable() {
-              @Override
-              public void run() {
-
-                  Toast.makeText(RegistrationActivity.this, ""+name+""+age, Toast.LENGTH_SHORT).show();
-
                   List<NameValuePair> params = new ArrayList<NameValuePair>();
-
 
                   params.add(new BasicNameValuePair(KEY_NAME, name));
                   params.add(new BasicNameValuePair(KEY_Image, image));
@@ -180,38 +245,32 @@ public class RegistrationActivity extends AppCompatActivity {
                   params.add(new BasicNameValuePair(KEY_PatientMobNo, mobileno));
                   params.add(new BasicNameValuePair(KEY_Disease, disease));
                   params.add(new BasicNameValuePair(KEY_EncryptedPassword, epassword));
-                  params.add(new BasicNameValuePair(KEY_DATE, "4/4/16"));
 
-
-                  // getting JSON Object
-                  // Note that create product url accepts POST method
                   JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
-                  Log.d("json",json.toString());
-                  // check log cat fro response
-                  //Log.d("Create Response", json.toString());
 
-                  // check for success tag
                   try {
 
                       int success = json.getInt(TAG_SUCCESS);
 
-                      Toast.makeText(RegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                     // Toast.makeText(RegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                       if (success == 1) {
                           // successfully created product
 
-                          Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                          startActivity(i);
-
-                          // closing this screen
-                          finish();
+                          RegistrationActivity.this.runOnUiThread(new Runnable() {
+                              public void run() {
+                                  Toast.makeText(RegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
+                                  Intent i = new Intent(getApplicationContext(), PatientDashboard.class);
+                                  startActivity(i);
+                                  finish();
+                              }
+                          });
                       } else {
                           // failed to create product
                       }
                   } catch (JSONException e) {
                       e.printStackTrace();
                   }
-              }
-          });
+
                   return null;
         }
 

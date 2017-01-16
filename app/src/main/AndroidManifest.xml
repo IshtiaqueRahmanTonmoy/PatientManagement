@@ -13,10 +13,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.patientmanagement.activity.MainActivity"
+            android:name="com.patientmanagement.activity.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +25,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.patientmanagement.activity.MainActivity" />
         <activity android:name="com.patientmanagement.activity.RegistrationActivity" />
         <activity android:name="com.patientmanagement.activity.DoctorLoginActivity" />
         <activity android:name="com.patientmanagement.activity.DoctorRegistrationActivity" />
         <activity android:name="com.patientmanagement.activity.DoctorListActivity" />
         <activity android:name="com.patientmanagement.activity.PatientDashboard" />
         <activity android:name="com.patientmanagement.activity.HealthTips" />
+        <activity android:name="com.patientmanagement.activity.HealthNews" />
+        <activity android:name="com.patientmanagement.activity.HealthtipsDetail" />
+        <activity android:name="com.patientmanagement.activity.HealthNewsDetails" />
         <activity android:name="com.patientmanagement.activity.PatientAppoinmentList" />
         <activity android:name="com.patientmanagement.activity.PatientDetailActivity" />
         <activity android:name="com.patientmanagement.activity.AddPrescriptionActivity" />
         <activity android:name="com.patientmanagement.activity.MedicineList" />
-        <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity"/>
-
+        <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity" />
+        <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory"></activity>
     </application>
 
 </manifest>

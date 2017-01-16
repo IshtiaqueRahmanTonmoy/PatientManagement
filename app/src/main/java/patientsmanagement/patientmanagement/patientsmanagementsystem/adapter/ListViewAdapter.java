@@ -60,8 +60,8 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
             inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            vi = inflater.inflate(R.layout.doctorcustomlist,null);
-
+            vi = inflater.inflate(R.layout.doctorcustomlist, null);
+        }
             holder.name = (TextView) vi.findViewById(R.id.tvDoctor);
             holder.address = (TextView) vi.findViewById(R.id.tvAddress);
             holder.mobileno = (TextView) vi.findViewById(R.id.tvMobileNo);
@@ -72,12 +72,6 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
             holder.time = (TextView) vi.findViewById(R.id.tvTime);
             holder.image = (ImageView) vi.findViewById(R.id.ivIcon);
 
-            vi.setTag(holder);
-        } else {
-
-            holder = (ViewHolder) rowView.getTag();
-        }
-
         holder.name.setText(ldoc.getName());
         holder.address.setText(ldoc.getAddress());
         holder.mobileno.setText(ldoc.getPhone());
@@ -87,6 +81,8 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
         holder.followupfee.setText(ldoc.getFollowupfeee());
         holder.date.setText(ldoc.getChamberday());
         holder.time.setText(ldoc.getChambertime());
+
+        vi.setTag(holder);
 
         return vi;
     }

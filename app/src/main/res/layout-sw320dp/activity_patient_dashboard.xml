@@ -29,10 +29,10 @@
 
 
         <Button
-            android:id="@+id/paymentHistoryButton"
+            android:id="@+id/appoinmentDetailButton"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Payment history"
+            android:text="Appoinemnt Details"
             android:textSize="16dp"
             android:textColor="#fff"
             android:textAlignment="center"

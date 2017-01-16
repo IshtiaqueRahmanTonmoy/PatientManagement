@@ -95,6 +95,7 @@ public class DoctorListActivity extends AppCompatActivity {
         if(b!=null)
         {
             phone =(String) b.get("mobile");
+            new LoadName().execute();
             //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
         }
 
@@ -134,7 +135,6 @@ public class DoctorListActivity extends AppCompatActivity {
     DialogInterface.OnClickListener listenerAccept = new DialogInterface.OnClickListener() {
 
         public void onClick(DialogInterface dialog, int which) {
-            new LoadName().execute();
             new CreateAppoinment().execute();
         }
     };
@@ -247,6 +247,7 @@ public class DoctorListActivity extends AppCompatActivity {
                     params.add(new BasicNameValuePair(TAG_TIME, time));
                     params.add(new BasicNameValuePair(TAG_DOCTORID, docid));
 
+                    Log.d("param",params.toString());
                     // getting JSON Object
                     // Note that create product url accepts POST method
                     JSONObject json = jParser.makeHttpRequest(REGISTER_URL, "POST", params);
@@ -262,8 +263,8 @@ public class DoctorListActivity extends AppCompatActivity {
                         Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
-
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), PatientDashboard.class);
                             startActivity(i);
 
                             // closing this screen
@@ -335,6 +336,7 @@ public class DoctorListActivity extends AppCompatActivity {
                             name = lnews.getString(TAG_NAME);
                             disease = lnews.getString(TAG_DISEASE);
 
+                            Log.d("valuessss",patientid+name+disease+phone);
                             Toast.makeText(DoctorListActivity.this, "id"+ patientid + "name"+ name+"consult for"+disease, Toast.LENGTH_SHORT).show();
                             //main.... text.setText(healthpo.getString(TAG_DETAILS));
 

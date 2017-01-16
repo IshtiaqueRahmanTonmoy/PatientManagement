@@ -70,6 +70,7 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
     private PrescriptionAdapter prescriptionadapter = null;
     private ArrayList<Prescription> prescriptionlist;
     Prescription prescriptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

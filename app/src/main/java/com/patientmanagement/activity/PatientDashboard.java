@@ -11,22 +11,44 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 public class PatientDashboard extends AppCompatActivity {
 
     private Button appoinmentSchedule;
-    private Button healthTips;
+    private Button healthTips,healthNews;
+    String phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_dashboard);
 
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+            phone =(String) b.get("mobile");
+            //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
+        }
+
         appoinmentSchedule = (Button)findViewById(R.id.appoinmentScheduleButton);
         healthTips=(Button)findViewById(R.id.helthTipsButton);
+        healthNews = (Button) findViewById(R.id.helthNewsButton);
+
         appoinmentSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PatientDashboard.this,DoctorListActivity.class);
-                startActivity(intent);
+                Intent ii = new Intent(PatientDashboard.this,DoctorListActivity.class);
+                ii.putExtra("mobile",phone);
+                finish();
+                startActivity(ii);
             }
         });
 
+        healthNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientDashboard.this,HealthNews.class);
+                startActivity(intent);
+            }
+        });
         healthTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
