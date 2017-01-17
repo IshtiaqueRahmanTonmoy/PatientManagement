@@ -5,12 +5,29 @@ package patientsmanagement.patientmanagement.patientsmanagementsystem.entity;
  *
  */
 public class Person {
-    private String name,disease,mobileno,time;
+    private String name,disease,mobileno,time,date;
 
     public Person(String name, String disease,String mobileno,String time) {
         this.name = name;
         this.disease = disease;
         this.mobileno = mobileno;
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Person(String name, String disease, String mobileno, String date, String time){
+        this.name = name;
+        this.disease = disease;
+
+        this.mobileno = mobileno;
+        this.date = date;
         this.time = time;
     }
 

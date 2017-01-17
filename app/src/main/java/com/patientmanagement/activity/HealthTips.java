@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -22,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.ListViewAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 
 public class HealthTips extends AppCompatActivity {

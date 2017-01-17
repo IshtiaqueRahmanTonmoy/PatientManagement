@@ -1,7 +1,9 @@
 package com.patientmanagement.activity;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
@@ -30,6 +32,7 @@ import org.json.JSONObject;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
@@ -70,6 +73,28 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     String mobnopatient;
     String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid,prescriptionno;
     int i = 0;
+    private List<String> ItemsIntoList;
+    private AlertDialog.Builder alertdialogbuilder;
+
+    String[] AlertDialogItems = new String[]{
+            "1/0/0",
+            "0/1/0",
+            "0/0/1",
+            "1/0/1",
+            "1/1/0",
+            "0/1/1",
+            "1/1/1"
+    };
+
+    boolean[] Selectedtruefalse = new boolean[]{
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +113,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        ItemsIntoList = new ArrayList<>();
         medicine = new Medicine();
         medicineList = new ArrayList<String>();
         medicineUnit = new ArrayList<>();
@@ -118,6 +144,54 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
         new MedicineName().execute();
         new MedicineUnit().execute();
+
+        frequent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertdialogbuilder = new AlertDialog.Builder(AddPrescriptionActivity.this);
+
+                ItemsIntoList = Arrays.asList(AlertDialogItems);
+
+                alertdialogbuilder.setMultiChoiceItems(AlertDialogItems, Selectedtruefalse, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                    }
+                });
+
+                alertdialogbuilder.setCancelable(false);
+                alertdialogbuilder.setTitle("Select Frequent times");
+
+                alertdialogbuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        StringBuffer responseText = new StringBuffer();
+                        int a = 0;
+                        while (a < Selectedtruefalse.length) {
+                            boolean value = Selectedtruefalse[a];
+
+                            if (value) {
+                                String names = ItemsIntoList.get(a);
+                                responseText.append(names);
+                                frequent.setText("" + responseText);
+                            }
+                            a++;
+                        }
+                    }
+                });
+
+                alertdialogbuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = alertdialogbuilder.create();
+                dialog.show();
+            }
+        });
+
 
         Medicinename.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

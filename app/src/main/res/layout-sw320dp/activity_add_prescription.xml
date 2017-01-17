@@ -67,6 +67,14 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prescription No"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
+
             <EditText
                 android:id="@+id/PrescriptionNo"
                 android:layout_width="match_parent"
@@ -142,6 +150,14 @@
             </LinearLayout>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
+
             <EditText
                 android:id="@+id/Quantity"
                 android:layout_width="match_parent"
@@ -155,6 +171,14 @@
                 android:background="#fff"
                 android:textSize="16dp"
                 android:padding="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time Duration"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:id="@+id/Timeduration"
@@ -179,7 +203,7 @@
                     android:id="@+id/afterbefore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medicine Name"
+                    android:text="After/Before"
                     android:textSize="14sp"
                     android:layout_below="@+id/user_profile_name"
                     android:layout_centerHorizontal="true" />
@@ -199,6 +223,15 @@
                     android:padding="12dp"/>
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frequent Times"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
+
             <EditText
                 android:id="@+id/Frequent"
                 android:layout_width="match_parent"
@@ -225,16 +258,13 @@
 
             <Button
                 android:id="@+id/AddmoreMedicine"
-                android:layout_width="match_parent"
+                style="?android:attr/buttonStyleSmall"
+                android:background="?attr/colorPrimary"
+                android:textColor="@color/white"
+                android:textAllCaps="true"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:letterSpacing="0.025"
-                android:background="#fff"
-                android:text="@string/addmedicine"
-                android:textSize="16dp"
-                android:padding="12dp"/>
+                android:text="Add more medicine"/>
 
         </LinearLayout>
     </RelativeLayout>

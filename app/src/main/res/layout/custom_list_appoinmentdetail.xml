@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:background="@drawable/list_row_selector"
+    android:id="@+id/relativelayout">
+    <!-- ListRow Left sied Thumbnail image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+        <TextView
+            android:id="@+id/names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/title"
+            android:text="Name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/diseases"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/names"
+            android:layout_marginTop="1dip"
+            android:text="Disease"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/rating" />
+
+        <TextView
+            android:id="@+id/mobilenos"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diseases"
+            android:layout_marginTop="5dp"
+            android:text="Mobileno"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/genre"
+            android:textSize="@dimen/genre" />
+
+
+    </LinearLayout>
+    <!-- Rightend Arrow -->
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:textColor="@color/dt"
+        android:id="@+id/times"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageview"
+        android:layout_alignEnd="@+id/imageview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:textColor="@color/dt"
+        android:id="@+id/dates"
+        android:layout_alignBaseline="@+id/times"
+        android:layout_alignBottom="@+id/times"
+        android:layout_toLeftOf="@+id/times"
+        android:layout_toStartOf="@+id/times"
+        android:layout_marginRight="34dp"
+        android:layout_marginEnd="34dp" />
+</RelativeLayout>
