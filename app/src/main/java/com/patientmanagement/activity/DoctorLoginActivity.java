@@ -105,9 +105,8 @@ public class DoctorLoginActivity extends AppCompatActivity {
                 {
                     Log.d("Successfully Login!", json.toString());
 
-                    Intent ii = new Intent(DoctorLoginActivity.this,PatientAppoinmentList.class);
+                    Intent ii = new Intent(DoctorLoginActivity.this,DoctorDashboard.class);
                     ii.putExtra(TAG_DOCTORID,doctorid);
-                    finish();
                     startActivity(ii);
 
                     return json.getString(TAG_MESSAGE);

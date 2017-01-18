@@ -27,21 +27,25 @@
 
         <TextView
             android:id="@+id/diseases"
-            android:layout_width="fill_parent"
+            android:layout_width="240px"
             android:layout_height="wrap_content"
             android:layout_below="@id/names"
             android:layout_marginTop="1dip"
             android:text="Disease"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_toRightOf="@+id/thumbnail"
             android:textSize="@dimen/rating" />
 
         <TextView
             android:id="@+id/mobilenos"
-            android:layout_width="fill_parent"
+            android:layout_width="240px"
             android:layout_height="wrap_content"
             android:layout_below="@id/diseases"
             android:layout_marginTop="5dp"
             android:text="Mobileno"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_toRightOf="@+id/thumbnail"
             android:textColor="@color/genre"
             android:textSize="@dimen/genre" />

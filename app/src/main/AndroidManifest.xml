@@ -40,7 +40,8 @@
         <activity android:name="com.patientmanagement.activity.AddPrescriptionActivity" />
         <activity android:name="com.patientmanagement.activity.MedicineList" />
         <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity" />
-        <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory"></activity>
+        <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory" />
+        <activity android:name="com.patientmanagement.activity.DoctorDashboard"></activity>
     </application>
 
 </manifest>
