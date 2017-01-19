@@ -81,6 +81,10 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="Prescription No"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
@@ -238,6 +242,28 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="Frequent"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.025"
+                android:background="#fff"
+                android:textSize="16dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Follow up"
+                android:textSize="14sp"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/NextFollowup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Next Followup time and date"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"

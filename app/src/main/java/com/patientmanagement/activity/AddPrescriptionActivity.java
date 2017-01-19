@@ -1,23 +1,30 @@
 package com.patientmanagement.activity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ScrollingTabContainerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,21 +50,28 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Syst
 
 public class AddPrescriptionActivity extends AppCompatActivity {
 
-    EditText prescriptionNo,quantity,timeduration,frequent,Suggestion;
+    EditText prescriptionNo,quantity,timeduration,frequent,followuptime,Suggestion;
     Spinner Medicinename,MedicineUnit,AfterorBefore;
+    TextView name,address;
     Button AddmoreMedicine;
+    ImageButton imagebutton;
     JSONParser jP = new JSONParser();
     private static final String TAG_MEDICINEURL = "http://darumadhaka.com/patientmanagement/medicineinfo.php";
     private static final String TAG_MediUnitURL = "http://darumadhaka.com/patientmanagement/medicineunit.php";
     private static final String getmedicineinfo_url = "http://darumadhaka.com/patientmanagement/medicineunitid.php";
     private static final String getmedicineunit_url = "http://darumadhaka.com/patientmanagement/medicineinfoget.php";
-
+    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/searchallpatientinfo.php";
     private static final String TAG_MedicineName = "MediName";
     private static final String TAG_MediUnitId = "MediUnitId";
     private static final String TAG_UnitName = "UnitName";
     private static final String TAG_MEDINFO = "medinfo";
     private static final String TAG_INFOID = "MediInfoId";
+    private static final String TAG_PHONE = "phone";
     private static final String TH = "th";
+    private static final String TAG_IMAGE = "image";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_ADDRESS = "address";
+    private static final String TAG_DOCTORLIST = "patientdetail";
     String MediName,MediUnitId,MediUnitname,Total,Quantity;
     ArrayList<String> medicineList;
     ArrayList<String> medicineUnit;
@@ -71,11 +85,15 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     ArrayList<Medicine> result = new ArrayList<Medicine>();
     Medicine medicine;
     String mobnopatient;
+    Bitmap bmp1;
+    String namevalue,addressvalue;
     String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid,prescriptionno;
     int i = 0;
     private List<String> ItemsIntoList;
     private AlertDialog.Builder alertdialogbuilder;
-
+    private ProgressDialog pDialog;
+    StringBuilder value;
+    StringBuilder finalval;
     String[] AlertDialogItems = new String[]{
             "1/0/0",
             "0/1/0",
@@ -118,10 +136,15 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         medicineList = new ArrayList<String>();
         medicineUnit = new ArrayList<>();
 
+        imagebutton = (ImageButton) findViewById(R.id.user_profile_photo);
+        name = (TextView) findViewById(R.id.user_profile_name);
+        address = (TextView) findViewById(R.id.user_profile_short_bio);
         prescriptionNo = (EditText) findViewById(R.id.PrescriptionNo);
         quantity = (EditText) findViewById(R.id.Quantity);
         timeduration = (EditText) findViewById(R.id.Timeduration);
+        followuptime = (EditText) findViewById(R.id.NextFollowup);
         frequent = (EditText) findViewById(R.id.Frequent);
+
         Suggestion = (EditText) findViewById(R.id.addSugestion);
         AddmoreMedicine = (Button) findViewById(R.id.AddmoreMedicine);
 
@@ -138,10 +161,33 @@ public class AddPrescriptionActivity extends AppCompatActivity {
 
         AfterBeforeList.add(values);
 
+        followuptime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String st = "day";
+                String name = s.toString();
+                value = new StringBuilder(name);
+                finalval = value.append(st);
+                //followuptime.setText(st);
+                //Toast.makeText(AddPrescriptionActivity.this, ""+finalval, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                followuptime.setText(finalval);
+            }
+        });
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, values);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         AfterorBefore.setAdapter(spinnerArrayAdapter);
 
+        new getPatientDetail().execute();
         new MedicineName().execute();
         new MedicineUnit().execute();
 
@@ -481,6 +527,71 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 }
             });
             return null;
+        }
+    }
+
+
+    private class getPatientDetail extends AsyncTask<String, String, String> {
+
+        boolean failure = false;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(AddPrescriptionActivity.this);
+            pDialog.setMessage("Getting prescription...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            List<NameValuePair> param = new ArrayList<NameValuePair>();
+            param.add(new BasicNameValuePair(TAG_PHONE,  mobnopatient));
+            // getting JSON string from URL
+            JSONObject json = jP.makeHttpRequest(DOCTORDETAILGET_URL, "GET", param);
+
+            // Check your log cat for JSON reponse
+            Log.d("All Doctors: ", json.toString());
+
+            try {
+                // Checking for SUCCESS TAG
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // products found
+                    // Getting Array of Products
+                    jsonarray = json.getJSONArray(TAG_DOCTORLIST);
+
+                    // looping through All Products
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        JSONObject c = jsonarray.getJSONObject(i);
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        // Storing each json item in variable
+                        String imagevalue = c.getString(TAG_IMAGE);
+
+                        byte[] byteArray =  Base64.decode(imagevalue, Base64.DEFAULT) ;
+                        bmp1 = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+                        namevalue = c.getString(TAG_NAME);
+                        addressvalue = c.getString(TAG_ADDRESS);
+                    }
+                } else {
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String message) {
+            pDialog.dismiss();
+
+            imagebutton.setImageBitmap(bmp1);
+            name.setText(namevalue);
+            address.setText(addressvalue);
         }
     }
 }
