@@ -74,8 +74,6 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.healthNewslistview);
         editText = (EditText) findViewById(R.id.etSearch);
-
-
     }
 
     private class LoadName extends AsyncTask<String, String, String> {

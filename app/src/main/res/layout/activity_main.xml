@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/sea_opt">
+    android:background="@color/colorPrimary">
 
 
     <LinearLayout
@@ -100,12 +100,7 @@
                 android:textSize="16dp"
                 android:padding="12dp"/>
 
-
-
-
         </LinearLayout>
-
-
 
         <View
             android:layout_width="match_parent"

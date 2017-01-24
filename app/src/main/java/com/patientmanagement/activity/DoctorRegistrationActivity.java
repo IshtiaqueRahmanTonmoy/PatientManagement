@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +58,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     public static final String KEY_Password = "password";
 
     String name,image,address,phone,expertise,chamberday,chambertime,startime,endtime,doctorfee,followupfee,password;
-    TextView signup,uploadimage;
+    TextView uploadimage;
+    //Button uploadimage;
     EditText nameEdt,addressEdt,phoneEdt,expertiseEdt, chamberdayEdt,startEdt, endEdt,doctorfeeEdt,followupfeeEdt,passwordEdt;
     ImageView doctorimagepic;
     AlertDialog.Builder alertdialogbuilder;
@@ -69,6 +71,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private Uri filePath;
     private Bitmap bitmap;
     private ProgressDialog pDialog;
+    Button signup;
     StringBuffer responseText = new StringBuffer();
 
     String[] AlertDialogItems = new String[]{
@@ -118,6 +121,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+       // uploadimage = (Button) findViewById(R.id.imageupload);
         uploadimage = (TextView) findViewById(R.id.imageupload);
         nameEdt = (EditText) findViewById(R.id.name);
         addressEdt = (EditText) findViewById(R.id.address);
@@ -131,7 +135,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         passwordEdt = (EditText) findViewById(R.id.password);
         doctorimagepic = (ImageView) findViewById(R.id.doctorimage);
 
-        signup = (TextView) findViewById(R.id.signup);
+        signup = (Button) findViewById(R.id.submit);
+        //signup = (TextView) findViewById(R.id.signup);
 
         expertiseEdt.setFocusable(false);
         chamberdayEdt.setFocusable(false);

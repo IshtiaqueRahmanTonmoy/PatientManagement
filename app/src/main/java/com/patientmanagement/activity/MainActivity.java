@@ -64,6 +64,25 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+              /*
+                int a=1,b=4,c=2017,d;
+                int x = 100;
+                int j = 20;
+                int i = 1;
+                int n = 1;
+
+                 for(i=1;i<=x;i++) {
+                     if (i == 20 * n) {
+                         j = i - 19;
+                         d = a++;
+                         String date = String.valueOf(d)+String.valueOf(b)+String.valueOf(c);
+                         Log.d("output", String.valueOf(j) + String.valueOf(i)+date);
+                         n++;
+                     }
+                 }
+              */
+
                 phone = mobilenoEdt.getText().toString();
                 encryptedpassword = passwordEdt.getText().toString();
 

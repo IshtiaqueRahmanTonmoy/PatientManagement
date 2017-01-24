@@ -87,7 +87,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     String mobnopatient;
     Bitmap bmp1;
     String namevalue,addressvalue;
-    String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid,prescriptionno;
+    String unitname,tduration,MedinnameParam,MedinfoId,MediUnitIdVal,afterbefore,frequently,suggestion,doctorid,followupdate,prescriptionno;
     int i = 0;
     private List<String> ItemsIntoList;
     private AlertDialog.Builder alertdialogbuilder;
@@ -160,28 +160,6 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         AfterorBefore = (Spinner) findViewById(R.id.AfterorBefore);
 
         AfterBeforeList.add(values);
-
-        followuptime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String st = "day";
-                String name = s.toString();
-                value = new StringBuilder(name);
-                finalval = value.append(st);
-                //followuptime.setText(st);
-                //Toast.makeText(AddPrescriptionActivity.this, ""+finalval, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                followuptime.setText(finalval);
-            }
-        });
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, values);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
@@ -274,6 +252,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 Quantity = quantity.getText().toString();
                 tduration = timeduration.getText().toString();
                 frequently = frequent.getText().toString();
+                followupdate = followuptime.getText().toString();
                 suggestion = Suggestion.getText().toString();
 
                 Toast.makeText(AddPrescriptionActivity.this, "Quantity"+Quantity, Toast.LENGTH_SHORT).show();
@@ -296,6 +275,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 intent.putExtra("suggestion",suggestion);
                 intent.putExtra("prescriptionno",prescriptionno);
                 intent.putExtra("doctorid",doctorid);
+                intent.putExtra("followup",followupdate);
                 intent.putExtra("mobnopatient",mobnopatient);
                 startActivity(intent);
             }

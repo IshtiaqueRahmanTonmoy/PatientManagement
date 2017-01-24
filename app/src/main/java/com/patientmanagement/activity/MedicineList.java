@@ -73,7 +73,7 @@ public class MedicineList extends AppCompatActivity {
     private static final String TAG_SUGGESTION = "Suggestion";
 
     int docid,pid;
-    String medinfoid,mediunitid,quantity,timeduration,afterbefore,frequently,suggestion,doctorid,patientmobile,prescriptionno,currentdate,patientid;
+    String medinfoid,mediunitid,quantity,timeduration,afterbefore,frequently,suggestion,doctorid,patientmobile,prescriptionno,followup,currentdate,patientid;
     private ProgressDialog pDialog;
     int i=0,pno=0;
 
@@ -106,6 +106,7 @@ public class MedicineList extends AppCompatActivity {
         prescriptionno = getIntent().getExtras().getString("prescriptionno");
         docid = Integer.parseInt(getIntent().getExtras().getString("doctorid"));
         patientmobile = getIntent().getExtras().getString("mobnopatient");
+        followup = getIntent().getExtras().getString("followup");
         //Log.d("patientmobno",patientmobile);
 
         DateFormat dateFormat = new SimpleDateFormat("MMMM dd yyyy");

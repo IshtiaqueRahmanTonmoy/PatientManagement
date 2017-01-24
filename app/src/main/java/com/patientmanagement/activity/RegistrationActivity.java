@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,9 +48,9 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_Disease = "disease";
     public static final String KEY_EncryptedPassword = "encryptedpassword";
     public static final String KEY_DATE = "date";
-
+    Button signup;
     ImageView photoimage;
-    TextView uploadimage, signup, loginback;
+    TextView uploadimage,loginback;
     EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,password;
     String name;
     String image;
@@ -95,7 +96,8 @@ public class RegistrationActivity extends AppCompatActivity {
         photoimage = (ImageView) findViewById(R.id.patientimage);
 
         uploadimage = (TextView) findViewById(R.id.imageupload);
-        signup = (TextView) findViewById(R.id.signup);
+        //signup = (TextView) findViewById(R.id.signup);
+        signup = (Button) findViewById(R.id.submit);
         loginback = (TextView) findViewById(R.id.login);
 
         patientname = (EditText) findViewById(R.id.name);

@@ -38,7 +38,6 @@ public class PatientDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ii = new Intent(PatientDashboard.this,DoctorListActivity.class);
                 ii.putExtra("mobile",phone);
-                finish();
                 startActivity(ii);
             }
         });
@@ -48,7 +47,6 @@ public class PatientDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ii = new Intent(PatientDashboard.this,PatientAppoinmentHistory.class);
                 ii.putExtra("mobile",phone);
-                finish();
                 startActivity(ii);
             }
         });
