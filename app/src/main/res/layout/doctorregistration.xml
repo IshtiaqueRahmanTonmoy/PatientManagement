@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteColor"
+    android:background="@color/colorSky"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Capture image"
                 android:textSize="16dp"
+                android:textColor="#fff"
                 android:textAlignment="center"
                 android:background="@drawable/border"
                 android:layout_gravity="center"
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload image"
                 android:textSize="16dp"
+                android:textColor="#fff"
                 android:textAlignment="center"
                 android:background="@drawable/border"
                 android:layout_gravity="center"
@@ -73,19 +75,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Name"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff"/>
 
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Name"
@@ -108,19 +110,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Address"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff" />
 
                 <EditText
                     android:id="@+id/address"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Address"
@@ -143,22 +145,22 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Mobile no"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff"/>
 
                 <EditText
                     android:id="@+id/mobileno"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
-                    android:hint="Mobile no"
+                    android:hint="MobileNo"
                     android:inputType="number"
                     android:imeOptions="actionNext"
                     android:paddingLeft="10dp"
@@ -179,19 +181,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Designation"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff" />
 
                 <EditText
                     android:id="@+id/expertise"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Designation"
@@ -214,19 +216,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Chamber day"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff"/>
 
                 <EditText
                     android:id="@+id/chamberday"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Chamber day"
@@ -249,19 +251,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Start time"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff"/>
 
                 <EditText
                     android:id="@+id/chamberstarttime"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Start time"
@@ -284,19 +286,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="End time"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff" />
 
                 <EditText
                     android:id="@+id/chamberendtime"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="End time"
@@ -319,19 +321,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Doctor fee"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff" />
 
                 <EditText
                     android:id="@+id/doctorfee"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Doctor fee"
@@ -354,19 +356,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Followup fee"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff"/>
 
                 <EditText
                     android:id="@+id/followupfee"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Followup fee"
@@ -389,19 +391,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="2dp"
                     android:text="Password"
-                    android:textColor="@color/blackColor" />
+                    android:textColor="#fff" />
 
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
                     android:hint="Password"

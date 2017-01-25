@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_DATE = "date";
     Button signup;
     ImageView photoimage;
-    TextView uploadimage,loginback;
+    TextView uploadimage,loginback,captureimage;
     EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,password;
     String name;
     String image;
@@ -61,7 +61,8 @@ public class RegistrationActivity extends AppCompatActivity {
     String disease;
     String epassword;
     String date;
-
+    private final int requestCode = 20;
+    private static final int CAMERA_REQUEST = 1888;
     private static final String TAG_SUCCESS = "success";
     JSONParser jsonParser = new JSONParser();
     private Uri filePath;
@@ -94,7 +95,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
         photoimage = (ImageView) findViewById(R.id.patientimage);
-
+        captureimage = (TextView) findViewById(R.id.imagecapture);
         uploadimage = (TextView) findViewById(R.id.imageupload);
         //signup = (TextView) findViewById(R.id.signup);
         signup = (Button) findViewById(R.id.submit);
@@ -107,6 +108,14 @@ public class RegistrationActivity extends AppCompatActivity {
         patientmobileno = (EditText) findViewById(R.id.mobileno);
         diseasename = (EditText) findViewById(R.id.disease);
         password = (EditText) findViewById(R.id.password);
+
+        captureimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
 
         patientgender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,10 +208,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
+        /*
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
@@ -210,6 +218,12 @@ public class RegistrationActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        */
+
+        if (requestCode == CAMERA_REQUEST) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            photoimage.setImageBitmap(photo);
         }
     }
 

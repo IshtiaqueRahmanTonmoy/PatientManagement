@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-              /*
+             /*
                 int a=1,b=4,c=2017,d;
-                int x = 100;
+                int x = 121;
                 int j = 20;
                 int i = 1;
                 int n = 1;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                          n++;
                      }
                  }
-              */
+             */
 
                 phone = mobilenoEdt.getText().toString();
                 encryptedpassword = passwordEdt.getText().toString();

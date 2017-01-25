@@ -1,8 +1,16 @@
 package com.patientmanagement.activity;
 
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +20,7 @@ public class PatientDashboard extends AppCompatActivity {
 
     private Button appoinmentSchedule;
     private Button healthTips,healthNews,appoinmentDetail;
-    String phone;
+    String phone,message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,7 @@ public class PatientDashboard extends AppCompatActivity {
         if(b!=null)
         {
             phone =(String) b.get("mobile");
+            message = phone;
             //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
         }
 
@@ -46,7 +55,7 @@ public class PatientDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ii = new Intent(PatientDashboard.this,PatientAppoinmentHistory.class);
-                ii.putExtra("mobile",phone);
+                ii.putExtra("mobile",message);
                 startActivity(ii);
             }
         });
@@ -66,5 +75,35 @@ public class PatientDashboard extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle(R.string.quit)
+                    .setMessage(R.string.really_quit)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            //Stop the activity
+                            PatientDashboard.this.finish();
+                        }
+
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+
+            return true;
+        }
+        else {
+            return super.onKeyDown(keyCode, event);
+        }
+
     }
 }

@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_cover_image"
-            android:background="@color/coloraction"
+            android:background="@color/colorSky"
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
@@ -285,7 +285,7 @@
             <Button
                 android:id="@+id/AddmoreMedicine"
                 style="?android:attr/buttonStyleSmall"
-                android:background="?attr/colorPrimary"
+                android:background="@color/colorSkyButton"
                 android:textColor="@color/white"
                 android:textAllCaps="true"
                 android:layout_width="fill_parent"

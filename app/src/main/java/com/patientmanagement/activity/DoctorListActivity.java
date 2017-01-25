@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -41,6 +43,7 @@ public class DoctorListActivity extends AppCompatActivity {
     private static String url_doctorlist = "http://darumadhaka.com/patientmanagement/getalldoctorinfo.php";
     private static String url_getname = "http://darumadhaka.com/patientmanagement/getnameappoinment.php";
     private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/appoinmentschedule.php";
+    private static final String url_getlastid = "http://darumadhaka.com/patientmanagement/getlastAppoinmentId.php";
     private ProgressDialog pDialog;
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DOCTORLIST = "alldoctor";
@@ -67,11 +70,12 @@ public class DoctorListActivity extends AppCompatActivity {
     private static final String TAG_DATE = "date";
     private static final String TAG_TIME = "time";
     private static final String TAG_DOCTORID = "doctorId";
+    private static final String TAG_ID = "app_scheduleid";
     String phone,patientid,formattedDate;
     int pid,doctorid;
     String name,docid,disease,time;
     String delegate = "hh:mm aaa";
-
+    int id=0;
     Calendar c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +134,8 @@ public class DoctorListActivity extends AppCompatActivity {
         jParser = new JSONParser();
         listview = (ListView) findViewById(R.id.listview);
         alist = new ArrayList<Doctor>();
+
+        new GetLastAppoinment().execute();
         new DownloadJSON().execute();
     }
 
@@ -264,14 +270,11 @@ public class DoctorListActivity extends AppCompatActivity {
                         Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
-                            Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), PatientDashboard.class);
-                            startActivity(i);
 
-                            // closing this screen
-                            finish();
-                        } else {
-                            // failed to create product
+                            Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), DoctorListActivity.class);
+
+                            sendSMS("01822256267", "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of ");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -289,6 +292,11 @@ public class DoctorListActivity extends AppCompatActivity {
             pDialog.dismiss();
         }
 
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
     private class LoadName extends AsyncTask<String, String, String> {
@@ -358,6 +366,51 @@ public class DoctorListActivity extends AppCompatActivity {
             super.onPostExecute(result);
             pDialog.dismiss();
 
+        }
+    }
+
+
+    private class GetLastAppoinment extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<NameValuePair> param =
+                            new ArrayList<NameValuePair>();
+                    // getting JSON string from URL
+                    JSONObject json = jParser.makeHttpRequest(url_getlastid, "GET", param);
+
+                    // Check your log cat for JSON reponse
+                    Log.d("All Doctors: ", json.toString());
+
+                    try {
+                        // Checking for SUCCESS TAG
+                        int success = json.getInt(TAG_SUCCESS);
+
+                        if (success == 1) {
+                            // products found
+                            // Getting Array of Products
+                            jsonarray = json.getJSONArray(TAG_DOCTORLIST);
+
+                            // looping through All Products
+                                JSONObject c = jsonarray.getJSONObject(0);
+                                // Storing each json item in variable
+                                id = Integer.parseInt(c.getString(TAG_ID));
+                                //Toast.makeText(DoctorListActivity.this, "last id"+id, Toast.LENGTH_SHORT).show();
+                                //Log.d("last id",id);
+
+                        } else {
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return null;
         }
     }
 }

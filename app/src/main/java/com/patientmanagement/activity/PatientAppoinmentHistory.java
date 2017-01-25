@@ -4,11 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -74,6 +76,12 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.healthNewslistview);
         editText = (EditText) findViewById(R.id.etSearch);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //Toast.makeText(PatientAppoinmentHistory.this, ""+phone, Toast.LENGTH_SHORT).show();
     }
 
     private class LoadName extends AsyncTask<String, String, String> {
