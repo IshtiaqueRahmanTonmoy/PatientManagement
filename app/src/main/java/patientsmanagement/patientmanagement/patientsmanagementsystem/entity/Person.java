@@ -14,6 +14,10 @@ public class Person {
         this.time = time;
     }
 
+    public Person(String  mobileno) {
+        this.mobileno = mobileno;
+    }
+
     public String getDate() {
         return date;
     }

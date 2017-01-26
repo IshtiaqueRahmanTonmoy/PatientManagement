@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="100dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/wsdesignlogobagtrans"
             android:layout_gravity="center"/>
 

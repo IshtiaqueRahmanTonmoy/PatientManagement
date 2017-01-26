@@ -6,12 +6,15 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
@@ -29,17 +33,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
+import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.ListViewAdapter;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Doctor;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/patientinfo.php";
-
+    private static final String GETPHONE_URL = "http://darumadhaka.com/patientmanagement/allpatientmobileno.php";
     private int PICK_IMAGE_REQUEST = 1;
     public static final String KEY_NAME = "name";
+    public static final String KEY_PHONE = "phone";
     public static final String KEY_Image = "image";
     public static final String KEY_Age = "age";
     public static final String KEY_Gender = "gender";
@@ -48,6 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_Disease = "disease";
     public static final String KEY_EncryptedPassword = "encryptedpassword";
     public static final String KEY_DATE = "date";
+    public static final String TAG_ALLCONTACT = "allmobile";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
@@ -71,7 +81,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private int year, month, day;
     AlertDialog.Builder alertdialogbuilder;
-
+    Person person;
+    ArrayList<Person> alist;
     String[] AlertDialogItems = new String[]{
             "Male",
             "Female"
@@ -94,6 +105,9 @@ public class RegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        new DownloadJSON().execute();
+
+        alist = new ArrayList<Person>();
         photoimage = (ImageView) findViewById(R.id.patientimage);
         captureimage = (TextView) findViewById(R.id.imagecapture);
         uploadimage = (TextView) findViewById(R.id.imageupload);
@@ -173,13 +187,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        patientmobileno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSpinnerDialog();
-            }
-        });
-        
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,13 +204,172 @@ public class RegistrationActivity extends AppCompatActivity {
                 disease = diseasename.getText().toString();
                 epassword = password.getText().toString();
 
-                new CreateNewUser().execute();
+                /*
+                if (!isValidMobileno(mobileno)) {
+                    patientmobileno.setError("Invalid Email");
+                }
+
+                if (!isValidPassword(epassword)) {
+                    password.setError("Invalid Password");
+                }
+                */
+
+                  if(patientname.length()==0){
+                        patientname.setError("Field cannot be null");
+                    }
+                    if(address.length()==0){
+                        patientaddress.setError("Field cannot be null");
+                    }
+                    if(age.length()==0){
+                        patientage.setError("Field cannot be null");
+                    }
+                    if(gender.length()==0){
+                        patientgender.setError("Field cannot be null");
+                    }
+                    if(mobileno.length()==0){
+                        patientmobileno.setError("Field cannot be null");
+                    }
+                    if(disease.length()==0){
+                        diseasename.setError("Field cannot be null");
+                    }
+                    if(epassword.length()==0){
+                        password.setError("Field cannot be null");
+                    }
+
+                    patientname.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            patientname.setError(null);
+                        }
+                    });
+
+                patientaddress.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        patientaddress.setError(null);
+                    }
+                });
+
+                patientage.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        patientage.setError(null);
+                    }
+                });
+
+                patientgender.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        patientgender.setError(null);
+                    }
+                });
+
+                patientmobileno.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        patientmobileno.setError(null);
+                    }
+                });
+
+                diseasename.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        diseasename.setError(null);
+                    }
+                });
+
+                password.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        password.setError(null);
+                    }
+                });
+
+                //new CreateNewUser().execute();
             }
         });
     }
 
-    private void showSpinnerDialog() {
+    private boolean isValidMobileno(String mobileno) {
 
+        return false;
+    }
+
+    private boolean isValidPassword(String pass) {
+        if (pass != null && pass.length() > 6) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -294,6 +460,58 @@ public class RegistrationActivity extends AppCompatActivity {
             // dismiss the dialog once done
             pDialog.dismiss();
         }
+    }
 
+
+    private class DownloadJSON extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<NameValuePair> param =
+                            new ArrayList<NameValuePair>();
+                    // getting JSON string from URL
+                    JSONObject json = jsonParser.makeHttpRequest(GETPHONE_URL, "GET", param);
+
+                    // Check your log cat for JSON reponse
+                    Log.d("All Doctors: ", json.toString());
+
+                    try {
+                        // Checking for SUCCESS TAG
+                        int success = json.getInt(TAG_SUCCESS);
+
+                        if (success == 1) {
+                            // products found
+                            // Getting Array of Products
+                            JSONArray jsonarray = json.getJSONArray(TAG_ALLCONTACT);
+
+                            // looping through All Products
+                            for (int i = 0; i < jsonarray.length(); i++) {
+                                JSONObject c = jsonarray.getJSONObject(i);
+                                // Storing each json item in variable
+                                String mobileall = c.getString(KEY_PHONE);
+                                person = new Person(mobileall);
+                                //Toast.makeText(RegistrationActivity.this, ""+person.getMobileno(), Toast.LENGTH_SHORT).show();
+                                alist.add(person);
+
+                                /*
+                                for(int x=0;x <= alist.size(); x++){
+                                    Toast.makeText(RegistrationActivity.this, ""+alist.get(x).toString(), Toast.LENGTH_SHORT).show();
+                                }
+                                */
+                            }
+                        } else {
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return null;
+        }
     }
 }
