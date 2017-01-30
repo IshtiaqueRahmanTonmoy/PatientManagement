@@ -105,7 +105,7 @@ public class RegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        new DownloadJSON().execute();
+        //new DownloadJSON().execute();
 
         alist = new ArrayList<Person>();
         photoimage = (ImageView) findViewById(R.id.patientimage);
@@ -204,17 +204,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 disease = diseasename.getText().toString();
                 epassword = password.getText().toString();
 
-                /*
-                if (!isValidMobileno(mobileno)) {
-                    patientmobileno.setError("Invalid Email");
-                }
-
-                if (!isValidPassword(epassword)) {
-                    password.setError("Invalid Password");
-                }
-                */
-
-                  if(patientname.length()==0){
+                    if(name.length()==0){
                         patientname.setError("Field cannot be null");
                     }
                     if(address.length()==0){
@@ -312,12 +302,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     }
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        patientmobileno.setError(null);
+                       patientmobileno.setError(null);
+                        //String afterTextChanged = patientmobileno.getText().toString();
+                        //Toast.makeText(RegistrationActivity.this, + '\n' + "after: " + afterTextChanged,Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -341,12 +332,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 password.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                     }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     }
 
                     @Override
@@ -356,26 +345,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 });
 
                 //new CreateNewUser().execute();
+
+                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !epassword.isEmpty()){
+                    //Toast.makeText(RegistrationActivity.this, "field is not null", Toast.LENGTH_SHORT).show();
+                    new CreateNewUser().execute();
+                }
             }
         });
     }
 
-    private boolean isValidMobileno(String mobileno) {
-
-        return false;
-    }
-
-    private boolean isValidPassword(String pass) {
-        if (pass != null && pass.length() > 6) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        /*
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
@@ -385,14 +365,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        */
-
-        if (requestCode == CAMERA_REQUEST) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            photoimage.setImageBitmap(photo);
-        }
     }
-
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -473,36 +446,20 @@ public class RegistrationActivity extends AppCompatActivity {
                 public void run() {
                     List<NameValuePair> param =
                             new ArrayList<NameValuePair>();
+                    param.add(new BasicNameValuePair("phone",mobileno));
                     // getting JSON string from URL
                     JSONObject json = jsonParser.makeHttpRequest(GETPHONE_URL, "GET", param);
 
                     // Check your log cat for JSON reponse
-                    Log.d("All Doctors: ", json.toString());
+                    Log.d("check", json.toString());
 
                     try {
                         // Checking for SUCCESS TAG
                         int success = json.getInt(TAG_SUCCESS);
 
                         if (success == 1) {
-                            // products found
-                            // Getting Array of Products
-                            JSONArray jsonarray = json.getJSONArray(TAG_ALLCONTACT);
+                            Toast.makeText(RegistrationActivity.this, "This number exits please try another", Toast.LENGTH_SHORT).show();
 
-                            // looping through All Products
-                            for (int i = 0; i < jsonarray.length(); i++) {
-                                JSONObject c = jsonarray.getJSONObject(i);
-                                // Storing each json item in variable
-                                String mobileall = c.getString(KEY_PHONE);
-                                person = new Person(mobileall);
-                                //Toast.makeText(RegistrationActivity.this, ""+person.getMobileno(), Toast.LENGTH_SHORT).show();
-                                alist.add(person);
-
-                                /*
-                                for(int x=0;x <= alist.size(); x++){
-                                    Toast.makeText(RegistrationActivity.this, ""+alist.get(x).toString(), Toast.LENGTH_SHORT).show();
-                                }
-                                */
-                            }
                         } else {
                         }
                     } catch (JSONException e) {

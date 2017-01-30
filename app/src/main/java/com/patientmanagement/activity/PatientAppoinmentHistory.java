@@ -39,7 +39,6 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
     private static final String TAG_TH = "th";
     private static final String TAG_NAMEAPPOINT = "nameapp";
     private static final String TAG_PATIENTID = "patientid";
-
     private static final String TAG_PATIENTNAME = "name";
     private static final String TAG_DISEASE = "disease";
     private static final String TAG_MOBILENO = "mobileno";

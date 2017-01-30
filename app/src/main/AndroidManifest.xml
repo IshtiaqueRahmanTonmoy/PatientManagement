@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +42,8 @@
         <activity android:name="com.patientmanagement.activity.MedicineList" />
         <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity" />
         <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory" />
-        <activity android:name="com.patientmanagement.activity.DoctorDashboard"></activity>
+        <activity android:name="com.patientmanagement.activity.DoctorDashboard" />
+        <activity android:name="com.patientmanagement.activity.Expense"></activity>
     </application>
 
 </manifest>

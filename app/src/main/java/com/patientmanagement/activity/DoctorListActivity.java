@@ -219,9 +219,6 @@ public class DoctorListActivity extends AppCompatActivity {
 
     class CreateAppoinment extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

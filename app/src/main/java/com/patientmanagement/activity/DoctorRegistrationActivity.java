@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -362,8 +364,213 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                 followupfee = followupfeeEdt.getText().toString();
                 password = passwordEdt.getText().toString();
 
+                if(name.length()==0){
+                    nameEdt.setError("Field cannot be null");
+                }
+                if(address.length()==0){
+                    addressEdt.setError("Field cannot be null");
+                }
+                if(phone.length()==0){
+                    phoneEdt.setError("Field cannot be null");
+                }
+                if(expertise.length()==0){
+                    expertiseEdt.setError("Field cannot be null");
+                }
+                if(chamberday.length()==0){
+                    chamberdayEdt.setError("Field cannot be null");
+                }
+                if(startime.length()==0){
+                    startEdt.setError("Field cannot be null");
+                }
+                if(endtime.length()==0){
+                    endEdt.setError("Field cannot be null");
+                }
+                if(doctorfee.length()==0){
+                    doctorfeeEdt.setError("Field cannot be null");
+                }
+                if(followupfee.length()==0){
+                    followupfeeEdt.setError("Field cannot be null");
+                }
+                if(password.length()==0){
+                    passwordEdt.setError("Field cannot be null");
+                }
+
+                nameEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        nameEdt.setError(null);
+                    }
+                });
+
+                addressEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        addressEdt.setError(null);
+                    }
+                });
+
+                phoneEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        phoneEdt.setError(null);
+                    }
+                });
+
+                expertiseEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        expertiseEdt.setError(null);
+                    }
+                });
+
+                chamberdayEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        chamberdayEdt.setError(null);
+                    }
+                });
+
+                startEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        startEdt.setError(null);
+                    }
+                });
+
+                endEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        endEdt.setError(null);
+                    }
+                });
+
+                doctorfeeEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        doctorfeeEdt.setError(null);
+                    }
+                });
+
+                followupfeeEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        followupfeeEdt.setError(null);
+                    }
+                });
+
+                passwordEdt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        passwordEdt.setError(null);
+                    }
+                });
+
                 Log.d("output",name+address+phone+expertise+chamberday+chambertime+doctorfee+followupfee+password);
-                new CreateNewUser().execute();
+               // new CreateNewUser().execute();
+
+                if(!name.isEmpty() && !address.isEmpty() && !phone.isEmpty() && !expertise.isEmpty() && !chamberday.isEmpty() && !startime.isEmpty() && !endtime.isEmpty() && !chambertime.isEmpty() && !doctorfee.isEmpty() && !followupfee.isEmpty() && !password.isEmpty()){
+                    new CreateNewUser().execute();
+                }
             }
         });
     }
@@ -422,7 +629,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
 
                     try {
-
                         int success = json.getInt(TAG_SUCCESS);
 
                         //Toast.makeText(DoctorRegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
