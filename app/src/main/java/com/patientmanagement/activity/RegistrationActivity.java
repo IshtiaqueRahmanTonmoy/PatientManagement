@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,11 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.ListViewAdapter;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Doctor;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
@@ -56,8 +51,9 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_PatientMobNo = "mobileno";
     public static final String KEY_Disease = "disease";
     public static final String KEY_EncryptedPassword = "encryptedpassword";
+
     public static final String KEY_DATE = "date";
-    public static final String TAG_ALLCONTACT = "allmobile";
+    public static final String TAG_ALLCONTACT = "alldoctor";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
@@ -70,7 +66,8 @@ public class RegistrationActivity extends AppCompatActivity {
     String mobileno;
     String disease;
     String epassword;
-    String date;
+    String phone;
+    private JSONArray jsonArray;
     private final int requestCode = 20;
     private static final int CAMERA_REQUEST = 1888;
     private static final String TAG_SUCCESS = "success";
@@ -82,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private int year, month, day;
     AlertDialog.Builder alertdialogbuilder;
     Person person;
-    ArrayList<Person> alist;
+    ArrayList<String> alist;
     String[] AlertDialogItems = new String[]{
             "Male",
             "Female"
@@ -105,9 +102,9 @@ public class RegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        //new DownloadJSON().execute();
+        new DownloadJSON().execute();
 
-        alist = new ArrayList<Person>();
+        alist = new ArrayList<String>();
         photoimage = (ImageView) findViewById(R.id.patientimage);
         captureimage = (TextView) findViewById(R.id.imagecapture);
         uploadimage = (TextView) findViewById(R.id.imageupload);
@@ -297,7 +294,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 patientmobileno.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                        //Toast.makeText(RegistrationActivity.this, ""+alist.size(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -307,8 +304,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void afterTextChanged(Editable s) {
                        patientmobileno.setError(null);
-                        //String afterTextChanged = patientmobileno.getText().toString();
-                        //Toast.makeText(RegistrationActivity.this, + '\n' + "after: " + afterTextChanged,Toast.LENGTH_SHORT).show();
+                        //String search = "A";
+                        String search = patientmobileno.getText().toString();
+                        for(String str: alist) {
+                            if(str.trim().contains(search)){
+                                //Toast.makeText(RegistrationActivity.this, "This name already contains", Toast.LENGTH_SHORT).show();
+                                patientmobileno.setError("This mobile no is already in used");
+                            }
+                        }
                     }
                 });
 
@@ -414,7 +417,7 @@ public class RegistrationActivity extends AppCompatActivity {
                           RegistrationActivity.this.runOnUiThread(new Runnable() {
                               public void run() {
                                   Toast.makeText(RegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
-                                  Intent i = new Intent(getApplicationContext(), PatientDashboard.class);
+                                  Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                   startActivity(i);
                                   finish();
                               }
@@ -440,34 +443,37 @@ public class RegistrationActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    List<NameValuePair> param =
-                            new ArrayList<NameValuePair>();
-                    param.add(new BasicNameValuePair("phone",mobileno));
-                    // getting JSON string from URL
-                    JSONObject json = jsonParser.makeHttpRequest(GETPHONE_URL, "GET", param);
-
-                    // Check your log cat for JSON reponse
-                    Log.d("check", json.toString());
+                    List<NameValuePair>param = new ArrayList<NameValuePair>();
+                    JSONObject json= jsonParser.makeHttpRequest(GETPHONE_URL,"GET",param);
 
                     try {
                         // Checking for SUCCESS TAG
                         int success = json.getInt(TAG_SUCCESS);
 
                         if (success == 1) {
-                            Toast.makeText(RegistrationActivity.this, "This number exits please try another", Toast.LENGTH_SHORT).show();
+                            // products found
+                            // Getting Array of Products
+                            jsonArray = json.getJSONArray(TAG_ALLCONTACT);
 
+                            // looping through All Products
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject c = jsonArray.getJSONObject(i);
+                                // Storing each json item in variable
+                                phone = c.getString(KEY_PHONE);
+                                alist.add(phone);
+
+                            }
                         } else {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                 }
             });
-
             return null;
         }
     }

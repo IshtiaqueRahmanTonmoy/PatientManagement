@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,9 +46,10 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
     private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/doctorregistration.php";
+    private static final String GETPHONE_URL = "http://darumadhaka.com/patientmanagement/getalldoctorno.php";
     private int PICK_IMAGE_REQUEST = 1;
     private static final String TAG_SUCCESS = "success";
-
+    public static final String KEY_PHONE = "phone";
     public static final String KEY_NAME = "name";
     public static final String KEY_Image = "image";
     public static final String KEY_Address = "address";
@@ -58,10 +60,11 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     public static final String KEY_Doctorfee = "doctorfee";
     public static final String KEY_Followupfee = "followupfeee";
     public static final String KEY_Password = "password";
-
+    public static final String TAG_ALLCONTACT = "alldoctor";
     String name,image,address,phone,expertise,chamberday,chambertime,startime,endtime,doctorfee,followupfee,password;
     TextView uploadimage;
     //Button uploadimage;
+    private JSONArray jsonArray;
     EditText nameEdt,addressEdt,phoneEdt,expertiseEdt, chamberdayEdt,startEdt, endEdt,doctorfeeEdt,followupfeeEdt,passwordEdt;
     ImageView doctorimagepic;
     AlertDialog.Builder alertdialogbuilder;
@@ -75,7 +78,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     Button signup;
     StringBuffer responseText = new StringBuffer();
-
+    ArrayList<String> alist;
     String[] AlertDialogItems = new String[]{
             "E.N.T Specialist",
             "Child Health specialist",
@@ -123,6 +126,9 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        new DownloadJSON().execute();
+
+        alist = new ArrayList<String>();
        // uploadimage = (Button) findViewById(R.id.imageupload);
         uploadimage = (TextView) findViewById(R.id.imageupload);
         nameEdt = (EditText) findViewById(R.id.name);
@@ -443,6 +449,13 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void afterTextChanged(Editable s) {
                         phoneEdt.setError(null);
+                        String search = phoneEdt.getText().toString();
+                        for(String str: alist) {
+                            if(str.trim().contains(search)){
+                                //Toast.makeText(RegistrationActivity.this, "This name already contains", Toast.LENGTH_SHORT).show();
+                                phoneEdt.setError("This mobile no is already in used");
+                            }
+                        }
                     }
                 });
 
@@ -664,6 +677,45 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             pDialog.dismiss();
         }
 
+    }
+
+    private class DownloadJSON extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<NameValuePair>param = new ArrayList<NameValuePair>();
+                    JSONObject json= jsonParser.makeHttpRequest(GETPHONE_URL,"GET",param);
+
+                    try {
+                        // Checking for SUCCESS TAG
+                        int success = json.getInt(TAG_SUCCESS);
+
+                        if (success == 1) {
+                            // products found
+                            // Getting Array of Products
+                            jsonArray = json.getJSONArray(TAG_ALLCONTACT);
+
+                            // looping through All Products
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject c = jsonArray.getJSONObject(i);
+                                // Storing each json item in variable
+                                phone = c.getString(KEY_PHONE);
+                                alist.add(phone);
+
+                            }
+                        } else {
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            return null;
+        }
     }
 }
 
