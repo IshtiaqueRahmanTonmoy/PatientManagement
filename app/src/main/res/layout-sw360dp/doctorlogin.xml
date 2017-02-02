@@ -14,17 +14,17 @@
 
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/wsdesignlogobagtrans"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/pmslogo"
             android:layout_gravity="center"/>
 
     </LinearLayout>
 
     +<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="60dp"></LinearLayout>
+    android:layout_height="30dp"></LinearLayout>
 
 
     <LinearLayout

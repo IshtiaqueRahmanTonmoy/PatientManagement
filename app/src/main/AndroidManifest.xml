@@ -43,6 +43,7 @@
         <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity" />
         <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory" />
         <activity android:name="com.patientmanagement.activity.DoctorDashboard" />
+        <activity android:name="com.patientmanagement.activity.ViewSpecificPatientt" />
         <activity android:name="com.patientmanagement.activity.Expense"></activity>
     </application>
 

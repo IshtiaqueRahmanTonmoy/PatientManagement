@@ -29,7 +29,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
     private static final String LOGIN_URL = "http://darumadhaka.com/patientmanagement/doctorlogin.php";
     private static final String DOCTORIDGET_URL = "http://darumadhaka.com/patientmanagement/doctoridget.php";
-    TextView Signup;
+    TextView Signup,Backtodoctor;
     Button login;
     String mobile,password,doctorid;
     EditText mobileEdt,passwordEdt;
@@ -51,7 +51,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
         mobileEdt = (EditText) findViewById(R.id.edtMobileNo);
         passwordEdt = (EditText) findViewById(R.id.edtPassword);
-
+        Backtodoctor = (TextView) findViewById(R.id.signupasDoctor);
         login = (Button) findViewById(R.id.doctorsigninButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +69,14 @@ public class DoctorLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorLoginActivity.this,DoctorRegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Backtodoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorLoginActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });

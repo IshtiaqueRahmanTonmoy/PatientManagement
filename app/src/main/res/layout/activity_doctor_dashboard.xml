@@ -28,7 +28,6 @@
             android:padding="10dp"
             android:layout_marginTop="60dp" />
 
-
         <Button
             android:id="@+id/PrescriptionVisit"
             android:layout_width="250dp"

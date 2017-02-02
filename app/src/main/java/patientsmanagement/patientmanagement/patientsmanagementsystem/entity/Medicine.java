@@ -9,6 +9,8 @@ public class Medicine {
     String timeduration;
     String medinfo;
     String suggestion;
+    String  medininfoid;
+    String followup;
 
     public String getSuggestion() {
         return suggestion;
@@ -17,6 +19,7 @@ public class Medicine {
     public void setSuggestion(String suggestion) {
         this.suggestion = suggestion;
     }
+
 
     public Medicine(String medicineName, String medinfo, String Unit, String unival, String Quantity, String timeduration, String afterbefore, String frequently, String suggestion) {
         this.medicineName = medicineName;
@@ -29,6 +32,19 @@ public class Medicine {
         this.frequently = frequently;
         this.suggestion = suggestion;
     }
+
+
+    public Medicine(String medicineName,String Unit,String Quantity,String timeduration,String afterbefore,String frequently,String followup,String suggestion){
+        this.medicineName = medicineName;
+        this.Unit = Unit;
+        this.Quantity = Quantity;
+        this.timeduration = timeduration;
+        this.afterbefore = afterbefore;
+        this.frequently = frequently;
+        this.followup = followup;
+        this.suggestion = suggestion;
+    }
+
 
     public Medicine() {
 
@@ -52,6 +68,21 @@ public class Medicine {
 
     String unival;
 
+    public String getMedininfoid() {
+        return medininfoid;
+    }
+
+    public void setMedininfoid(String medininfoid) {
+        this.medininfoid = medininfoid;
+    }
+
+    public String getFollowup() {
+        return followup;
+    }
+
+    public void setFollowup(String followup) {
+        this.followup = followup;
+    }
 
     public String getTimeduration() {
         return timeduration;

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:background="@drawable/list_row_selector"
+    android:id="@+id/relativelayout">
+    <!-- ListRow Left sied Thumbnail image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+        <TextView
+            android:id="@+id/names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/title"
+            android:text="Name"
+            android:textColor="@color/dt"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="240px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/names"
+            android:layout_marginTop="1dip"
+            android:text="Unit"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/dt"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textSize="@dimen/rating" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="240px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diseases"
+            android:layout_marginTop="5dp"
+            android:text="Quantity"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/dt"
+            android:textSize="@dimen/genre" />
+
+        <TextView
+            android:id="@+id/timedurations"
+            android:layout_width="240px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diseases"
+            android:layout_marginTop="5dp"
+            android:text="Time duration"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/dt"
+            android:textSize="@dimen/genre" />
+
+        <TextView
+            android:id="@+id/afterbefore"
+            android:layout_width="240px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diseases"
+            android:layout_marginTop="5dp"
+            android:text="After or before"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/dt"
+            android:textSize="@dimen/genre" />
+        <TextView
+            android:id="@+id/suggestions"
+            android:layout_width="240px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diseases"
+            android:layout_marginTop="5dp"
+            android:text="Suggestions"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:textColor="@color/dt"
+            android:textSize="@dimen/genre" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Followupdate"
+            android:textColor="@color/dt"
+            android:id="@+id/follow"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/imageview"
+            android:layout_alignEnd="@+id/imageview" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Frequency"
+            android:textColor="@color/dt"
+            android:id="@+id/frequency"
+            android:layout_alignBaseline="@+id/follow"
+            android:layout_alignBottom="@+id/follow"
+            android:layout_toLeftOf="@+id/follow"
+            android:layout_toStartOf="@+id/follow"
+            android:layout_marginRight="34dp"
+            android:layout_marginEnd="34dp" />
+
+    </LinearLayout>
+    <!-- Rightend Arrow -->
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageview"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon" />
+
+
+</RelativeLayout>

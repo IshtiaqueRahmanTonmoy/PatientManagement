@@ -32,12 +32,22 @@ public class DoctorDashboard extends AppCompatActivity {
         }
 
         appoinmentList = (Button) findViewById(R.id.listofAppoinment);
+        viewSpecificPrescription = (Button) findViewById(R.id.PrescriptionVisit);
         vistitHistory = (Button) findViewById(R.id.visitRate);
 
         appoinmentList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ii = new Intent(DoctorDashboard.this,PatientAppoinmentList.class);
+                ii.putExtra(TAG_DOCTORID, doctorId);
+                startActivity(ii);
+            }
+        });
+
+        viewSpecificPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ii = new Intent(DoctorDashboard.this,ViewSpecificPatientt.class);
                 ii.putExtra(TAG_DOCTORID, doctorId);
                 startActivity(ii);
             }
