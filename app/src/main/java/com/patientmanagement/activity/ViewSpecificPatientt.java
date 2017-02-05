@@ -72,9 +72,8 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
             doctorId = b.getString(TAG_DOCTORID);
             new getPrescriptionNo().execute();
             new getPrescriptionHistory().execute();
-
+            new getMedicineName().execute();
         }
-
     }
 
 
@@ -134,7 +133,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
                             medininfoid = catObj11.getString(TAG_MEDINFOID);
                             // Toast.makeText(ViewSpecificPatientt.this, ""+medicinename, Toast.LENGTH_SHORT).show();
                             //Log.d("medicinename",medicinename);
-                            new getMedicineName().execute();
+
                             mediunitid = catObj11.getString(TAG_MediUnitID);
                             quantity = catObj11.getString(TAG_Quantity);
                             timeduration = catObj11.getString(TAG_TimeDuration);
@@ -148,9 +147,6 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
 
                             mediadapter = new MedicineListAdapter(ViewSpecificPatientt.this, R.layout.activity_view_specific, medicinelist);
                             listview.setAdapter(mediadapter);
-
-                            //Toast.makeText(ViewSpecificPatientt.this, ""+medicinename, Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(ViewSpecificPatientt.this, ""+medininfoid, Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {

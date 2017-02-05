@@ -255,7 +255,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 followupdate = followuptime.getText().toString();
                 suggestion = Suggestion.getText().toString();
 
-                Toast.makeText(AddPrescriptionActivity.this, "Quantity"+Quantity, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddPrescriptionActivity.this, "Quantity"+Quantity, Toast.LENGTH_SHORT).show();
                 result.add(new Medicine(MediName,MedinfoId,MediUnitname,MediUnitIdVal,Quantity,tduration,afterbefore,frequently,suggestion));
 
                 //Toast.makeText(AddPrescriptionActivity.this, ""+MediName, Toast.LENGTH_SHORT).show();
@@ -296,7 +296,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                 String mediname = cartList.get(i).getMedicineName();
                 String mediunit = cartList.get(i).getUnit();
 
-                Toast.makeText(AddPrescriptionActivity.this, ""+quantity, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddPrescriptionActivity.this, ""+quantity, Toast.LENGTH_SHORT).show();
                 medicinesList.add(new Medicine(mediname,mediunit));
                 sys.setMedicine(medicinesList);
             }
@@ -387,7 +387,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
                                 HashMap<String, String> map = new HashMap<String, String>();
                                 // Storing each json item in variable
                                 unitname = c.getString(TAG_UnitName);
-                                Toast.makeText(AddPrescriptionActivity.this, ""+unitname, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(AddPrescriptionActivity.this, ""+unitname, Toast.LENGTH_SHORT).show();
                                 medicineUnit.add(unitname);
 
                                 ArrayAdapter<String> adp= new ArrayAdapter<String>(AddPrescriptionActivity.this,

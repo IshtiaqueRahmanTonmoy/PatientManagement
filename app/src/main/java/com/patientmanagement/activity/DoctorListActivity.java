@@ -343,7 +343,7 @@ public class DoctorListActivity extends AppCompatActivity {
                             disease = lnews.getString(TAG_DISEASE);
 
                             Log.d("valuessss",patientid+name+disease+phone);
-                            Toast.makeText(DoctorListActivity.this, "id"+ patientid + "name"+ name+"consult for"+disease, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DoctorListActivity.this, "id"+ patientid + "name"+ name+"consult for"+disease, Toast.LENGTH_SHORT).show();
                             //main.... text.setText(healthpo.getString(TAG_DETAILS));
 
 

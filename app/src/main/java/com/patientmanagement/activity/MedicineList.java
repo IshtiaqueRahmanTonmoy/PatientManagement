@@ -219,7 +219,7 @@ public class MedicineList extends AppCompatActivity {
                     // getting JSON Object
                     // Note that create product url accepts POST method
                     JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
-                    Toast.makeText(MedicineList.this, ""+pid, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MedicineList.this, ""+pid, Toast.LENGTH_SHORT).show();
                     //Log.d("json",json.toString());
                     // check log cat fro response
                     //Log.d("Create Response", json.toString());
@@ -290,7 +290,7 @@ public class MedicineList extends AppCompatActivity {
 
                             JSONObject lnews = productObj.getJSONObject(0);
                             pid = lnews.getInt(TAG_PATIENTIDVAL);
-                            Toast.makeText(MedicineList.this, ""+pid, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MedicineList.this, ""+pid, Toast.LENGTH_SHORT).show();
                            // patientid = String.valueOf(pid);
 
                         } else {
@@ -349,7 +349,7 @@ public class MedicineList extends AppCompatActivity {
 
                             int success = json.getInt(TAG_SUCCESS);
 
-                            Toast.makeText(MedicineList.this, "" + success, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MedicineList.this, "" + success, Toast.LENGTH_SHORT).show();
                             if (success == 1) {
                                 // successfully created product
 
