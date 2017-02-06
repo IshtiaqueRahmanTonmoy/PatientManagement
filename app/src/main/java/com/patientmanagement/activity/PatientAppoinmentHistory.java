@@ -74,7 +74,7 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
         }
 
         listview = (ListView) findViewById(R.id.healthNewslistview);
-        editText = (EditText) findViewById(R.id.etSearch);
+        //editText = (EditText) findViewById(R.id.etSearch);
     }
 
     @Override

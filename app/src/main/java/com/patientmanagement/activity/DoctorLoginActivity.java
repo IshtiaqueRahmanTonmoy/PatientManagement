@@ -70,6 +70,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorLoginActivity.this,DoctorRegistrationActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -159,7 +160,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
                             JSONObject catObj11 = than.getJSONObject(x);
                             doctorid = catObj11.getString(TAG_DOCTORID);
                             Log.d("id",doctorid);
-                            Toast.makeText(DoctorLoginActivity.this, ""+doctorid, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DoctorLoginActivity.this, ""+doctorid, Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {

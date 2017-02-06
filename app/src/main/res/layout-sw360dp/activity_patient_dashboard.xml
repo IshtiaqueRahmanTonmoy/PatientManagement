@@ -37,22 +37,7 @@
             android:textSize="16dp"
             android:textColor="#fff"
             android:textAlignment="center"
-            android:drawableLeft="@drawable/ic_user"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="30dp" />
-
-        <Button
-            android:id="@+id/upcommingScheduleButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Upcoming schedule"
-            android:textSize="16dp"
-            android:textColor="#fff"
             android:drawableLeft="@drawable/upcomingshcedule"
-            android:textAlignment="center"
             android:background="@drawable/border"
             android:layout_gravity="center"
             android:letterSpacing="0.025"

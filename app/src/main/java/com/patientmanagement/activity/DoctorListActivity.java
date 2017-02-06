@@ -239,7 +239,7 @@ public class DoctorListActivity extends AppCompatActivity {
                     SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                     formattedDate = df.format(c.getTime());
 
-                    Toast.makeText(DoctorListActivity.this, ""+formattedDate, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(DoctorListActivity.this, ""+formattedDate, Toast.LENGTH_SHORT).show();
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
 
                     //Log.d("output",patientid+name+mobile+serial+formattedDate+docid);
@@ -271,7 +271,7 @@ public class DoctorListActivity extends AppCompatActivity {
                             Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), DoctorListActivity.class);
 
-                            sendSMS("01822256267", "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of ");
+                            sendSMS(phone, "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of " + formattedDate);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

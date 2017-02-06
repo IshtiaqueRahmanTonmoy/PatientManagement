@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
+                android:textColor="@color/background"
                 android:padding="5dp"
                 android:layout_marginTop="8dp"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -44,6 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PatientName"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/titlecolor"
                     android:layout_marginTop="5dp"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -53,6 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Consultingfor"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/indigo_500"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -60,6 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MobileNo"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/indigo_700"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </LinearLayout>

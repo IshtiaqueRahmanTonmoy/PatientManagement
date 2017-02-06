@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Patient_Management_System</string>
+    <string name="app_name">Patient Management System</string>
     <string name="chamberstarttime">Start Time</string>
     <string name="chamberendtime">End Time</string>
 
