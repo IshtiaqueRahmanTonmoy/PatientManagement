@@ -106,7 +106,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         alist = new ArrayList<String>();
         photoimage = (ImageView) findViewById(R.id.patientimage);
-        captureimage = (TextView) findViewById(R.id.imagecapture);
+        //captureimage = (TextView) findViewById(R.id.imagecapture);
         uploadimage = (TextView) findViewById(R.id.imageupload);
         //signup = (TextView) findViewById(R.id.signup);
         signup = (Button) findViewById(R.id.submit);
@@ -120,13 +120,7 @@ public class RegistrationActivity extends AppCompatActivity {
         diseasename = (EditText) findViewById(R.id.disease);
         password = (EditText) findViewById(R.id.password);
 
-        captureimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            }
-        });
+        patientgender.setFocusable(false);
 
         patientgender.setOnClickListener(new View.OnClickListener() {
             @Override

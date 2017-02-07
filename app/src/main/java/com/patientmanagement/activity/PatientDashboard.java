@@ -92,7 +92,9 @@ public class PatientDashboard extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             //Stop the activity
-                            PatientDashboard.this.finish();
+                            Intent intent = new Intent(PatientDashboard.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                     })

@@ -198,6 +198,7 @@ public class DoctorListActivity extends AppCompatActivity {
                                 String doctorfee = c.getString(TAG_DOCTORFEE);
                                 String followupfee = c.getString(TAG_FOLLOWUPFEE);
 
+                                //Toast.makeText(DoctorListActivity.this, ""+bmp1, Toast.LENGTH_SHORT).show();
                                 doctor = new Doctor(name,bmp1,address,phone,expertise,chamberday,chambertime,doctorfee,followupfee);
                                 alist.add(doctor);
 

@@ -36,20 +36,6 @@
                 android:padding="10px"/>
 
             <TextView
-                android:id="@+id/imagecapture"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="Capture image"
-                android:textSize="16dp"
-                android:textColor="#fff"
-                android:textAlignment="center"
-                android:background="@drawable/border"
-                android:layout_gravity="center"
-                android:letterSpacing="0.025"
-                android:padding="10dp"
-                android:layout_marginTop="15dp" />
-
-            <TextView
                 android:id="@+id/imageupload"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
@@ -408,7 +394,7 @@
                     android:background="@color/editTextBack"
                     android:hint="Password"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />

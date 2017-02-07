@@ -129,7 +129,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         new DownloadJSON().execute();
 
         alist = new ArrayList<String>();
-       // uploadimage = (Button) findViewById(R.id.imageupload);
+        // uploadimage = (Button) findViewById(R.id.imageupload);
         uploadimage = (TextView) findViewById(R.id.imageupload);
         nameEdt = (EditText) findViewById(R.id.name);
         addressEdt = (EditText) findViewById(R.id.address);
@@ -192,7 +192,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                                 responseText.append(names);
                                 expertiseEdt.setText("" + responseText);
                             }
-                              a++;
+                            a++;
                         }
                     }
                 });
@@ -579,21 +579,13 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                 });
 
                 Log.d("output",name+address+phone+expertise+chamberday+chambertime+doctorfee+followupfee+password);
-               // new CreateNewUser().execute();
+                // new CreateNewUser().execute();
 
                 if(!name.isEmpty() && !address.isEmpty() && !phone.isEmpty() && !expertise.isEmpty() && !chamberday.isEmpty() && !startime.isEmpty() && !endtime.isEmpty() && !chambertime.isEmpty() && !doctorfee.isEmpty() && !followupfee.isEmpty() && !password.isEmpty()){
                     new CreateNewUser().execute();
                 }
             }
         });
-    }
-
-    private String getStringImage(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
 
     @Override
@@ -611,6 +603,15 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         }
     }
 
+    private String getStringImage(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+
     class CreateNewUser extends AsyncTask<String, String, String> {
 
         @Override
@@ -626,45 +627,46 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-                    List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-                    params.add(new BasicNameValuePair(KEY_NAME, name));
-                    params.add(new BasicNameValuePair(KEY_Image, image));
-                    params.add(new BasicNameValuePair(KEY_Address, address));
-                    params.add(new BasicNameValuePair(KEY_Phone, phone));
-                    params.add(new BasicNameValuePair(KEY_Expertise, expertise));
-                    params.add(new BasicNameValuePair(KEY_Chamberday, chamberday));
-                    params.add(new BasicNameValuePair(KEY_Chambertime, chambertime));
-                    params.add(new BasicNameValuePair(KEY_Doctorfee, doctorfee));
-                    params.add(new BasicNameValuePair(KEY_Followupfee, followupfee));
-                    params.add(new BasicNameValuePair(KEY_Password, password));
+            params.add(new BasicNameValuePair(KEY_NAME, name));
+            params.add(new BasicNameValuePair(KEY_Image, image));
+            params.add(new BasicNameValuePair(KEY_Address, address));
+            params.add(new BasicNameValuePair(KEY_Phone, phone));
+            params.add(new BasicNameValuePair(KEY_Expertise, expertise));
+            params.add(new BasicNameValuePair(KEY_Chamberday, chamberday));
+            params.add(new BasicNameValuePair(KEY_Chambertime, chambertime));
+            params.add(new BasicNameValuePair(KEY_Doctorfee, doctorfee));
+            params.add(new BasicNameValuePair(KEY_Followupfee, followupfee));
+            params.add(new BasicNameValuePair(KEY_Password, password));
 
-                    JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
+            JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
 
-                    try {
-                        int success = json.getInt(TAG_SUCCESS);
+            try {
+                int success = json.getInt(TAG_SUCCESS);
 
-                        //Toast.makeText(DoctorRegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
-                        if (success == 1) {
-                            // successfully created product
+                //Toast.makeText(DoctorRegistrationActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                if (success == 1) {
+                    // successfully created product
 
-                            DoctorRegistrationActivity.this.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Toast.makeText(DoctorRegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(getApplicationContext(), DoctorLoginActivity.class);
-                                    startActivity(i);
-                                    finish();
-                                }
-                            });
-
-                            // closing this screen
-
-                        } else {
-                            // failed to create product
+                    DoctorRegistrationActivity.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(DoctorRegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DoctorRegistrationActivity.this, ""+image, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), DoctorLoginActivity.class);
+                            startActivity(i);
+                            finish();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    });
+
+                    // closing this screen
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             return null;
         }
@@ -718,6 +720,3 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         }
     }
 }
-
-
-

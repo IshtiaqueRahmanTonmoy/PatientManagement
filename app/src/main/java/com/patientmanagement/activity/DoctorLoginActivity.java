@@ -116,7 +116,9 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
                     Intent ii = new Intent(DoctorLoginActivity.this,DoctorDashboard.class);
                     ii.putExtra(TAG_DOCTORID,doctorid);
+                    finish();
                     startActivity(ii);
+
 
                     return json.getString(TAG_MESSAGE);
                 }

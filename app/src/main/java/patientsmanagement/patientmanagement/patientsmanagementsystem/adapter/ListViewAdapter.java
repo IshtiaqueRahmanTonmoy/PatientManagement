@@ -2,6 +2,8 @@ package patientsmanagement.patientmanagement.patientsmanagementsystem.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Doctor;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Medicine;
 
 /**
  * Created by Administrator on 12/7/2016.
@@ -50,18 +53,20 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View vi, ViewGroup parent) {
 
-        ViewHolder holder = new ViewHolder();
-        Doctor ldoc = (Doctor) alist.get(position);
-        View vi = convertView;
+        final ViewHolder holder;
+
+        final Doctor ldoc = alist.get(position);
+        final int temp = position;
+
+        LayoutInflater mInflater = (LayoutInflater) context
+                .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         if (vi == null) {
-            inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            vi = inflater.inflate(R.layout.doctorcustomlist, null);
-        }
+            vi = mInflater.inflate(R.layout.doctorcustomlist, null);
+            holder = new ViewHolder();
             holder.name = (TextView) vi.findViewById(R.id.tvDoctor);
             holder.address = (TextView) vi.findViewById(R.id.tvAddress);
             holder.mobileno = (TextView) vi.findViewById(R.id.tvMobileNo);
@@ -71,18 +76,27 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
             holder.date = (TextView) vi.findViewById(R.id.tvDate);
             holder.time = (TextView) vi.findViewById(R.id.tvTime);
             holder.image = (ImageView) vi.findViewById(R.id.ivIcon);
+            vi.setTag(holder);
+        }
 
+        else  {
+
+            holder = (ViewHolder)vi.getTag();
+        }
+
+        //Toast.makeText(context, ""+alist.get(position).getImage(), Toast.LENGTH_SHORT).show();
         holder.name.setText(ldoc.getName());
         holder.address.setText(ldoc.getAddress());
         holder.mobileno.setText(ldoc.getPhone());
         holder.expertise.setText(ldoc.getExpertise());
-        holder.image.setImageBitmap(ldoc.getImage());
+
+        //Bitmap b = Bitmap.createScaledBitmap(ldoc.getImage(), 100, 100, false);
+       // holder.image.setImageBitmap(ldoc.getImage());
+        holder.image.setImageResource(R.drawable.download);
         holder.doctorfee.setText(ldoc.getDoctorfee());
         holder.followupfee.setText(ldoc.getFollowupfeee());
         holder.date.setText(ldoc.getChamberday());
         holder.time.setText(ldoc.getChambertime());
-
-        vi.setTag(holder);
 
         return vi;
     }

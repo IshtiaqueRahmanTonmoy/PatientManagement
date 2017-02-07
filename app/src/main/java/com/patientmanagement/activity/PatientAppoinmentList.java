@@ -70,7 +70,7 @@ public class PatientAppoinmentList extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
-           // Toast.makeText(PatientAppoinmentList.this, ""+doctorid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PatientAppoinmentList.this, ""+doctorId, Toast.LENGTH_SHORT).show();
         }
     }
 
