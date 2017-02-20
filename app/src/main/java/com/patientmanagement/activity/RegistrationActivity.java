@@ -51,13 +51,13 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_PatientMobNo = "mobileno";
     public static final String KEY_Disease = "disease";
     public static final String KEY_EncryptedPassword = "encryptedpassword";
-
+    public static final String KEY_BLOODGROUP = "bloodgroup";
     public static final String KEY_DATE = "date";
     public static final String TAG_ALLCONTACT = "alldoctor";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
-    EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,password;
+    EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,bloodgroup,password;
     String name;
     String image;
     String address;
@@ -67,6 +67,7 @@ public class RegistrationActivity extends AppCompatActivity {
     String disease;
     String epassword;
     String phone;
+    String blood;
     private JSONArray jsonArray;
     private final int requestCode = 20;
     private static final int CAMERA_REQUEST = 1888;
@@ -77,7 +78,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Calendar calendar;
     private ProgressDialog pDialog;
     private int year, month, day;
-    AlertDialog.Builder alertdialogbuilder;
+    AlertDialog.Builder alertdialogbuilder,alertdialogbuilder1;
     Person person;
     ArrayList<String> alist;
     String[] AlertDialogItems = new String[]{
@@ -90,7 +91,30 @@ public class RegistrationActivity extends AppCompatActivity {
             false
     };
 
-    List<String> ItemsIntoList;
+
+    String[] Bloodgroups = new String[]{
+            "O+",
+            "O-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-"
+    };
+
+    boolean[] Selectedtruefalseblood = new boolean[]{
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+    };
+
+    List<String> ItemsIntoList,ItemsIntoList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +142,11 @@ public class RegistrationActivity extends AppCompatActivity {
         patientgender = (EditText) findViewById(R.id.gender);
         patientmobileno = (EditText) findViewById(R.id.mobileno);
         diseasename = (EditText) findViewById(R.id.disease);
+        bloodgroup = (EditText) findViewById(R.id.bloodgroup);
         password = (EditText) findViewById(R.id.password);
 
         patientgender.setFocusable(false);
+        bloodgroup.setFocusable(false);
 
         patientgender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +194,53 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        bloodgroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertdialogbuilder1 = new AlertDialog.Builder(RegistrationActivity.this);
+
+                ItemsIntoList1 = Arrays.asList(Bloodgroups);
+
+                alertdialogbuilder1.setMultiChoiceItems(Bloodgroups, Selectedtruefalseblood, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    }
+                });
+
+                alertdialogbuilder1.setCancelable(false);
+                alertdialogbuilder1.setTitle("Select Blood Groups Here");
+
+                alertdialogbuilder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        StringBuffer responseText = new StringBuffer();
+                        int a = 0;
+                        while (a < Selectedtruefalseblood.length) {
+                            boolean value = Selectedtruefalseblood[a];
+
+                            if (value) {
+                                String namess = ItemsIntoList1.get(a);
+                                //Toast.makeText(RegistrationActivity.this, ""+names, Toast.LENGTH_SHORT).show();
+                                responseText.append(namess);
+                                bloodgroup.setText("" + responseText);
+                            }
+                            a++;
+                        }
+                    }
+                });
+
+                alertdialogbuilder1.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = alertdialogbuilder1.create();
+                dialog.show();
+            }
+        });
+
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +266,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 gender = patientgender.getText().toString();
                 mobileno = patientmobileno.getText().toString();
                 disease = diseasename.getText().toString();
+                blood = bloodgroup.getText().toString();
                 epassword = password.getText().toString();
 
                     if(name.length()==0){
@@ -213,6 +287,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     if(disease.length()==0){
                         diseasename.setError("Field cannot be null");
                     }
+                   if(blood.length()==0){
+                    bloodgroup.setError("Field cannot be null");
+                   }
                     if(epassword.length()==0){
                         password.setError("Field cannot be null");
                     }
@@ -343,7 +420,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 //new CreateNewUser().execute();
 
-                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !epassword.isEmpty()){
+                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !blood.isEmpty() && !epassword.isEmpty()){
                     //Toast.makeText(RegistrationActivity.this, "field is not null", Toast.LENGTH_SHORT).show();
                     new CreateNewUser().execute();
                 }
@@ -396,6 +473,7 @@ public class RegistrationActivity extends AppCompatActivity {
                   params.add(new BasicNameValuePair(KEY_Address, address));
                   params.add(new BasicNameValuePair(KEY_PatientMobNo, mobileno));
                   params.add(new BasicNameValuePair(KEY_Disease, disease));
+                  params.add(new BasicNameValuePair(KEY_BLOODGROUP, blood));
                   params.add(new BasicNameValuePair(KEY_EncryptedPassword, epassword));
 
                   JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);

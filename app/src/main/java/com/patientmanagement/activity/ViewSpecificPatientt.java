@@ -98,7 +98,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
                         for (int x = 0; x < than.length(); x++) {
                             JSONObject catObj11 = than.getJSONObject(x);
                             prescriptionno = catObj11.getString(TAG_PRESCRIPTIONNO);
-                            Toast.makeText(ViewSpecificPatientt.this, ""+prescriptionno, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ViewSpecificPatientt.this, ""+prescriptionno, Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {

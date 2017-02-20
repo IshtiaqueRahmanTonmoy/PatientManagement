@@ -12,6 +12,9 @@
         android:id="@+id/healthNewslistview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:divider="#010d21"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector_flatcolor"
         android:layout_below="@+id/search" />
 
 

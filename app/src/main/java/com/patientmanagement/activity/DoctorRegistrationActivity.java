@@ -151,6 +151,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         startEdt.setFocusable(false);
         endEdt.setFocusable(false);
 
+
+
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -357,7 +359,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                 else{
                     image = "";
                 }
-
                 name = nameEdt.getText().toString();
                 address = addressEdt.getText().toString();
                 phone = phoneEdt.getText().toString();
@@ -588,11 +589,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
@@ -603,13 +603,14 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private String getStringImage(Bitmap bitmap) {
+    public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
+
 
 
     class CreateNewUser extends AsyncTask<String, String, String> {
@@ -652,7 +653,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     DoctorRegistrationActivity.this.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(DoctorRegistrationActivity.this.getBaseContext(), "Registration completed..", Toast.LENGTH_LONG).show();
-                            Toast.makeText(DoctorRegistrationActivity.this, ""+image, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DoctorRegistrationActivity.this, ""+image, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), DoctorLoginActivity.class);
                             startActivity(i);
                             finish();
@@ -712,6 +713,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+
                     }
 
                 }

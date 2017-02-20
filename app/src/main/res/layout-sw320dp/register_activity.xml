@@ -262,6 +262,41 @@
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
 
             <LinearLayout
+                android:id="@+id/lastLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Blood Group"
+                    android:textColor="#fff"/>
+
+                <EditText
+                    android:id="@+id/bloodgroup"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1.4"
+                    android:inputType="number"
+                    android:background="@color/editTextBack"
+                    android:hint="BloodGroup"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/seventhLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

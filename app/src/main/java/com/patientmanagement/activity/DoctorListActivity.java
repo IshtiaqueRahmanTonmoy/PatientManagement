@@ -265,7 +265,7 @@ public class DoctorListActivity extends AppCompatActivity {
 
                         int success = json.getInt(TAG_SUCCESS);
 
-                        Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
 
