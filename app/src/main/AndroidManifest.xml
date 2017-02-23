@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -44,7 +45,8 @@
         <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory" />
         <activity android:name="com.patientmanagement.activity.DoctorDashboard" />
         <activity android:name="com.patientmanagement.activity.ViewSpecificPatientt" />
-        <activity android:name="com.patientmanagement.activity.Expense"></activity>
+        <activity android:name="com.patientmanagement.activity.Expense" />
+        <activity android:name="com.patientmanagement.activity.SearchBloodActivity"></activity>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@ public class DoctorDashboard extends AppCompatActivity {
 
     private String doctorId;
     private static final String TAG_DOCTORID = "doctorId";
-    private Button appoinmentList,viewSpecificPrescription, vistitHistory;
+    private Button appoinmentList,viewSpecificPrescription, vistitHistory,SearchBlood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class DoctorDashboard extends AppCompatActivity {
         appoinmentList = (Button) findViewById(R.id.listofAppoinment);
         viewSpecificPrescription = (Button) findViewById(R.id.PrescriptionVisit);
         vistitHistory = (Button) findViewById(R.id.visitRate);
+        SearchBlood = (Button) findViewById(R.id.bloodgroupButton);
 
         appoinmentList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +59,14 @@ public class DoctorDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorDashboard.this,Expense.class);
                 intent.putExtra(TAG_DOCTORID, doctorId);
+                startActivity(intent);
+            }
+        });
+
+        SearchBlood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorDashboard.this,SearchBloodActivity.class);
                 startActivity(intent);
             }
         });

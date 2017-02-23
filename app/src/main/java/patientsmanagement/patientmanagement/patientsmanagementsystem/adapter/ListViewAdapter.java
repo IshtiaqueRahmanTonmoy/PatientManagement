@@ -16,10 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Doctor;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Medicine;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Patient;
 
 /**
  * Created by Administrator on 12/7/2016.
@@ -30,11 +32,16 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
     List<Doctor> alist = null;
     View rowView = null;
     private LayoutInflater inflater = null;
+    private ArrayList<Doctor> arraylist;
 
     public ListViewAdapter(Context context, int resourceid, List<Doctor> alist) {
         super(context, resourceid, alist);
         this.context = context;
         this.alist = alist;
+
+        this.arraylist = new ArrayList<Doctor>();
+        this.arraylist.addAll(alist);
+
     }
 
     @Override
@@ -113,4 +120,19 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
         TextView time;
         ImageView image;
     }
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        alist.clear();
+        if (charText.length() == 0) {
+            alist.addAll(arraylist);
+        } else {
+            for (Doctor wp : arraylist) {
+                if (wp.getExpertise().toLowerCase(Locale.getDefault()).contains(charText) || wp.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    alist.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }

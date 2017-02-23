@@ -19,7 +19,7 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 public class PatientDashboard extends AppCompatActivity {
 
     private Button appoinmentSchedule;
-    private Button healthTips,healthNews,appoinmentDetail;
+    private Button healthTips,healthNews,appoinmentDetail,searchBlood;
     String phone,message;
 
     @Override
@@ -41,6 +41,7 @@ public class PatientDashboard extends AppCompatActivity {
         appoinmentDetail = (Button) findViewById(R.id.appoinmentDetailButton);
         healthTips=(Button)findViewById(R.id.helthTipsButton);
         healthNews = (Button) findViewById(R.id.helthNewsButton);
+        searchBlood = (Button) findViewById(R.id.bloodgroupButton);
 
         appoinmentSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,14 @@ public class PatientDashboard extends AppCompatActivity {
                 Intent ii = new Intent(PatientDashboard.this,PatientAppoinmentHistory.class);
                 ii.putExtra("mobile",message);
                 startActivity(ii);
+            }
+        });
+
+        searchBlood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientDashboard.this,SearchBloodActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -18,7 +18,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="Appoinment list"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="#fff"
             android:textAlignment="center"
             android:background="@drawable/border"
@@ -33,7 +33,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="View Specific Prescription"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="#fff"
             android:drawableLeft="@drawable/ic_user"
             android:textAlignment="center"
@@ -43,13 +43,27 @@
             android:padding="10dp"
             android:layout_marginTop="50dp" />
 
+        <Button
+            android:id="@+id/bloodgroupButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Search Blood"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/blood"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
 
         <Button
             android:id="@+id/visitRate"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="Visit rate"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="#fff"
             android:textAlignment="center"
             android:drawableLeft="@drawable/healthtips"

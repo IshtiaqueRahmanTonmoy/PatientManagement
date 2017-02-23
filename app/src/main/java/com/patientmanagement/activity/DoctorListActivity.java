@@ -12,12 +12,15 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class DoctorListActivity extends AppCompatActivity {
 
@@ -52,6 +56,7 @@ public class DoctorListActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private JSONArray jsonarray;
     ListView listview;
+    EditText search;
     Doctor doctor;
     ArrayList<Doctor> alist;
     private static final String TAG_NAMEAPPOINT = "nameapp";
@@ -87,6 +92,7 @@ public class DoctorListActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        search = (EditText) findViewById(R.id.search);
         c = Calendar.getInstance();
 
         //Toast.makeText(DoctorListActivity.this, ""+formattedDate, Toast.LENGTH_SHORT).show();
@@ -137,6 +143,24 @@ public class DoctorListActivity extends AppCompatActivity {
 
         new GetLastAppoinment().execute();
         new DownloadJSON().execute();
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                String text = search.getText().toString().toLowerCase(Locale.getDefault());
+                adapter.filter(text);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     DialogInterface.OnClickListener listenerAccept = new DialogInterface.OnClickListener() {
