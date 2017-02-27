@@ -2,6 +2,7 @@ package com.patientmanagement.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -51,7 +53,6 @@ public class DoctorListActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DOCTORLIST = "alldoctor";
-    private JSONParser jParser;
     ListViewAdapter adapter;
     private ProgressDialog mProgressDialog;
     private JSONArray jsonarray;
@@ -82,15 +83,17 @@ public class DoctorListActivity extends AppCompatActivity {
     String delegate = "hh:mm aaa";
     int id=0;
     Calendar c;
+    private JSONParser jsonParser = new JSONParser();
+    private Bitmap bmp1;
+    String names,address,phones,expertise,chamberday,chambertime,doctorfee,followupfee;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         search = (EditText) findViewById(R.id.search);
         c = Calendar.getInstance();
@@ -109,6 +112,9 @@ public class DoctorListActivity extends AppCompatActivity {
             new LoadName().execute();
             //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
         }
+
+        new GetLastAppoinment().execute();
+        new DownloadJSON().execute();
 
         listview = (ListView) findViewById(R.id.listview);
 
@@ -137,12 +143,8 @@ public class DoctorListActivity extends AppCompatActivity {
             }
         });
 
-        jParser = new JSONParser();
         listview = (ListView) findViewById(R.id.listview);
         alist = new ArrayList<Doctor>();
-
-        new GetLastAppoinment().execute();
-        new DownloadJSON().execute();
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -161,6 +163,12 @@ public class DoctorListActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 
     DialogInterface.OnClickListener listenerAccept = new DialogInterface.OnClickListener() {
@@ -182,13 +190,10 @@ public class DoctorListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    List<NameValuePair> param =
+            List<NameValuePair> param =
                             new ArrayList<NameValuePair>();
                     // getting JSON string from URL
-                    JSONObject json = jParser.makeHttpRequest(url_doctorlist, "GET", param);
+                    JSONObject json = jsonParser.makeHttpRequest(url_doctorlist, "GET", param);
 
                     // Check your log cat for JSON reponse
                     Log.d("All Doctors: ", json.toString());
@@ -210,34 +215,38 @@ public class DoctorListActivity extends AppCompatActivity {
                                 String image = c.getString(TAG_IMAGE);
 
                                 byte[] byteArray =  Base64.decode(image, Base64.DEFAULT) ;
-                                Bitmap bmp1 = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                                bmp1 = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
 
-                                String name = c.getString(TAG_NAME);
-                                String address = c.getString(TAG_ADDRESS);
-                                String phone = c.getString(TAG_PHONE);
-                                String expertise = c.getString(TAG_EXPERTISE);
-                                String chamberday = c.getString(TAG_CHAMBERDAY);
-                                String chambertime = c.getString(TAG_CHAMBERTIME);
-                                String doctorfee = c.getString(TAG_DOCTORFEE);
-                                String followupfee = c.getString(TAG_FOLLOWUPFEE);
+                                names = c.getString(TAG_NAME);
+                                address = c.getString(TAG_ADDRESS);
+                                phones = c.getString(TAG_PHONE);
+                                expertise = c.getString(TAG_EXPERTISE);
+                                chamberday = c.getString(TAG_CHAMBERDAY);
+                                chambertime = c.getString(TAG_CHAMBERTIME);
+                                doctorfee = c.getString(TAG_DOCTORFEE);
+                                followupfee = c.getString(TAG_FOLLOWUPFEE);
 
-                                //Toast.makeText(DoctorListActivity.this, ""+bmp1, Toast.LENGTH_SHORT).show();
-                                doctor = new Doctor(name,bmp1,address,phone,expertise,chamberday,chambertime,doctorfee,followupfee);
+                                doctor = new Doctor(names,bmp1,address,phone,expertise,chamberday,chambertime,doctorfee,followupfee);
                                 alist.add(doctor);
 
                                 adapter = new ListViewAdapter(DoctorListActivity.this, R.layout.activity_doctor_list, alist);
-                                listview.setAdapter(adapter);
+                                //Toast.makeText(DoctorListActivity.this, ""+bmp1, Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
 
-             return null;
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+            listview.setAdapter(adapter);
         }
     }
 
@@ -257,10 +266,6 @@ public class DoctorListActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
                     SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                     formattedDate = df.format(c.getTime());
 
@@ -279,7 +284,7 @@ public class DoctorListActivity extends AppCompatActivity {
                     Log.d("param",params.toString());
                     // getting JSON Object
                     // Note that create product url accepts POST method
-                    JSONObject json = jParser.makeHttpRequest(REGISTER_URL, "POST", params);
+                    JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
                     Log.d("json",json.toString());
                     // check log cat fro response
                     //Log.d("Create Response", json.toString());
@@ -289,20 +294,18 @@ public class DoctorListActivity extends AppCompatActivity {
 
                         int success = json.getInt(TAG_SUCCESS);
 
-                       // Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(DoctorListActivity.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
 
-                            Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DoctorListActivity.this, "Successfully created appoinment", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), DoctorListActivity.class);
 
-                            sendSMS(phone, "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of " + formattedDate);
+                            //sendSMS(phone, "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of " + formattedDate);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
             return null;
         }
 
@@ -321,73 +324,49 @@ public class DoctorListActivity extends AppCompatActivity {
         sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
-    private class LoadName extends AsyncTask<String, String, String> {
+    private class LoadName extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(DoctorListActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
+        protected Void doInBackground(Void... params) {
+            int success;
+            try {
+                // Building Parameters
+                List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                paramss.add(new BasicNameValuePair(TAG_PHONE, phone));
 
-        @Override
-        protected String doInBackground(String... params) {
-            // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    // Check for success tag
-                    int success;
-                    try {
-                        // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_PHONE, phone));
+                // getting product details by making HTTP request
+                // Note that product details url will use GET request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        url_getname, "GET", paramss);
 
-                        // getting product details by making HTTP request
-                        // Note that product details url will use GET request
-                        JSONObject json = jParser.makeHttpRequest(
-                                url_getname, "GET", params);
+                // check your log for json response
+                Log.d("Single Product Details", json.toString());
 
-                        // check your log for json response
-                        Log.d("Single Product Details", json.toString());
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray(TAG_NAMEAPPOINT); // JSON Array
 
-                        // json success tag
-                        success = json.getInt(TAG_SUCCESS);
-                        if (success == 1) {
-                            // successfully received product details
-                            JSONArray productObj = json
-                                    .getJSONArray(TAG_NAMEAPPOINT); // JSON Array
+                    JSONObject lnews = productObj.getJSONObject(0);
+                    pid = lnews.getInt(TAG_PATIENTID);
+                    patientid = String.valueOf(pid);
+                    name = lnews.getString(TAG_NAME);
+                    disease = lnews.getString(TAG_DISEASE);
 
-                            JSONObject lnews = productObj.getJSONObject(0);
-                            pid = lnews.getInt(TAG_PATIENTID);
-                            patientid = String.valueOf(pid);
-                            name = lnews.getString(TAG_NAME);
-                            disease = lnews.getString(TAG_DISEASE);
-
-                            Log.d("valuessss",patientid+name+disease+phone);
-                            //Toast.makeText(DoctorListActivity.this, "id"+ patientid + "name"+ name+"consult for"+disease, Toast.LENGTH_SHORT).show();
-                            //main.... text.setText(healthpo.getString(TAG_DETAILS));
+                    // Log.d("valuessss",patientid+name+disease+phone);
+                    //Toast.makeText(DoctorListActivity.this, "id"+ patientid + "name"+ name+"consult for"+disease, Toast.LENGTH_SHORT).show();
+                    //main.... text.setText(healthpo.getString(TAG_DETAILS));
 
 
-                        } else {
-                            // product with pid not found
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                } else {
+                    // product with pid not found
                 }
-            });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            pDialog.dismiss();
-
         }
     }
 
@@ -397,13 +376,10 @@ public class DoctorListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    List<NameValuePair> param =
+            List<NameValuePair> param =
                             new ArrayList<NameValuePair>();
                     // getting JSON string from URL
-                    JSONObject json = jParser.makeHttpRequest(url_getlastid, "GET", param);
+                    JSONObject json = jsonParser.makeHttpRequest(url_getlastid, "GET", param);
 
                     // Check your log cat for JSON reponse
                     Log.d("All Doctors: ", json.toString());
@@ -418,20 +394,17 @@ public class DoctorListActivity extends AppCompatActivity {
                             jsonarray = json.getJSONArray(TAG_DOCTORLIST);
 
                             // looping through All Products
-                                JSONObject c = jsonarray.getJSONObject(0);
-                                // Storing each json item in variable
-                                id = Integer.parseInt(c.getString(TAG_ID));
-                                //Toast.makeText(DoctorListActivity.this, "last id"+id, Toast.LENGTH_SHORT).show();
-                                //Log.d("last id",id);
+                            JSONObject c = jsonarray.getJSONObject(0);
+                            // Storing each json item in variable
+                            id = Integer.parseInt(c.getString(TAG_ID));
+                            //Toast.makeText(DoctorListActivity.this, "last id"+id, Toast.LENGTH_SHORT).show();
+                            //Log.d("last id",id);
 
                         } else {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
-
             return null;
         }
     }

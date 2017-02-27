@@ -1,9 +1,11 @@
 package com.patientmanagement.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,6 +80,13 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
     }
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
+
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         //Toast.makeText(PatientAppoinmentHistory.this, ""+phone, Toast.LENGTH_SHORT).show();
@@ -87,20 +96,16 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    // Check for success tag
-                    int success;
+              int success;
                     try {
                         // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_PHONE, phone));
+                        List<NameValuePair> param = new ArrayList<NameValuePair>();
+                        param.add(new BasicNameValuePair(TAG_PHONE, phone));
 
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jParser.makeHttpRequest(
-                                url_getname, "GET", params);
+                                url_getname, "GET", param);
 
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());
@@ -122,8 +127,6 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
             return null;
         }
     }
@@ -144,19 +147,18 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
+
                     // Check for success tag
                     int success;
                     try {
                         // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_PATIENTID,  patientid));
+                        List<NameValuePair> param = new ArrayList<NameValuePair>();
+                        param.add(new BasicNameValuePair(TAG_PATIENTID,  patientid));
 
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jParser.makeHttpRequest(
-                                url_getappoinmentdetail, "GET", params);
+                                url_getappoinmentdetail, "GET", param);
 
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());
@@ -178,9 +180,6 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
 
                                 person = new Person(pname, disease, mobileno, date, time);
                                 alist.add(person);
-
-                                adapter = new AppoinmentListAdapter(PatientAppoinmentHistory.this, R.layout.activity_patient_appoinment_history, alist);
-                                listview.setAdapter(adapter);
                             }
                            // Log.d("result",pname+disease+mobileno+date+time);
                         } else {
@@ -189,8 +188,8 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
+
+
             return null;
         }
 
@@ -198,6 +197,8 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             pDialog.dismiss();
+            adapter = new AppoinmentListAdapter(PatientAppoinmentHistory.this, R.layout.activity_patient_appoinment_history, alist);
+            listview.setAdapter(adapter);
 
         }
     }

@@ -35,6 +35,7 @@ public class HealthNewsDetails extends AppCompatActivity {
     private JSONParser jsonParser = new JSONParser();
     TextView text;
     private String id;
+    String outd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,36 +70,31 @@ public class HealthNewsDetails extends AppCompatActivity {
 
         @Override
         protected String doInBackground(final String... params) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    int success;
+
+            int success;
                     try{
-                        List<NameValuePair>params=new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_ID,id));
-                        JSONObject json=jsonParser.makeHttpRequest(DOCTORDETAILGET_URL,"GET",params);
+                        List<NameValuePair>param=new ArrayList<NameValuePair>();
+                        param.add(new BasicNameValuePair(TAG_ID,id));
+                        JSONObject json=jsonParser.makeHttpRequest(DOCTORDETAILGET_URL,"GET",param);
                         success=json.getInt(TAG_SUCCESS);
                         if (success == 1) {
                             JSONArray patientObj=json.getJSONArray(TAG_HEALTHDETAIL_LIST);
                             JSONObject healthdetails=patientObj.getJSONObject(0);
-                            String outd=removeHTML(healthdetails.getString(TAG_DETAIL));
+                            outd =removeHTML(healthdetails.getString(TAG_DETAIL));
                             Log.d("outputvalue",outd);
-                            text.setText(outd);
                         }
-
-
                     }
                     catch (JSONException e){
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
         @Override
         protected void onPostExecute(String result){
             super.onPostExecute(result);
             pDialog.dismiss();
+            text.setText(outd);
         }
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         private  String removeHTML(String tagDetails){

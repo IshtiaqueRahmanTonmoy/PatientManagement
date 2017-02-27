@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 
@@ -28,7 +29,7 @@ public class DoctorDashboard extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
-            // Toast.makeText(PatientAppoinmentList.this, ""+doctorid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(DoctorDashboard.this, ""+doctorId, Toast.LENGTH_SHORT).show();
         }
 
         appoinmentList = (Button) findViewById(R.id.listofAppoinment);

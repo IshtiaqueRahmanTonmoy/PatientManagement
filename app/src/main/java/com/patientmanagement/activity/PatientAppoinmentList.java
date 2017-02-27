@@ -1,10 +1,12 @@
 package com.patientmanagement.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -26,6 +28,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
+import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.AppoinmentListAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PersonAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
@@ -56,10 +59,8 @@ public class PatientAppoinmentList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_appoint_list);
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         personlist = new ArrayList<Person>();
         Intent iin= getIntent();
@@ -70,10 +71,15 @@ public class PatientAppoinmentList extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
-            //Toast.makeText(PatientAppoinmentList.this, ""+doctorId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PatientAppoinmentList.this, ""+doctorId, Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
     private void loadAppoinmentList() {
         new PatientAppList().execute();
     }
@@ -81,11 +87,18 @@ public class PatientAppoinmentList extends AppCompatActivity {
     public class PatientAppList extends AsyncTask<String, String, String> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(PatientAppoinmentList.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-            //arealist = new ArrayList<String>();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
 
                     List<NameValuePair> param = new ArrayList<NameValuePair>();
                     param.add(new BasicNameValuePair(TAG_DOCTORID, doctorId));
@@ -105,32 +118,34 @@ public class PatientAppoinmentList extends AppCompatActivity {
 
                             person = new Person(name,disease,mobileno,time);
                             personlist.add(person);
-                            personadapter = new PersonAdapter(PatientAppoinmentList.this, R.layout.patient_appoint_list, personlist);
-                            listview.setAdapter(personadapter);
-
-                            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    String mobilenumber = personlist.get(position).getMobileno();
-                                    //Toast.makeText(getApplicationContext(), "" + member_name,
-                                     //       Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(PatientAppoinmentList.this,PatientDetailActivity.class);
-                                    intent.putExtra("mobile",mobilenumber);
-                                    intent.putExtra("doctorid",doctorId);
-                                    startActivity(intent);
-                                }
-                            });
-                            //Toast.makeText(PatientAppoinmentList.this, "name"+name+"disease"+disease+"mobileno"+mobileno, Toast.LENGTH_SHORT).show();
-                            //Log.d("output",name+disease+mobileno);
-                            //arealist.add(name);
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            pDialog.dismiss();
+            personadapter = new PersonAdapter(PatientAppoinmentList.this, R.layout.patient_appoint_list, personlist);
+            listview.setAdapter(personadapter);
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String mobilenumber = personlist.get(position).getMobileno();
+                    //Toast.makeText(getApplicationContext(), "" + member_name,
+                    //       Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(PatientAppoinmentList.this,PatientDetailActivity.class);
+                    intent.putExtra("mobile",mobilenumber);
+                    intent.putExtra("doctorid",doctorId);
+                    startActivity(intent);
                 }
             });
-            return null;
+
         }
 
     }

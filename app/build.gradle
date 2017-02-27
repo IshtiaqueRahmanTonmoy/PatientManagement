@@ -9,6 +9,7 @@ android {
         applicationId "patientsmanagement.patientmanagement.patientsmanagementsystem"
         minSdkVersion 15
         targetSdkVersion 23
+        multiDexEnabled true
         versionCode 3
         versionName "1.1.3"
     }
@@ -33,4 +34,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.ganfra:material-spinner:1.1.1'
+    compile 'com.google.android.gms:play-services:6.5.87'
+    compile 'com.android.support:multidex:1.0.1'
 }

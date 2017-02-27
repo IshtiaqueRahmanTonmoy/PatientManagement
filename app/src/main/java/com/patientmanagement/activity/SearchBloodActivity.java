@@ -2,9 +2,11 @@ package com.patientmanagement.activity;
 
 import android.app.AlertDialog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -50,12 +52,19 @@ public class SearchBloodActivity extends AppCompatActivity {
     String mob;
     private BloodAdapter bloodadapter = null;
     private static final String urlblood = "http://darumadhaka.com/patientmanagement/getblood.php";
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_blood);
 
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        new GetBlood().execute();
         alist = new ArrayList<Patient>();
         search = (EditText) findViewById(R.id.editText);
         listview = (ListView) findViewById(R.id.listview);
@@ -72,7 +81,6 @@ public class SearchBloodActivity extends AppCompatActivity {
             }
         });
 
-        new GetBlood().execute();
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,23 +120,24 @@ public class SearchBloodActivity extends AppCompatActivity {
                         //Toast.makeText(SearchBloodActivity.this, "No Clicked", Toast.LENGTH_LONG).show();
                         break;
                 }
-              }
-            };
+            }
+        };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
-
-
-
     }
 
-    protected class  GetBlood extends AsyncTask<String,String,String> {
+    private class GetBlood extends AsyncTask<String,String,String>{
 
         @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(SearchBloodActivity.this,
+                    "ProgressDialog",
+                    "Getting data");
+        }
+        @Override
         protected String doInBackground(String... params) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+
                     List<NameValuePair> param = new ArrayList<NameValuePair>();
                     JSONObject json= jParser.makeHttpRequest(urlblood,"GET",param);
 
@@ -152,19 +161,21 @@ public class SearchBloodActivity extends AppCompatActivity {
                                 phone = c.getString(TAG_PHONE);
                                 bloodgroup = c.getString(TAG_BLOOD);
                                 alist.add(new Patient(name,address,phone,bloodgroup));
-
-                                bloodadapter = new BloodAdapter(SearchBloodActivity.this, R.layout.simplerow, alist);
-                                listview.setAdapter(bloodadapter);
                             }
                         } else {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                      return null;
                 }
-            });
-            return null;
+
+        @Override
+        protected void onPostExecute(String result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+            bloodadapter = new BloodAdapter(SearchBloodActivity.this, R.layout.simplerow, alist);
+            listview.setAdapter(bloodadapter);
         }
 
     }

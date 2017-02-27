@@ -41,6 +41,7 @@ public class HealthtipsDetail extends AppCompatActivity {
     private JSONArray jsonarray;
     private String id,detail;
     TextView text;
+    String outd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class HealthtipsDetail extends AppCompatActivity {
 
         getDetail();
 
+        text = (TextView) findViewById(R.id.detail);
         Intent i = getIntent();
         id = i.getStringExtra("IdValue");
         Log.e("idvalue",id);
@@ -81,19 +83,18 @@ public class HealthtipsDetail extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
+
                     // Check for success tag
                     int success;
                     try {
                         // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_ID, id));
+                        List<NameValuePair> param = new ArrayList<NameValuePair>();
+                        param.add(new BasicNameValuePair(TAG_ID, id));
 
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                DOCTORDETAILGET_URL, "GET", params);
+                                DOCTORDETAILGET_URL, "GET", param);
 
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());
@@ -110,10 +111,10 @@ public class HealthtipsDetail extends AppCompatActivity {
 
                             // product with this pid found
                             // Edit Text
-                            text = (TextView) findViewById(R.id.detail);
-                            String outd = removeHTML(healthpo.getString(TAG_DETAIL));
+
+                            outd = removeHTML(healthpo.getString(TAG_DETAIL));
                             Log.d("outputvalue",outd);
-                            text.setText(outd);
+
 
                             //main.... text.setText(healthpo.getString(TAG_DETAILS));
 
@@ -124,8 +125,6 @@ public class HealthtipsDetail extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
             return null;
         }
 
@@ -133,6 +132,7 @@ public class HealthtipsDetail extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             pDialog.dismiss();
+            text.setText(outd);
 
         }
     }

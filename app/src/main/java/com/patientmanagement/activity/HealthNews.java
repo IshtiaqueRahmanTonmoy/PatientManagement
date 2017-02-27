@@ -1,5 +1,6 @@
 package com.patientmanagement.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class HealthNews extends AppCompatActivity {
     private ArrayAdapter<String> listAdapter;
     String id,heading,idvalue;
     ListView listview;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +60,20 @@ public class HealthNews extends AppCompatActivity {
     protected class DownloadJSON extends AsyncTask<String,String,String>{
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(HealthNews.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    List<NameValuePair> param=new ArrayList<NameValuePair>();
+
+                  List<NameValuePair> param=new ArrayList<NameValuePair>();
                     JSONObject json=jParser.makeHttpRequest(url_health_news,"GET",param);
                     try{
                         int success=json.getInt(TAG_SUCCESS);
@@ -76,8 +87,7 @@ public class HealthNews extends AppCompatActivity {
                                 heading=c.getString(TAG_HEADING);
 
                                 alist.add(heading);
-                                listAdapter=new ArrayAdapter<String>(HealthNews.this,R.layout.simplerow,alist);
-                                listview.setAdapter(listAdapter);
+
                             }
                         }
                         else {
@@ -88,9 +98,18 @@ public class HealthNews extends AppCompatActivity {
                     {
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            pDialog.dismiss();
+            listAdapter=new ArrayAdapter<String>(HealthNews.this,R.layout.simplerow,alist);
+            listview.setAdapter(listAdapter);
+
+        }
+
     }
 }
