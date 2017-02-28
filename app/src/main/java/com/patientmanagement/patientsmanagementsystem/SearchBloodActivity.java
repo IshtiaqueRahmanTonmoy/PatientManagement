@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.app.AlertDialog;
 
@@ -13,11 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.content.DialogInterface;
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -31,7 +28,6 @@ import java.util.Locale;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.BloodAdapter;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PrescriptionAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Patient;
 
@@ -74,10 +70,12 @@ public class SearchBloodActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Patient selectedFromList =(Patient) (listview.getItemAtPosition(position));
-                mob = selectedFromList.getPhone();
+                Intent intent = new Intent(SearchBloodActivity.this,GoogleMapActivity.class);
+                startActivity(intent);
+                //Patient selectedFromList =(Patient) (listview.getItemAtPosition(position));
+                //mob = selectedFromList.getPhone();
                 //Toast.makeText(SearchBloodActivity.this, ""+mob, Toast.LENGTH_SHORT).show();
-                alertMessage();
+               // alertMessage();
             }
         });
 

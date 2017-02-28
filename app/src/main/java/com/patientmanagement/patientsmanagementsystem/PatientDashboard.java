@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,67 +8,75 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 
-public class DoctorDashboard extends AppCompatActivity {
+public class PatientDashboard extends AppCompatActivity {
 
-    private String doctorId;
-    private static final String TAG_DOCTORID = "doctorId";
-    private Button appoinmentList,viewSpecificPrescription, vistitHistory,SearchBlood;
+    private Button appoinmentSchedule;
+    private Button healthTips,healthNews,appoinmentDetail,searchBlood;
+    String phone,message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_dashboard);
+        setContentView(R.layout.activity_patient_dashboard);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
         if(b!=null)
         {
-            doctorId = b.getString(TAG_DOCTORID);
-            Toast.makeText(DoctorDashboard.this, ""+doctorId, Toast.LENGTH_SHORT).show();
+            phone =(String) b.get("mobile");
+            message = phone;
+            //Toast.makeText(DoctorListActivity.this, ""+phone, Toast.LENGTH_SHORT).show();
         }
 
-        appoinmentList = (Button) findViewById(R.id.listofAppoinment);
-        viewSpecificPrescription = (Button) findViewById(R.id.PrescriptionVisit);
-        vistitHistory = (Button) findViewById(R.id.visitRate);
-        SearchBlood = (Button) findViewById(R.id.bloodgroupButton);
+        appoinmentSchedule = (Button)findViewById(R.id.appoinmentScheduleButton);
+        appoinmentDetail = (Button) findViewById(R.id.appoinmentDetailButton);
+        healthTips=(Button)findViewById(R.id.helthTipsButton);
+        healthNews = (Button) findViewById(R.id.helthNewsButton);
+        searchBlood = (Button) findViewById(R.id.bloodgroupButton);
 
-        appoinmentList.setOnClickListener(new View.OnClickListener() {
+        appoinmentSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii = new Intent(DoctorDashboard.this,PatientAppoinmentList.class);
-                ii.putExtra(TAG_DOCTORID, doctorId);
+                Intent ii = new Intent(PatientDashboard.this,DoctorListActivity.class);
+                ii.putExtra("mobile",phone);
                 startActivity(ii);
             }
         });
 
-        viewSpecificPrescription.setOnClickListener(new View.OnClickListener() {
+        appoinmentDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii = new Intent(DoctorDashboard.this,ViewSpecificPatientt.class);
-                ii.putExtra(TAG_DOCTORID, doctorId);
+                Intent ii = new Intent(PatientDashboard.this,PatientAppoinmentHistory.class);
+                ii.putExtra("mobile",message);
                 startActivity(ii);
             }
         });
 
-        vistitHistory.setOnClickListener(new View.OnClickListener() {
+        searchBlood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DoctorDashboard.this,Expense.class);
-                intent.putExtra(TAG_DOCTORID, doctorId);
+                Intent intent = new Intent(PatientDashboard.this,SearchBloodActivity.class);
                 startActivity(intent);
             }
         });
 
-        SearchBlood.setOnClickListener(new View.OnClickListener() {
+        healthNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DoctorDashboard.this,SearchBloodActivity.class);
+                Intent intent = new Intent(PatientDashboard.this,HealthNews.class);
                 startActivity(intent);
+            }
+        });
+        healthTips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientDashboard.this,HealthTips.class);
+                startActivity(intent);
+
             }
         });
     }
@@ -88,10 +96,9 @@ public class DoctorDashboard extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             //Stop the activity
-                            Intent intent = new Intent(DoctorDashboard.this,MainActivity.class);
+                            Intent intent = new Intent(PatientDashboard.this,MainActivity.class);
                             startActivity(intent);
                             finish();
-
                         }
 
                     })

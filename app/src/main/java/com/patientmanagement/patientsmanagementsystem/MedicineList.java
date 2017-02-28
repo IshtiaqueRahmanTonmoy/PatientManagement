@@ -1,6 +1,5 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,12 +11,11 @@ import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -150,7 +148,7 @@ public class MedicineList extends AppCompatActivity {
                     //Log.d("idval",id);
                 }
 
-                //new PrescriptionPatient().execute();
+                new PrescriptionPatient().execute();
 
             }
         });
@@ -205,10 +203,6 @@ public class MedicineList extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
                     Log.d("value for paramter", String.valueOf(pid));
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
                     params.add(new BasicNameValuePair(TAG_PATIENTPRESCRIPTIONNO, prescriptionno));
@@ -229,7 +223,7 @@ public class MedicineList extends AppCompatActivity {
 
                         int success = json.getInt(TAG_SUCCESS);
 
-                        Toast.makeText(MedicineList.this, "" + success, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MedicineList.this, "" + success, Toast.LENGTH_SHORT).show();
                         if (success == 1) {
                             // successfully created product
 
@@ -244,9 +238,7 @@ public class MedicineList extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
-            return null;
+              return null;
         }
 
         /**
@@ -264,19 +256,18 @@ public class MedicineList extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    // Check for success tag
+
+            // Check for success tag
                     int success;
                     try {
                         // Building Parameters
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair(TAG_PHONE, patientmobile));
+                        List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                        paramss.add(new BasicNameValuePair(TAG_PHONE, patientmobile));
 
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                url_getname, "GET", params);
+                                url_getname, "GET", paramss);
 
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());
@@ -299,8 +290,7 @@ public class MedicineList extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
     }
@@ -324,12 +314,7 @@ public class MedicineList extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
                     String patno = String.valueOf(pid);
-
                     Log.d("value for paramter", String.valueOf(pid));
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
@@ -364,8 +349,7 @@ public class MedicineList extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                  }
-            });
+
             return null;
         }
     }

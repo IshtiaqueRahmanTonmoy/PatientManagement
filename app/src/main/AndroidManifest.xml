@@ -3,7 +3,7 @@
     package="patientsmanagement.patientmanagement.patientsmanagementsystem">
 
     <permission
-        android:name="com.patientmanagement.activity.permission.MAPS_RECEIVE"
+        android:name="com.patientmanagement.patientsmanagementsystem.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.patientmanagement.activity.permission.MAPS_RECEIVE" />
@@ -39,7 +39,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.patientmanagement.activity.SplashScreenActivity"
+            android:name="com.patientmanagement.patientsmanagementsystem.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,31 +47,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.patientmanagement.activity.MainActivity" />
-        <activity android:name="com.patientmanagement.activity.RegistrationActivity" />
-        <activity android:name="com.patientmanagement.activity.DoctorLoginActivity" />
-        <activity android:name="com.patientmanagement.activity.DoctorRegistrationActivity" />
-        <activity android:name="com.patientmanagement.activity.DoctorListActivity" />
-        <activity android:name="com.patientmanagement.activity.PatientDashboard" />
-        <activity android:name="com.patientmanagement.activity.HealthTips" />
-        <activity android:name="com.patientmanagement.activity.HealthNews" />
-        <activity android:name="com.patientmanagement.activity.HealthtipsDetail" />
-        <activity android:name="com.patientmanagement.activity.HealthNewsDetails" />
-        <activity android:name="com.patientmanagement.activity.PatientAppoinmentList" />
-        <activity android:name="com.patientmanagement.activity.PatientDetailActivity" />
-        <activity android:name="com.patientmanagement.activity.AddPrescriptionActivity" />
-        <activity android:name="com.patientmanagement.activity.MedicineList" />
-        <activity android:name="com.patientmanagement.activity.ViewPrescriptionActivity" />
-        <activity android:name="com.patientmanagement.activity.PatientAppoinmentHistory" />
-        <activity android:name="com.patientmanagement.activity.DoctorDashboard" />
-        <activity android:name="com.patientmanagement.activity.ViewSpecificPatientt" />
-        <activity android:name="com.patientmanagement.activity.Expense" />
-        <activity android:name="com.patientmanagement.activity.SearchBloodActivity" />
-        <activity android:name="com.patientmanagement.activity.GoogleMapActivity"></activity>
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.MainActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.RegistrationActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.DoctorLoginActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.DoctorRegistrationActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.DoctorListActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.PatientDashboard" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.HealthTips" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.HealthNews" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.HealthtipsDetail" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.HealthNewsDetails" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.PatientAppoinmentList" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.PatientDetailActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.AddPrescriptionActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.MedicineList" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.ViewPrescriptionActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.PatientAppoinmentHistory" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.DoctorDashboard" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.ViewSpecificPatientt" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.Expense" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.SearchBloodActivity" />
+        <activity android:name="com.patientmanagement.patientsmanagementsystem.GoogleMapActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAnacp9i3cmCYOnLQ-S9S6TbqqsQAXBUEg" />
+            android:value="AIzaSyBRQh92CEFhBNIaLVaq5KL4bAfrLQexGFs" />
 
 
     </application>

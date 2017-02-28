@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f1f5f8"
-    tools:context="com.patientmanagement.activity.PatientDetailActivity">
-
-    <include layout="@layout/toolbar"/>
+    tools:context="com.patientmanagement.patientsmanagementsystem.PatientDetailActivity">
 
     <Button
         android:id="@+id/SubmitMedicine"

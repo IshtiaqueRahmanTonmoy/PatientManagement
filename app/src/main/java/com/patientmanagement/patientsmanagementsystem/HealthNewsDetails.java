@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;

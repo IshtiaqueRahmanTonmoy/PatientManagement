@@ -25,4 +25,8 @@
 
     <string name="viewexpense">Total revenue income:-</string>
     <string name="viewexpenseoutput">Expense</string>
+
+    <string name="str_btn_find">Find</string>
+    <string name="hnt_et_location">Enter location</string>
+    <string name="menu_settings">Settings</string>
 </resources>

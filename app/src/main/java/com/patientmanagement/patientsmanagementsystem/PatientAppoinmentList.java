@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,13 +8,11 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -22,13 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.AppoinmentListAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PersonAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
@@ -71,7 +66,7 @@ public class PatientAppoinmentList extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
-            Toast.makeText(PatientAppoinmentList.this, ""+doctorId, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PatientAppoinmentList.this, ""+doctorId, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -143,6 +138,7 @@ public class PatientAppoinmentList extends AppCompatActivity {
                     intent.putExtra("mobile",mobilenumber);
                     intent.putExtra("doctorid",doctorId);
                     startActivity(intent);
+                    finish();
                 }
             });
 

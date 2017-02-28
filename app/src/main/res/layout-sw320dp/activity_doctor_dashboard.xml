@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#1c3c4d"
-    tools:context="com.patientmanagement.activity.PatientDashboard">
+    tools:context="com.patientmanagement.patientsmanagementsystem.PatientDashboard">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,29 +1,24 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;

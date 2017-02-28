@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.AppoinmentListAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 
 public class HealthTips extends AppCompatActivity {

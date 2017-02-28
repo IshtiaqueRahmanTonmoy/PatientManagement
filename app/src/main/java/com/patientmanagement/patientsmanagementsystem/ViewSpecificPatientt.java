@@ -1,13 +1,14 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,13 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.MedicineAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.MedicineListAdapter;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PersonAdapter;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PrescriptionAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Medicine;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
 
 /**
  * Created by Administrator on 2/2/2017.
@@ -56,11 +53,17 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
     private static String url_getall = "http://darumadhaka.com/patientmanagement/getallprescriptions.php";
     private static String url_getmedicine = "http://darumadhaka.com/patientmanagement/medicinenamegetbyinfo.php";
     JSONParser jP = new JSONParser();
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_specific);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
@@ -70,10 +73,17 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
+            Toast.makeText(ViewSpecificPatientt.this, ""+doctorId, Toast.LENGTH_SHORT).show();
             new getPrescriptionNo().execute();
             new getPrescriptionHistory().execute();
             new getMedicineName().execute();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 
 
@@ -82,10 +92,6 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             //arealist = new ArrayList<String>();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
                     List<NameValuePair> param = new ArrayList<NameValuePair>();
                     param.add(new BasicNameValuePair(TAG_DOCTORIDVAL, doctorId));
                     JSONObject json = jP.makeHttpRequest(url_search, "GET", param);
@@ -104,8 +110,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
     }
@@ -115,11 +120,8 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             //arealist = new ArrayList<String>();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
 
-                    List<NameValuePair> param = new ArrayList<NameValuePair>();
+                   List<NameValuePair> param = new ArrayList<NameValuePair>();
                     param.add(new BasicNameValuePair(TAG_PRESCRIPTIONNO,  prescriptionno));
                     JSONObject json = jP.makeHttpRequest(url_getall, "GET", param);
 
@@ -145,17 +147,24 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
                             medicine = new Medicine(medicinename,mediunitid,quantity,timeduration,afterbefore,frequency,followupdate,suggestion);
                             medicinelist.add(medicine);
 
-                            mediadapter = new MedicineListAdapter(ViewSpecificPatientt.this, R.layout.activity_view_specific, medicinelist);
-                            listview.setAdapter(mediadapter);
+
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
-            return null;
+              return null;
         }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            mediadapter = new MedicineListAdapter(ViewSpecificPatientt.this, R.layout.activity_view_specific, medicinelist);
+            listview.setAdapter(mediadapter);
+
+        }
+
+
     }
 
     public class getMedicineName extends AsyncTask<String, String, String> {
@@ -163,10 +172,6 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             //arealist = new ArrayList<String>();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
                     List<NameValuePair> param = new ArrayList<NameValuePair>();
                     param.add(new BasicNameValuePair(TAG_MEDINFOID, medininfoid));
                     JSONObject json = jP.makeHttpRequest(url_getmedicine, "GET", param);
@@ -184,8 +189,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-            });
+
             return null;
         }
     }

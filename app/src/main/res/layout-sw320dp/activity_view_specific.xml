@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.patientmanagement.activity.ViewSpecificPatientt">
+    tools:context="com.patientmanagement.patientsmanagementsystem.ViewSpecificPatientt">
 
     <include layout="@layout/toolbar"/>
 

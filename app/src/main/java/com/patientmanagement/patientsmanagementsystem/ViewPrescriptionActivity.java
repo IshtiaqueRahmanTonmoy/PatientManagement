@@ -1,19 +1,15 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,10 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PersonAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.adapter.PrescriptionAdapter;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
-import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Person;
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Prescription;
 
 public class ViewPrescriptionActivity extends AppCompatActivity {

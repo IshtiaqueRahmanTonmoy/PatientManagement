@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;

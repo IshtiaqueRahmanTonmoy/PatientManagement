@@ -1,4 +1,4 @@
-package com.patientmanagement.activity;
+package com.patientmanagement.patientsmanagementsystem;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -14,9 +14,6 @@ import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ScrollingTabContainerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
