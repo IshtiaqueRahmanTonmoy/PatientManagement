@@ -43,7 +43,6 @@
             android:padding="10dp"
             android:layout_marginTop="50dp" />
 
-
         <Button
             android:id="@+id/bloodgroupButton"
             android:layout_width="250dp"
@@ -55,6 +54,21 @@
             android:background="@drawable/border"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/blood"
+            android:letterSpacing="0.025"
+            android:padding="10dp"
+            android:layout_marginTop="30dp" />
+
+        <Button
+            android:id="@+id/searchlocation"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Search Location"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/distance"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
             android:letterSpacing="0.025"
             android:padding="10dp"
             android:layout_marginTop="30dp" />

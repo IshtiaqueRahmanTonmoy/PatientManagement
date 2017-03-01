@@ -15,7 +15,7 @@ public class DoctorDashboard extends AppCompatActivity {
 
     private String doctorId;
     private static final String TAG_DOCTORID = "doctorId";
-    private Button appoinmentList,viewSpecificPrescription, vistitHistory,SearchBlood;
+    private Button appoinmentList,viewSpecificPrescription, vistitHistory,SearchBlood,searchLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class DoctorDashboard extends AppCompatActivity {
         viewSpecificPrescription = (Button) findViewById(R.id.PrescriptionVisit);
         vistitHistory = (Button) findViewById(R.id.visitRate);
         SearchBlood = (Button) findViewById(R.id.bloodgroupButton);
+        searchLocation = (Button) findViewById(R.id.searchlocation);
 
         appoinmentList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,7 @@ public class DoctorDashboard extends AppCompatActivity {
                 Intent ii = new Intent(DoctorDashboard.this,PatientAppoinmentList.class);
                 ii.putExtra(TAG_DOCTORID, doctorId);
                 startActivity(ii);
+
             }
         });
 
@@ -51,6 +53,7 @@ public class DoctorDashboard extends AppCompatActivity {
                 Intent ii = new Intent(DoctorDashboard.this,ViewSpecificPatientt.class);
                 ii.putExtra(TAG_DOCTORID, doctorId);
                 startActivity(ii);
+
             }
         });
 
@@ -60,6 +63,7 @@ public class DoctorDashboard extends AppCompatActivity {
                 Intent intent = new Intent(DoctorDashboard.this,Expense.class);
                 intent.putExtra(TAG_DOCTORID, doctorId);
                 startActivity(intent);
+
             }
         });
 
@@ -68,6 +72,16 @@ public class DoctorDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorDashboard.this,SearchBloodActivity.class);
                 startActivity(intent);
+
+            }
+        });
+
+        searchLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorDashboard.this,GoogleMapActivity.class);
+                startActivity(intent);
+
             }
         });
     }

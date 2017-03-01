@@ -14,7 +14,7 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 public class PatientDashboard extends AppCompatActivity {
 
     private Button appoinmentSchedule;
-    private Button healthTips,healthNews,appoinmentDetail,searchBlood;
+    private Button healthTips,healthNews,appoinmentDetail,searchBlood,searchLocation;
     String phone,message;
 
     @Override
@@ -37,6 +37,7 @@ public class PatientDashboard extends AppCompatActivity {
         healthTips=(Button)findViewById(R.id.helthTipsButton);
         healthNews = (Button) findViewById(R.id.helthNewsButton);
         searchBlood = (Button) findViewById(R.id.bloodgroupButton);
+        searchLocation = (Button) findViewById(R.id.searchlocation);
 
         appoinmentSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +45,7 @@ public class PatientDashboard extends AppCompatActivity {
                 Intent ii = new Intent(PatientDashboard.this,DoctorListActivity.class);
                 ii.putExtra("mobile",phone);
                 startActivity(ii);
+
             }
         });
 
@@ -53,6 +55,7 @@ public class PatientDashboard extends AppCompatActivity {
                 Intent ii = new Intent(PatientDashboard.this,PatientAppoinmentHistory.class);
                 ii.putExtra("mobile",message);
                 startActivity(ii);
+
             }
         });
 
@@ -61,6 +64,16 @@ public class PatientDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PatientDashboard.this,SearchBloodActivity.class);
                 startActivity(intent);
+
+            }
+        });
+
+        searchLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientDashboard.this,GoogleMapActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -69,6 +82,7 @@ public class PatientDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PatientDashboard.this,HealthNews.class);
                 startActivity(intent);
+
             }
         });
         healthTips.setOnClickListener(new View.OnClickListener() {

@@ -70,12 +70,12 @@ public class SearchBloodActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(SearchBloodActivity.this,GoogleMapActivity.class);
-                startActivity(intent);
-                //Patient selectedFromList =(Patient) (listview.getItemAtPosition(position));
-                //mob = selectedFromList.getPhone();
+                //Intent intent = new Intent(SearchBloodActivity.this,GoogleMapActivity.class);
+                //startActivity(intent);
+                Patient selectedFromList =(Patient) (listview.getItemAtPosition(position));
+                mob = selectedFromList.getPhone();
                 //Toast.makeText(SearchBloodActivity.this, ""+mob, Toast.LENGTH_SHORT).show();
-               // alertMessage();
+                alertMessage();
             }
         });
 
@@ -122,7 +122,7 @@ public class SearchBloodActivity extends AppCompatActivity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage("Are you sure to call this patient?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
     }
 
     private class GetBlood extends AsyncTask<String,String,String>{
