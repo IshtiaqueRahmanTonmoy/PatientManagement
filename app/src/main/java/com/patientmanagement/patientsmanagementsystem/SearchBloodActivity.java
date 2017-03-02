@@ -83,13 +83,14 @@ public class SearchBloodActivity extends AppCompatActivity {
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String text = search.getText().toString().toLowerCase(Locale.getDefault());
-                bloodadapter.filter(text);
+                //String text = search.getText().toString().toLowerCase(Locale.getDefault());
+               // bloodadapter.filter(text);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                String text = search.getText().toString().toLowerCase(Locale.getDefault());
+                bloodadapter.filter(text);
             }
 
             @Override
