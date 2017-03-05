@@ -83,7 +83,17 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             "E.N.T Specialist",
             "Child Health specialist",
             "Orthopaedic Surgeon",
-            "Cardiologist"
+            "Cardiologist",
+            "Diabetologist/ endocrinologist",
+            "Medicine",
+            "Consultnat, Eye Plastic Surgery, Eye Cancer Specialist",
+            "Thoracic Surgeon",
+            "Skin & VD ( Dermatology )",
+            "ICU - Critical Care",
+            "Liver & Gastroenterolog",
+            "Urology",
+            "Neuromedicine",
+            "Internal Medicine"
     };
 
     String[] AlertDialogItemsforDay = new String[]{
@@ -103,6 +113,16 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
     };
 
     boolean[] Selectedtruefalseforday = new boolean[]{
