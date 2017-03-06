@@ -16,9 +16,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.http.NameValuePair;
@@ -31,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSONParser;
@@ -41,9 +46,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/patientinfo.php";
     private static final String GETPHONE_URL = "http://darumadhaka.com/patientmanagement/allpatientmobileno.php";
+    private static final String GETDIVISION_URL = "http://darumadhaka.com/patientmanagement/getdivision.php";
+    private static final String GETJONE_URL = "http://darumadhaka.com/patientmanagement/getjone.php";
+    private static final String GETDISTRICT_URL = "http://darumadhaka.com/patientmanagement/getdistrict.php";
     private int PICK_IMAGE_REQUEST = 1;
     public static final String KEY_NAME = "name";
     public static final String KEY_PHONE = "phone";
+    public static final String TAG_DIVID = "div_id";
+    public static final String TAG_JONALID = "jonal_id";
+    public static final String KEY_ID = "id";
+    public static final String KEY_DISNAME = "name";
+
     public static final String KEY_Image = "image";
     public static final String KEY_Age = "age";
     public static final String KEY_Gender = "gender";
@@ -54,20 +67,29 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String KEY_BLOODGROUP = "bloodgroup";
     public static final String KEY_DATE = "date";
     public static final String TAG_ALLCONTACT = "alldoctor";
+    public static final String TAG_ALLDVISION = "division";
+    public static final String TAG_TH = "th";
+    public static final String TAG_JONENAME = "name";
+    public static final String TAG_DISTRICTNAME = "name";
+    public static final String TAG_JONEID = "id";
+    public static final String TAG_DISTRICTID = "id";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
     EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,bloodgroup,password;
+    Spinner districtspinner,divisionspinner,thanaspinner,jonespinner;
+    String id,districtname,districtid;
     String name;
     String image;
     String address;
-    String age;
+    String age,jonal_id;
     String gender;
     String mobileno;
     String disease;
     String epassword;
     String phone;
-    String blood;
+    String blood,jonename;
+    String div_id;
     private JSONArray jsonArray;
     private final int requestCode = 20;
     private static final int CAMERA_REQUEST = 1888;
@@ -80,7 +102,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private int year, month, day;
     AlertDialog.Builder alertdialogbuilder,alertdialogbuilder1;
     Person person;
-    ArrayList<String> alist;
+    ArrayList<String> alist,jonelist,dislist;
+    ArrayAdapter<String> spinnerArrayAdapter,joneadapter,districtadapter;
     String[] AlertDialogItems = new String[]{
             "Male",
             "Female"
@@ -114,7 +137,7 @@ public class RegistrationActivity extends AppCompatActivity {
             false
     };
 
-    List<String> ItemsIntoList,ItemsIntoList1;
+    List<String> ItemsIntoList,ItemsIntoList1,DisList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +150,11 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
         new DownloadJSON().execute();
+        new getDivision().execute();
 
         alist = new ArrayList<String>();
+        DisList = new ArrayList<String>();
+
         photoimage = (ImageView) findViewById(R.id.patientimage);
         //captureimage = (TextView) findViewById(R.id.imagecapture);
         uploadimage = (TextView) findViewById(R.id.imageupload);
@@ -144,6 +170,11 @@ public class RegistrationActivity extends AppCompatActivity {
         diseasename = (EditText) findViewById(R.id.disease);
         bloodgroup = (EditText) findViewById(R.id.bloodgroup);
         password = (EditText) findViewById(R.id.password);
+
+        divisionspinner = (Spinner) findViewById(R.id.division);
+        jonespinner = (Spinner) findViewById(R.id.jone);
+        districtspinner = (Spinner) findViewById(R.id.district);
+        thanaspinner = (Spinner) findViewById(R.id.thana);
 
         patientgender.setFocusable(false);
         bloodgroup.setFocusable(false);
@@ -182,6 +213,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     }
                 });
+
 
                 alertdialogbuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -515,9 +547,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
                     List<NameValuePair>param = new ArrayList<NameValuePair>();
                     JSONObject json= jsonParser.makeHttpRequest(GETPHONE_URL,"GET",param);
 
@@ -543,10 +572,196 @@ public class RegistrationActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+            return null;
+        }
+    }
+
+    private class getDivision extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+                    List<NameValuePair>param = new ArrayList<NameValuePair>();
+                    JSONObject json= jsonParser.makeHttpRequest(GETDIVISION_URL,"GET",param);
+
+                    try {
+                        // Checking for SUCCESS TAG
+                        int success = json.getInt(TAG_SUCCESS);
+
+                        if (success == 1) {
+                            // products found
+                            // Getting Array of Products
+                            jsonArray = json.getJSONArray(TAG_ALLDVISION);
+
+                            // looping through All Products
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject c = jsonArray.getJSONObject(i);
+                                // Storing each json item in variable
+                                id = c.getString(KEY_ID);
+                                districtname = c.getString(KEY_DISNAME);
+                                DisList.add(districtname);
+
+                               spinnerArrayAdapter = new ArrayAdapter<String>(
+                                        RegistrationActivity.this,R.layout.spinner_item,DisList);
+
+                            }
+                        } else {
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            divisionspinner.setAdapter(spinnerArrayAdapter);
+            divisionspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+               @Override
+               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                   div_id = String.valueOf(divisionspinner.getSelectedItemPosition() + 1);
+                   //Toast.makeText(RegistrationActivity.this, ""+Hold, Toast.LENGTH_SHORT).show();
+                   new getJone().execute();
+               }
+
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) {
+
+               }
+           });
+        }
+    }
+
+
+
+    private class getJone extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            int success;
+            try {
+                jonelist = new ArrayList<String>();
+                // Building Parameters
+                List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                paramss.add(new BasicNameValuePair(TAG_DIVID, div_id));
+
+                // getting product details by making HTTP request
+                // Note that product details url will use GET request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        GETJONE_URL, "GET", paramss);
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray(TAG_TH); // JSON Array
+
+                    JSONObject lnews = productObj.getJSONObject(0);
+                    jonal_id = lnews.getString(TAG_JONEID);
+                    jonename = lnews.getString(TAG_JONENAME);
+                    jonelist.add(jonename);
+                    joneadapter = new ArrayAdapter<String>(
+                            RegistrationActivity.this,R.layout.spinner_item,jonelist);
+
+
+                } else {
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            jonespinner.setAdapter(joneadapter);
+            new getDistrict().execute();
+          /*
+            jonespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    //jonal_id = String.valueOf(districtspinner.getSelectedItemPosition() + 55);
+                    //Toast.makeText(RegistrationActivity.this, ""+jonal_id, Toast.LENGTH_SHORT).show();
+                   // new getDistrict().execute();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
                 }
             });
+            */
+        }
+    }
+
+
+    private class getDistrict extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            int success;
+            try {
+                dislist = new ArrayList<>();
+                // Building Parameters
+                List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                paramss.add(new BasicNameValuePair(TAG_JONALID, jonal_id));
+
+                // getting product details by making HTTP request
+                // Note that product details url will use GET request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        GETDISTRICT_URL, "GET", paramss);
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray(TAG_TH); // JSON Array
+                    for (int i=0;i<productObj.length();i++)
+                    {
+                        JSONObject lnews = productObj.getJSONObject(i);
+                        districtid = lnews.getString(TAG_DISTRICTID);
+                        districtname = lnews.getString(TAG_DISTRICTNAME);
+                        //Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
+                        dislist.add(districtname);
+                    }
+
+                } else {
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
+            districtadapter = new ArrayAdapter<String>(
+                    RegistrationActivity.this,R.layout.spinner_item,dislist);
+            districtspinner.setAdapter(districtadapter);
+            districtspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    //jonal_id = String.valueOf(districtspinner.getSelectedItemPosition() + 55);
+                    //Toast.makeText(RegistrationActivity.this, ""+Hold, Toast.LENGTH_SHORT).show();
+                    //new getDistrict().execute();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
     }
 }

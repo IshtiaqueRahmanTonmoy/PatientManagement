@@ -117,6 +117,141 @@
                     android:singleLine="true"
                     android:textColor="@color/blackColor" />
             </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/Division"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Division"
+                    android:textColor="#fff"/>
+
+                <Spinner
+                    android:id="@+id/division"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1.4"
+                    android:background="@color/editTextBack"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Jone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Jone"
+                    android:textColor="#fff"/>
+
+                <Spinner
+                    android:id="@+id/jone"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1.4"
+                    android:background="@color/editTextBack"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/District"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="District"
+                    android:textColor="#fff"/>
+
+                <Spinner
+                    android:id="@+id/district"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1.4"
+                    android:background="@color/editTextBack"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/Thana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- place one TextView and one EditText inside layout using weight property -->
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Thana"
+                    android:textColor="#fff"/>
+
+                <Spinner
+                    android:id="@+id/thana"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1.4"
+                    android:background="@color/editTextBack"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
             <!-- create a Linear Layout with horizontal orientation and weightSum property -->
 
             <LinearLayout
