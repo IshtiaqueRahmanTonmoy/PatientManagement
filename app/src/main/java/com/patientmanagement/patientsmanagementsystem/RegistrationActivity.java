@@ -49,6 +49,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static final String GETDIVISION_URL = "http://darumadhaka.com/patientmanagement/getdivision.php";
     private static final String GETJONE_URL = "http://darumadhaka.com/patientmanagement/getjone.php";
     private static final String GETDISTRICT_URL = "http://darumadhaka.com/patientmanagement/getdistrict.php";
+    private static final String GETTHANA_URL = "http://darumadhaka.com/patientmanagement/getThana.php";
     private int PICK_IMAGE_REQUEST = 1;
     public static final String KEY_NAME = "name";
     public static final String KEY_PHONE = "phone";
@@ -73,6 +74,8 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String TAG_DISTRICTNAME = "name";
     public static final String TAG_JONEID = "id";
     public static final String TAG_DISTRICTID = "id";
+    public static final String TAG_THANAID = "id";
+    public static final String TAG_THANANAME = "name";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
@@ -83,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
     String image;
     String address;
     String age,jonal_id;
-    String gender;
+    String gender,thanatid,thananame;
     String mobileno;
     String disease;
     String epassword;
@@ -102,8 +105,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private int year, month, day;
     AlertDialog.Builder alertdialogbuilder,alertdialogbuilder1;
     Person person;
-    ArrayList<String> alist,jonelist,dislist;
-    ArrayAdapter<String> spinnerArrayAdapter,joneadapter,districtadapter;
+    ArrayList<String> alist,jonelist,dislist,thanalist;
+    ArrayAdapter<String> spinnerArrayAdapter,joneadapter,districtadapter,thanaadapter;
     String[] AlertDialogItems = new String[]{
             "Male",
             "Female"
@@ -154,6 +157,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         alist = new ArrayList<String>();
         DisList = new ArrayList<String>();
+        thanalist = new ArrayList<String>();
 
         photoimage = (ImageView) findViewById(R.id.patientimage);
         //captureimage = (TextView) findViewById(R.id.imagecapture);
@@ -477,6 +481,7 @@ public class RegistrationActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
+
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
@@ -681,22 +686,6 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             jonespinner.setAdapter(joneadapter);
             new getDistrict().execute();
-          /*
-            jonespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    //jonal_id = String.valueOf(districtspinner.getSelectedItemPosition() + 55);
-                    //Toast.makeText(RegistrationActivity.this, ""+jonal_id, Toast.LENGTH_SHORT).show();
-                   // new getDistrict().execute();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            */
         }
     }
 
@@ -744,17 +733,68 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
+            new getThana().execute();
+            Toast.makeText(RegistrationActivity.this, ""+div_id, Toast.LENGTH_SHORT).show();
             districtadapter = new ArrayAdapter<String>(
                     RegistrationActivity.this,R.layout.spinner_item,dislist);
             districtspinner.setAdapter(districtadapter);
-            districtspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        }
+    }
+
+
+
+    private class getThana extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            int success;
+            try {
+                thanalist = new ArrayList<>();
+                // Building Parameters
+                List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                paramss.add(new BasicNameValuePair(TAG_DIVID, div_id));
+
+                // getting product details by making HTTP request
+                // Note that product details url will use GET request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        GETTHANA_URL, "GET", paramss);
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray(TAG_TH); // JSON Array
+                    for (int i=0;i<productObj.length();i++)
+                    {
+                        JSONObject lnews = productObj.getJSONObject(i);
+                        thanatid = lnews.getString(TAG_THANAID);
+                        thananame = lnews.getString(TAG_THANANAME);
+                        //Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
+                        thanalist.add(thananame);
+                    }
+
+                } else {
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            thanaadapter = new ArrayAdapter<String>(
+                    RegistrationActivity.this,R.layout.spinner_item,thanalist);
+            thanaspinner.setAdapter(thanaadapter);
+            thanaspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    //jonal_id = String.valueOf(districtspinner.getSelectedItemPosition() + 55);
-                    //Toast.makeText(RegistrationActivity.this, ""+Hold, Toast.LENGTH_SHORT).show();
-                    //new getDistrict().execute();
+                    //new getThana().execute();
                 }
 
                 @Override
