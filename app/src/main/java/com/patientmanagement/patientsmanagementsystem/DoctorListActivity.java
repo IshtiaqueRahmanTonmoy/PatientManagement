@@ -44,10 +44,10 @@ import java.util.Locale;
 
 public class DoctorListActivity extends AppCompatActivity {
 
-    private static String url_doctorlist = "http://darumadhaka.com/patientmanagement/getalldoctorinfo.php";
-    private static String url_getname = "http://darumadhaka.com/patientmanagement/getnameappoinment.php";
-    private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/appoinmentschedule.php";
-    private static final String url_getlastid = "http://darumadhaka.com/patientmanagement/getlastAppoinmentId.php";
+    private static String url_doctorlist = "http://patientmanagement.medi-bd.com/patientmanagement/getalldoctorinfo.php";
+    private static String url_getname = "http://patientmanagement.medi-bd.com/patientmanagement/getnameappoinment.php";
+    private static final String REGISTER_URL = "http://patientmanagement.medi-bd.com/patientmanagement/appoinmentschedule.php";
+    private static final String url_getlastid = "http://patientmanagement.medi-bd.com/patientmanagement/getlastAppoinmentId.php";
     private ProgressDialog pDialog;
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DOCTORLIST = "alldoctor";
@@ -225,7 +225,7 @@ public class DoctorListActivity extends AppCompatActivity {
                                 doctorfee = c.getString(TAG_DOCTORFEE);
                                 followupfee = c.getString(TAG_FOLLOWUPFEE);
 
-                                doctor = new Doctor(names,bmp1,address,phone,expertise,chamberday,chambertime,doctorfee,followupfee);
+                                doctor = new Doctor(names,bmp1,address,phones,expertise,chamberday,chambertime,doctorfee,followupfee);
                                 alist.add(doctor);
 
                                 adapter = new ListViewAdapter(DoctorListActivity.this, R.layout.activity_doctor_list, alist);

@@ -111,7 +111,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_weight="1.4"
                     android:background="@color/editTextBack"
-                    android:hint="Address"
+                    android:hint="Chamber Address"
                     android:imeOptions="actionNext"
                     android:paddingLeft="10dp"
                     android:singleLine="true"

@@ -37,7 +37,7 @@ public class PatientDetailActivity extends AppCompatActivity {
     String phone;
     private ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser();
-    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/searchallpatientinfo.php";
+    private static final String DOCTORDETAILGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/searchallpatientinfo.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     private static final String TAG_DOCTORLIST = "patientdetail";

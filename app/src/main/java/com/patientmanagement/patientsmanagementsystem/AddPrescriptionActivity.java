@@ -52,11 +52,11 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     Button AddmoreMedicine;
     ImageButton imagebutton;
     JSONParser jP = new JSONParser();
-    private static final String TAG_MEDICINEURL = "http://darumadhaka.com/patientmanagement/medicineinfo.php";
-    private static final String TAG_MediUnitURL = "http://darumadhaka.com/patientmanagement/medicineunit.php";
-    private static final String getmedicineinfo_url = "http://darumadhaka.com/patientmanagement/medicineunitid.php";
-    private static final String getmedicineunit_url = "http://darumadhaka.com/patientmanagement/medicineinfoget.php";
-    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/searchallpatientinfo.php";
+    private static final String TAG_MEDICINEURL = "http://patientmanagement.medi-bd.com/patientmanagement/medicineinfo.php";
+    private static final String TAG_MediUnitURL = "http://patientmanagement.medi-bd.com/patientmanagement/medicineunit.php";
+    private static final String getmedicineinfo_url = "http://patientmanagement.medi-bd.com/patientmanagement/medicineunitid.php";
+    private static final String getmedicineunit_url = "http://patientmanagement.medi-bd.com/patientmanagement/medicineinfoget.php";
+    private static final String DOCTORDETAILGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/searchallpatientinfo.php";
     private static final String TAG_MedicineName = "MediName";
     private static final String TAG_MediUnitId = "MediUnitId";
     private static final String TAG_UnitName = "UnitName";

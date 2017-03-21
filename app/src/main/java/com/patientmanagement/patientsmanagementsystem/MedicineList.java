@@ -52,9 +52,9 @@ public class MedicineList extends AppCompatActivity {
     private static final String TAG_MediUnitId = "MediUnitId";
     private static final String TAG_SUCCESS = "success";
 
-    private static String REGISTER_SAVEAPPOINMENT = "http://darumadhaka.com/patientmanagement/saveprescription.php";
-    private static String url_getname = "http://darumadhaka.com/patientmanagement/getnameappoinment.php";
-    private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/prescriptionpatient.php";
+    private static String REGISTER_SAVEAPPOINMENT = "http://patientmanagement.medi-bd.com/patientmanagement/saveprescription.php";
+    private static String url_getname = "http://patientmanagement.medi-bd.com/patientmanagement/getnameappoinment.php";
+    private static final String REGISTER_URL = "http://patientmanagement.medi-bd.com/patientmanagement/prescriptionpatient.php";
     private static final String TAG_PHONE = "phone";
 
     private static final String TAG_PATIENTPRESCRIPTIONNO = "PatientPrescriptionNo";

@@ -27,8 +27,8 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 
 public class DoctorLoginActivity extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://darumadhaka.com/patientmanagement/doctorlogin.php";
-    private static final String DOCTORIDGET_URL = "http://darumadhaka.com/patientmanagement/doctoridget.php";
+    private static final String LOGIN_URL = "http://patientmanagement.medi-bd.com/patientmanagement/doctorlogin.php";
+    private static final String DOCTORIDGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/doctoridget.php";
     TextView Signup,Backtodoctor;
     Button login;
     String mobile,password,doctorid;

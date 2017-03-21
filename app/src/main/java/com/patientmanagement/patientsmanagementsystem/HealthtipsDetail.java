@@ -30,7 +30,7 @@ public class HealthtipsDetail extends AppCompatActivity {
     private JSONParser jsonParser = new JSONParser();
     private static final String TAG_ID = "id";
     private static final String TAG_DETAIL = "details";
-    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/healthtipsdetail.php";
+    private static final String DOCTORDETAILGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/healthtipsdetail.php";
     private static final String TAG_HEALTHDETAIL_LIST = "htip";
     private static final String TAG_SUCCESS = "success";
     private JSONArray jsonarray;

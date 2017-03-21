@@ -25,8 +25,8 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Pers
 
 public class Expense extends AppCompatActivity {
 
-    private static final String EXPENSE_URL = "http://darumadhaka.com/patientmanagement/getexpense.php";
-    private static final String EXPENSECALCULATE_URL = "http://darumadhaka.com/patientmanagement/getdoctorfeefolliowup.php";
+    private static final String EXPENSE_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getexpense.php";
+    private static final String EXPENSECALCULATE_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getdoctorfeefolliowup.php";
     private ListView listview;
     private Button viewprescription;
     private String phone,doctorId,name,mobileno,disease,date,time,appoinmentno,fees,followupfee,settotal;

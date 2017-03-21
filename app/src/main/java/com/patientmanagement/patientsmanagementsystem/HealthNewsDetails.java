@@ -29,7 +29,7 @@ public class HealthNewsDetails extends AppCompatActivity {
     private ProgressDialog pDialog;
     private static final String TAG_ID = "id";
     private static final String TAG_DETAIL = "details";
-    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/healthnewsdetail.php";
+    private static final String DOCTORDETAILGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/healthnewsdetail.php";
     private static final String TAG_HEALTHDETAIL_LIST = "healthport";
     private static final String TAG_SUCCESS = "success";
     private JSONParser jsonParser = new JSONParser();

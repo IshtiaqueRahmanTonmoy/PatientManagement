@@ -25,7 +25,7 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.JSON
 public class HealthTips extends AppCompatActivity {
 
     private JSONParser jParser = new JSONParser();
-    private static String url_health_tips = "http://darumadhaka.com/patientmanagement/healthtips.php";
+    private static String url_health_tips = "http://patientmanagement.medi-bd.com/patientmanagement/healthtips.php";
     private static final String TAG_HEALTHTIPS = "htips";
     private static final String TAG_ID = "id";
     private static final String TAG_HEADING = "heading";

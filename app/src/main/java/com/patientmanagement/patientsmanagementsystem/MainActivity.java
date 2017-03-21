@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button Login;
     TextView Signup,SignupasDoctor;
     EditText mobilenoEdt,passwordEdt;
-    private static final String LOGIN_URL = "http://darumadhaka.com/patientmanagement/patientlogin.php";
+    private static final String LOGIN_URL = "http://patientmanagement.medi-bd.com/patientmanagement/patientlogin.php";
     String phone,encryptedpassword;
     JSONParser jsonParser = new JSONParser();
     private ProgressDialog pDialog;
@@ -87,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 phone = mobilenoEdt.getText().toString();
                 encryptedpassword = passwordEdt.getText().toString();
 
-                new AttemptLogin().execute();
+                if(phone!=null && encryptedpassword!=null){
+                    new AttemptLogin().execute();
+                }
+
             }
         });
 

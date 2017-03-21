@@ -49,9 +49,9 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
     private ArrayList<Medicine> medicinelist;
     private MedicineListAdapter mediadapter = null;
     private String doctorId,prescriptionno,medininfoid,mediunitid,quantity,timeduration,afterbefore,frequency,followupdate,suggestion,medicinename;
-    private static String url_search = "http://darumadhaka.com/patientmanagement/patientprescription.php";
-    private static String url_getall = "http://darumadhaka.com/patientmanagement/getallprescriptions.php";
-    private static String url_getmedicine = "http://darumadhaka.com/patientmanagement/medicinenamegetbyinfo.php";
+    private static String url_search = "http://patientmanagement.medi-bd.com/patientmanagement/patientprescription.php";
+    private static String url_getall = "http://patientmanagement.medi-bd.com/patientmanagement/getallprescriptions.php";
+    private static String url_getmedicine = "http://patientmanagement.medi-bd.com/patientmanagement/medicinenamegetbyinfo.php";
     JSONParser jP = new JSONParser();
     private ProgressDialog pDialog;
 

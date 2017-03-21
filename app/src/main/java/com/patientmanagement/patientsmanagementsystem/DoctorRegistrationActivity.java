@@ -45,8 +45,8 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
  */
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
-    private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/doctorregistration.php";
-    private static final String GETPHONE_URL = "http://darumadhaka.com/patientmanagement/getalldoctorno.php";
+    private static final String REGISTER_URL = "http://patientmanagement.medi-bd.com/patientmanagement/doctorregistration.php";
+    private static final String GETPHONE_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getalldoctorno.php";
     private int PICK_IMAGE_REQUEST = 1;
     private static final String TAG_SUCCESS = "success";
     public static final String KEY_PHONE = "phone";

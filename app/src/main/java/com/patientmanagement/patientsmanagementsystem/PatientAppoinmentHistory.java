@@ -33,8 +33,8 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
     private ProgressDialog pDialog;
     private static final String TAG_PHONE = "phone";
     private JSONParser jParser;
-    private static String url_getname = "http://darumadhaka.com/patientmanagement/getnameappoinment.php";
-    private static String url_getappoinmentdetail= "http://darumadhaka.com/patientmanagement/appoinmentList.php";
+    private static String url_getname = "http://patientmanagement.medi-bd.com/patientmanagement/getnameappoinment.php";
+    private static String url_getappoinmentdetail= "http://patientmanagement.medi-bd.com/patientmanagement/appoinmentList.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_TH = "th";
     private static final String TAG_NAMEAPPOINT = "nameapp";

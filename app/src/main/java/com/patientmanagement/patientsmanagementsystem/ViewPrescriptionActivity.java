@@ -48,11 +48,11 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
     private static final String TAG_MEDINAME = "MediName";
     private static final String TAG_SPECIALITY = "expertise";
     private static final String TAG_MEDICINEID = "MediInfoId";
-    private static final String MEDICINENAME_URL = "http://darumadhaka.com/patientmanagement/getmedicinename.php";
-    private static final String DOCTORDETAILGET_URL = "http://darumadhaka.com/patientmanagement/searchallpatientinfo.php";
-    private static final String DOCTORIDGET_URL = "http://darumadhaka.com/patientmanagement/getDocNameSpecial.php";
-    private static final String IDGET_URL = "http://darumadhaka.com/patientmanagement/getpatientid.php";
-    private static final String url_search = "http://darumadhaka.com/patientmanagement/prescriptionview.php";
+    private static final String MEDICINENAME_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getmedicinename.php";
+    private static final String DOCTORDETAILGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/searchallpatientinfo.php";
+    private static final String DOCTORIDGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getDocNameSpecial.php";
+    private static final String IDGET_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getpatientid.php";
+    private static final String url_search = "http://patientmanagement.medi-bd.com/patientmanagement/prescriptionview.php";
     private static final String TAG_PatientPrescriptionNo = "PatientPrescriptionNo";
     private static final String TAG_MediInfoID = "MediInfoID";
     private static final String TAG_UNIT = "MediUnitID";

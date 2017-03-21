@@ -47,7 +47,7 @@ public class SearchBloodActivity extends AppCompatActivity {
     EditText search;
     String mob;
     private BloodAdapter bloodadapter = null;
-    private static final String urlblood = "http://darumadhaka.com/patientmanagement/getblood.php";
+    private static final String urlblood = "http://patientmanagement.medi-bd.com/patientmanagement/getblood.php";
     ProgressDialog progressDialog;
 
     @Override

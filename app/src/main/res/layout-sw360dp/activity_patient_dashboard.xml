@@ -26,7 +26,7 @@
             android:drawableLeft="@drawable/ic_user"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_gravity="center"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
         <Button
             android:id="@+id/bloodgroupButton"
@@ -57,7 +57,7 @@
             android:drawableLeft="@drawable/blood"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
         <Button
             android:id="@+id/searchlocation"
@@ -72,7 +72,7 @@
             android:layout_gravity="center"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
         <Button
             android:id="@+id/helthNewsButton"
@@ -87,7 +87,7 @@
             android:layout_gravity="center"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
         <Button
             android:id="@+id/helthTipsButton"
@@ -102,7 +102,7 @@
             android:layout_gravity="center"
             android:letterSpacing="0.025"
             android:padding="10dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="15dp" />
 
 
     </LinearLayout>

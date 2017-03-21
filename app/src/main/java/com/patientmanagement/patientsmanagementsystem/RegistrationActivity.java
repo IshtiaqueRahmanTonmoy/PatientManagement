@@ -44,20 +44,22 @@ import patientsmanagement.patientmanagement.patientsmanagementsystem.entity.Pers
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static final String REGISTER_URL = "http://darumadhaka.com/patientmanagement/patientinfo.php";
-    private static final String GETPHONE_URL = "http://darumadhaka.com/patientmanagement/allpatientmobileno.php";
-    private static final String GETDIVISION_URL = "http://darumadhaka.com/patientmanagement/getdivision.php";
-    private static final String GETJONE_URL = "http://darumadhaka.com/patientmanagement/getjone.php";
-    private static final String GETDISTRICT_URL = "http://darumadhaka.com/patientmanagement/getdistrict.php";
-    private static final String GETTHANA_URL = "http://darumadhaka.com/patientmanagement/getThana.php";
+    private static final String REGISTER_URL = "http://patientmanagement.medi-bd.com/patientmanagement/patientinfo.php";
+    private static final String GETPHONE_URL = "http://patientmanagement.medi-bd.com/patientmanagement/allpatientmobileno.php";
+    private static final String GETDIVISION_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getdivision.php";
+    private static final String GETJONE_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getjone.php";
+    private static final String GETDISTRICT_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getdistrict.php";
+    private static final String GETIDDISTRCIT_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getiddistrict.php";
+    private static final String GETTHANA_URL = "http://patientmanagement.medi-bd.com/patientmanagement/getThana.php";
     private int PICK_IMAGE_REQUEST = 1;
     public static final String KEY_NAME = "name";
     public static final String KEY_PHONE = "phone";
     public static final String TAG_DIVID = "div_id";
+    public static final String TAG_DIVISIONID = "division_id";
     public static final String TAG_JONALID = "jonal_id";
     public static final String KEY_ID = "id";
     public static final String KEY_DISNAME = "name";
-
+    public static final String TAG_DISTRICTNAMEVALUE = "name";
     public static final String KEY_Image = "image";
     public static final String KEY_Age = "age";
     public static final String KEY_Gender = "gender";
@@ -75,22 +77,23 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final String TAG_JONEID = "id";
     public static final String TAG_DISTRICTID = "id";
     public static final String TAG_THANAID = "id";
+    public static final String TAG_DIVIDGET = "id";
     public static final String TAG_THANANAME = "name";
     Button signup;
     ImageView photoimage;
     TextView uploadimage,loginback,captureimage;
     EditText patientname, patientaddress, patientage, patientgender, patientmobileno, diseasename,bloodgroup,password;
     Spinner districtspinner,divisionspinner,thanaspinner,jonespinner;
-    String id,districtname,districtid;
-    String name;
+    String id,divisionname,districtname,districtid;
+    String name,districtnamevalue;
     String image;
     String address;
     String age,jonal_id;
     String gender,thanatid,thananame;
     String mobileno;
-    String disease;
+    String disease,div,dis,jon,tn;
     String epassword;
-    String phone;
+    String phone,division_id;
     String blood,jonename;
     String div_id;
     private JSONArray jsonArray;
@@ -178,7 +181,7 @@ public class RegistrationActivity extends AppCompatActivity {
         divisionspinner = (Spinner) findViewById(R.id.division);
         jonespinner = (Spinner) findViewById(R.id.jone);
         districtspinner = (Spinner) findViewById(R.id.district);
-        thanaspinner = (Spinner) findViewById(R.id.thana);
+
 
         patientgender.setFocusable(false);
         bloodgroup.setFocusable(false);
@@ -304,6 +307,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 disease = diseasename.getText().toString();
                 blood = bloodgroup.getText().toString();
                 epassword = password.getText().toString();
+                div = divisionspinner.getSelectedItem().toString();
+                dis = districtspinner.getSelectedItem().toString();
+                jon = jonespinner.getSelectedItem().toString();
 
                     if(name.length()==0){
                         patientname.setError("Field cannot be null");
@@ -456,9 +462,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 //new CreateNewUser().execute();
 
-                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !blood.isEmpty() && !epassword.isEmpty()){
+                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !blood.isEmpty() && !epassword.isEmpty() && !div.isEmpty() && !dis.isEmpty() && !jon.isEmpty()){
                     //Toast.makeText(RegistrationActivity.this, "field is not null", Toast.LENGTH_SHORT).show();
+
                     new CreateNewUser().execute();
+                    //Toast.makeText(RegistrationActivity.this, "div"+div+"dis"+dis+"jone"+jonename+""+jon+"thana"+tn, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -603,8 +611,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                 JSONObject c = jsonArray.getJSONObject(i);
                                 // Storing each json item in variable
                                 id = c.getString(KEY_ID);
-                                districtname = c.getString(KEY_DISNAME);
-                                DisList.add(districtname);
+                                divisionname = c.getString(KEY_DISNAME);
+                                DisList.add(divisionname);
 
                                spinnerArrayAdapter = new ArrayAdapter<String>(
                                         RegistrationActivity.this,R.layout.spinner_item,DisList);
@@ -629,6 +637,7 @@ public class RegistrationActivity extends AppCompatActivity {
                    div_id = String.valueOf(divisionspinner.getSelectedItemPosition() + 1);
                    //Toast.makeText(RegistrationActivity.this, ""+Hold, Toast.LENGTH_SHORT).show();
                    new getJone().execute();
+
                }
 
                @Override
@@ -707,7 +716,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         GETDISTRICT_URL, "GET", paramss);
 
                 // json success tag
-                success = json.getInt(TAG_SUCCESS);
+                success = json.getInt(TAG_SUCCESS
+                );
                 if (success == 1) {
                     // successfully received product details
                     JSONArray productObj = json
@@ -719,6 +729,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         districtname = lnews.getString(TAG_DISTRICTNAME);
                         //Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
                         dislist.add(districtname);
+
                     }
 
                 } else {
@@ -733,17 +744,71 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            new getThana().execute();
-            Toast.makeText(RegistrationActivity.this, ""+div_id, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegistrationActivity.this, ""+div_id, Toast.LENGTH_SHORT).show();
             districtadapter = new ArrayAdapter<String>(
                     RegistrationActivity.this,R.layout.spinner_item,dislist);
             districtspinner.setAdapter(districtadapter);
+            districtspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    districtnamevalue = districtspinner.getSelectedItem().toString();
+                    new getDistId().execute();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            //new getThana().execute();
 
         }
     }
 
+    private class getDistId extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Void... params) {
+            int success;
+            try {
 
+                // Building Parameters
+                List<NameValuePair> paramss = new ArrayList<NameValuePair>();
+                paramss.add(new BasicNameValuePair(TAG_DISTRICTNAMEVALUE, '"'+districtnamevalue+'"'));
+
+                // getting product details by making HTTP request
+                // Note that product details url will use GET request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        GETIDDISTRCIT_URL, "GET", paramss);
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray(TAG_TH); // JSON Array
+                    for(int x=0;x<productObj.length();x++) {
+                        JSONObject lnews = productObj.getJSONObject(x);
+                        division_id = lnews.getString(TAG_DIVIDGET);
+                    }
+                } else {
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(RegistrationActivity.this, ""+division_id, Toast.LENGTH_SHORT).show();
+            //new getThana().execute();
+        }
+    }
+
+    /*
     private class getThana extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -753,7 +818,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 thanalist = new ArrayList<>();
                 // Building Parameters
                 List<NameValuePair> paramss = new ArrayList<NameValuePair>();
-                paramss.add(new BasicNameValuePair(TAG_DIVID, div_id));
+                paramss.add(new BasicNameValuePair(TAG_DIVISIONID, division_id));
 
                 // getting product details by making HTTP request
                 // Note that product details url will use GET request
@@ -771,7 +836,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         JSONObject lnews = productObj.getJSONObject(i);
                         thanatid = lnews.getString(TAG_THANAID);
                         thananame = lnews.getString(TAG_THANANAME);
-                        //Toast.makeText(RegistrationActivity.this, ""+districtid, Toast.LENGTH_SHORT).show();
                         thanalist.add(thananame);
                     }
 
@@ -788,6 +852,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            //Toast.makeText(RegistrationActivity.this, ""+thananame, Toast.LENGTH_SHORT).show();
             thanaadapter = new ArrayAdapter<String>(
                     RegistrationActivity.this,R.layout.spinner_item,thanalist);
             thanaspinner.setAdapter(thanaadapter);
@@ -804,4 +869,5 @@ public class RegistrationActivity extends AppCompatActivity {
             });
         }
     }
+    */
 }

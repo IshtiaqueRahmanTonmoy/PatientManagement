@@ -40,7 +40,7 @@ public class PatientAppoinmentList extends AppCompatActivity {
     private static final String TAG_MOBILENO = "mobileno";
     private static final String TAG_TIME = "time";
     private static final String TAG_DOCTORID = "doctorId";
-    private static String url_search = "http://darumadhaka.com/patientmanagement/searchallpatientbyid.php";
+    private static String url_search = "http://patientmanagement.medi-bd.com/patientmanagement/searchallpatientbyid.php";
     private Person person;
     private ArrayList<Person> personlist;
     private PersonAdapter personadapter = null;
