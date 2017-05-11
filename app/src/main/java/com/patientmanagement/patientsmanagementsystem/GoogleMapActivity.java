@@ -71,8 +71,6 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
             }
             Location location = locationManager.getLastKnownLocation(mprovider);
             locationManager.requestLocationUpdates(mprovider, 15000, 1, this);
-
-
         }
 
         btnFindPath = (Button) findViewById(R.id.btnFindPath);

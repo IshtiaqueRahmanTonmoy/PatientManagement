@@ -3,15 +3,20 @@ package com.patientmanagement.patientsmanagementsystem;
 import android.app.AlertDialog;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -60,10 +65,30 @@ public class SearchBloodActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Search Blood");
+        setSupportActionBar(toolbar);
+
         new GetBlood().execute();
         alist = new ArrayList<Patient>();
         search = (EditText) findViewById(R.id.editText);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
         listview = (ListView) findViewById(R.id.listview);
+
+        listview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
+
+                return false;
+            }
+        });
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -131,8 +156,8 @@ public class SearchBloodActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(SearchBloodActivity.this,
-                    "ProgressDialog",
-                    "Getting data");
+                    "Search for blood..",
+                    "Getting blood data..");
         }
         @Override
         protected String doInBackground(String... params) {

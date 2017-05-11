@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
@@ -42,6 +43,10 @@ public class HealthNewsDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_news_details);
         text=(TextView)findViewById(R.id.healthNewsdetail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Health News Details");
+        setSupportActionBar(toolbar);
 
         if (Build.VERSION.SDK_INT>9){
             StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();

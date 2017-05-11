@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -155,6 +156,10 @@ public class RegistrationActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Patient Registration");
+        setSupportActionBar(toolbar);
+
         new DownloadJSON().execute();
         new getDivision().execute();
 
@@ -179,7 +184,6 @@ public class RegistrationActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
 
         divisionspinner = (Spinner) findViewById(R.id.division);
-        jonespinner = (Spinner) findViewById(R.id.jone);
         districtspinner = (Spinner) findViewById(R.id.district);
 
 
@@ -309,7 +313,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 epassword = password.getText().toString();
                 div = divisionspinner.getSelectedItem().toString();
                 dis = districtspinner.getSelectedItem().toString();
-                jon = jonespinner.getSelectedItem().toString();
+                //jon = jonespinner.getSelectedItem().toString();
 
                     if(name.length()==0){
                         patientname.setError("Field cannot be null");
@@ -462,7 +466,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 //new CreateNewUser().execute();
 
-                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !blood.isEmpty() && !epassword.isEmpty() && !div.isEmpty() && !dis.isEmpty() && !jon.isEmpty()){
+                if(!name.isEmpty() && !address.isEmpty() && !age.isEmpty() && !gender.isEmpty() && !mobileno.isEmpty() && !disease.isEmpty() && !blood.isEmpty() && !epassword.isEmpty() && !div.isEmpty() && !dis.isEmpty()){
                     //Toast.makeText(RegistrationActivity.this, "field is not null", Toast.LENGTH_SHORT).show();
 
                     new CreateNewUser().execute();
@@ -693,7 +697,7 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            jonespinner.setAdapter(joneadapter);
+            //jonespinner.setAdapter(joneadapter);
             new getDistrict().execute();
         }
     }
@@ -803,7 +807,7 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(RegistrationActivity.this, ""+division_id, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegistrationActivity.this, ""+division_id, Toast.LENGTH_SHORT).show();
             //new getThana().execute();
         }
     }

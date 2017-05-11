@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -86,6 +87,11 @@ public class MedicineList extends AppCompatActivity {
             StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Medicine List");
+        setSupportActionBar(toolbar);
+
         listview = (ListView) findViewById(R.id.listview);
         medicinelist = new ArrayList<Medicine>();
         lists = new ArrayList<Medicine>();

@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -58,6 +59,10 @@ public class PatientAppoinmentHistory extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Patient Appoinment History");
+        setSupportActionBar(toolbar);
 
         alist = new ArrayList<Person>();
         Intent iin= getIntent();

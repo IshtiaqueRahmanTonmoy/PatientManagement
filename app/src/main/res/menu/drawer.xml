@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/appmnmt"
+            android:title="Doctor List" />
+        <item
+            android:id="@+id/nav_photos"
+            android:icon="@drawable/blood"
+            android:title="Search Blood" />
+        <item
+            android:id="@+id/nav_movies"
+            android:icon="@drawable/hospital"
+            android:title="Health News" />
+
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/tips"
+            android:title="@string/healthtips" />
+        <item
+            android:id="@+id/googlemap"
+            android:icon="@drawable/map"
+            android:title="Search Location" />
+
+    </group>
+
+</menu>

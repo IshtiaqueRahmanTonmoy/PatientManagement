@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +39,10 @@ public class PatientDashboard extends AppCompatActivity {
         healthNews = (Button) findViewById(R.id.helthNewsButton);
         searchBlood = (Button) findViewById(R.id.bloodgroupButton);
         searchLocation = (Button) findViewById(R.id.searchlocation);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Patient Dashboard");
+        setSupportActionBar(toolbar);
 
         appoinmentSchedule.setOnClickListener(new View.OnClickListener() {
             @Override

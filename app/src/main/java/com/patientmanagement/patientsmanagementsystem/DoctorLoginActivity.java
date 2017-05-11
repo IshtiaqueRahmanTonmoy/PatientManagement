@@ -4,9 +4,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,10 +56,15 @@ public class DoctorLoginActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Doctor Login");
+        setSupportActionBar(toolbar);
+
         mobileEdt = (EditText) findViewById(R.id.edtMobileNo);
         passwordEdt = (EditText) findViewById(R.id.edtPassword);
         Backtodoctor = (TextView) findViewById(R.id.signupasDoctor);
-        login = (Button) findViewById(R.id.doctorsigninButton);
+
+        login = (Button) findViewById(R.id.signinButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +72,13 @@ public class DoctorLoginActivity extends AppCompatActivity {
                password = passwordEdt.getText().toString();
 
                 new DoctorIdget().execute();
-                new AttemptLogin().execute();
+                if(mobile.matches("") && password.matches("")) {
+                    //new AttemptLogin().execute();
+                    Toast.makeText(DoctorLoginActivity.this, "Field cannot be blank..", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    new AttemptLogin().execute();
+                }
             }
         });
 
@@ -79,6 +97,51 @@ public class DoctorLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorLoginActivity.this,MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tb.setTitle("");
+        tb.setSubtitle("");
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.iconmenu);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent intent = new Intent(DoctorLoginActivity.this,DoctorListActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_photos) {
+                    Intent intent = new Intent(DoctorLoginActivity.this,SearchBloodActivity.class);
+                    startActivity(intent);
+                }
+                else if (id == R.id.nav_movies) {
+                    Intent intent = new Intent(DoctorLoginActivity.this,HealthTips.class);
+                    startActivity(intent);
+                }
+                else if(id == R.id.nav_notifications){
+                    Intent intent = new Intent(DoctorLoginActivity.this,HealthNews.class);
+                    startActivity(intent);
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
             }
         });
     }
@@ -122,6 +185,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
                     return json.getString(TAG_MESSAGE);
                 }
+
 
                 else {
                     return json.getString(TAG_MESSAGE);

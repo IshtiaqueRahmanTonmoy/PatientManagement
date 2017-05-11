@@ -1,109 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#1c3c4d"
-    tools:context="com.patientmanagement.patientsmanagementsystem.PatientDashboard">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/toolbar"/>
+
+    <!-- Included header.xml here -->
+    <ViewStub android:id="@+id/vsHeader"
+        android:inflatedId="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/header" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="60dp">
-
-        <Button
-            android:id="@+id/appoinmentScheduleButton"
-            android:layout_width="250dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:padding="6dip">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Appointment schedule"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_user"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
+            android:layout_weight="1">
+            <Button android:id="@+id/appoinmentScheduleButton"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/appoinmentlist"
+                android:drawableTop="@drawable/appmnmt"/>
+            <Button android:id="@+id/appoinmentDetailButton"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/appoinmentdetails"
+                android:drawableTop="@drawable/details"/>
+        </LinearLayout>
 
-
-        <Button
-            android:id="@+id/appoinmentDetailButton"
-            android:layout_width="250dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Appoinment Details"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:drawableLeft="@drawable/upcomingshcedule"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
+            android:layout_weight="1">
+            <Button android:id="@+id/bloodgroupButton"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/searchblood"
+                android:drawableTop="@drawable/blood"/>
+            <Button android:id="@+id/searchlocation"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/searchhospital"
+                android:drawableTop="@drawable/hospital"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/bloodgroupButton"
-            android:layout_width="250dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Search Blood"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/blood"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
-
-        <Button
-            android:id="@+id/searchlocation"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Search Location"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/distance"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
-
-        <Button
-            android:id="@+id/helthNewsButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Health news"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/sthestoscope"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
-
-        <Button
-            android:id="@+id/helthTipsButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Health tips"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:drawableLeft="@drawable/healthtips"
-            android:layout_gravity="center"
-            android:letterSpacing="0.025"
-            android:padding="10dp"
-            android:layout_marginTop="15dp" />
-
+            android:layout_weight="1">
+            <Button android:id="@+id/helthNewsButton"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/healthnews"
+                android:drawableTop="@drawable/news"/>
+            <Button android:id="@+id/helthTipsButton"
+                style="@style/HomeButton"
+                android:onClick="onButtonClicker"
+                android:text="@string/healthtips"
+                android:drawableTop="@drawable/tips"/>
+        </LinearLayout>
 
     </LinearLayout>
 

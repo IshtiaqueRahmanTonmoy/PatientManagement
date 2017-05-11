@@ -2,6 +2,8 @@
     android:layout_width="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:layout_height="fill_parent">
 
     <include layout="@layout/toolbar"/>
@@ -10,8 +12,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/search"
-        android:hint="Search doctors here"
+        android:hint="Search doctors name/expertise here"
         android:drawableLeft="@android:drawable/ic_menu_search"
+        android:imeOptions="actionDone"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

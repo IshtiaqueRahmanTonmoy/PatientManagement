@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import patientsmanagement.patientmanagement.patientsmanagementsystem.R;
 
@@ -21,6 +23,10 @@ public class DoctorDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_dashboard);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Doctor Dashboard");
+        setSupportActionBar(toolbar);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
@@ -63,6 +69,7 @@ public class DoctorDashboard extends AppCompatActivity {
                 Intent intent = new Intent(DoctorDashboard.this,Expense.class);
                 intent.putExtra(TAG_DOCTORID, doctorId);
                 startActivity(intent);
+
 
             }
         });

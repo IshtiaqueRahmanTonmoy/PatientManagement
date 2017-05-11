@@ -2,7 +2,9 @@
     <string name="app_name">Patient Management System</string>
     <string name="chamberstarttime">Start Time</string>
     <string name="chamberendtime">End Time</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="label_btn_find">Find places</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="doctorname">Doctorname</string>
@@ -29,4 +31,15 @@
     <string name="str_btn_find">Find</string>
     <string name="hnt_et_location">Enter location</string>
     <string name="menu_settings">Settings</string>
+
+    <string name="appoinmentlist">Appoinment Schedule</string>
+    <string name="appoinmentdetails">Appoinment Details</string>
+    <string name="searchblood">Search Blood</string>
+    <string name="searchhospital">Search Hospital</string>
+    <string name="healthnews">Health News</string>
+    <string name="healthtips">Health Tips</string>
+
+    <string name="patientappoinment">Appoinment List</string>
+    <string name="viewspecificprescription">View Specific Prescription</string>
+    <string name="visitrate">Visit Rate</string>
 </resources>

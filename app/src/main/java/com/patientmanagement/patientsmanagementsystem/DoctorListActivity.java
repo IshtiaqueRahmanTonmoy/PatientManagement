@@ -12,13 +12,17 @@ import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -66,6 +70,7 @@ public class DoctorListActivity extends AppCompatActivity {
     private static final String TAG_EXPERTISE = "expertise";
     private static final String TAG_CHAMBERDAY = "chamberday";
     private static final String TAG_CHAMBERTIME = "chambertime";
+
     private static final String TAG_DOCTORFEE = "doctorfee";
     private static final String TAG_FOLLOWUPFEE = "followupfeee";
     private static final String TAG_DISEASE = "disease";
@@ -93,7 +98,16 @@ public class DoctorListActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Doctor List");
+        setSupportActionBar(toolbar);
+
         search = (EditText) findViewById(R.id.search);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
         c = Calendar.getInstance();
 
         //Toast.makeText(DoctorListActivity.this, ""+formattedDate, Toast.LENGTH_SHORT).show();
@@ -102,7 +116,7 @@ public class DoctorListActivity extends AppCompatActivity {
         Bundle b = iin.getExtras();
 
         time = (String) DateFormat.format(delegate,Calendar.getInstance().getTime());
-        Log.d("time",time);
+        //Log.d("time",time);
 
         if(b!=null)
         {
@@ -115,6 +129,17 @@ public class DoctorListActivity extends AppCompatActivity {
         new DownloadJSON().execute();
 
         listview = (ListView) findViewById(R.id.listview);
+
+        listview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
+
+                return false;
+            }
+        });
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -185,6 +210,15 @@ public class DoctorListActivity extends AppCompatActivity {
 
     private class DownloadJSON extends AsyncTask<String, String, String> {
 
+        //ProgressDialog pdLoading = new ProgressDialog(DoctorListActivity.this);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(DoctorListActivity.this);
+            pDialog.setMessage("Getting doctors lists...");
+            pDialog.show();
+        }
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -241,9 +275,10 @@ public class DoctorListActivity extends AppCompatActivity {
             return null;
         }
 
+
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
-
+            pDialog.dismiss();
             listview.setAdapter(adapter);
         }
     }
@@ -280,7 +315,9 @@ public class DoctorListActivity extends AppCompatActivity {
                     params.add(new BasicNameValuePair(TAG_DOCTORID, docid));
 
                     Log.d("param",params.toString());
+
                     // getting JSON Object
+
                     // Note that create product url accepts POST method
                     JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params);
                     Log.d("json",json.toString());
@@ -300,6 +337,7 @@ public class DoctorListActivity extends AppCompatActivity {
                             Intent i = new Intent(getApplicationContext(), DoctorListActivity.class);
 
                             sendSMS(phone, "Congratulations !! " + name + "You have successfully created an appoinment. Your appoinment serial is " + id + "Hope u see in at the date of " + formattedDate);
+                            //Toast.makeText(DoctorListActivity.this, "Created Appoinment Successfully..", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -313,6 +351,7 @@ public class DoctorListActivity extends AppCompatActivity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+            Toast.makeText(DoctorListActivity.this, "Created Appoinment Successfully..", Toast.LENGTH_SHORT).show();
         }
 
     }

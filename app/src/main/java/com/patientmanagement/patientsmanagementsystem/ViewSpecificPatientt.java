@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -65,6 +66,10 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("View Specific Patient");
+        setSupportActionBar(toolbar);
+
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
@@ -73,7 +78,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
         if(b!=null)
         {
             doctorId = b.getString(TAG_DOCTORID);
-            Toast.makeText(ViewSpecificPatientt.this, ""+doctorId, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ViewSpecificPatientt.this, ""+doctorId, Toast.LENGTH_SHORT).show();
             new getPrescriptionNo().execute();
             new getPrescriptionHistory().execute();
             new getMedicineName().execute();
@@ -161,10 +166,7 @@ public class ViewSpecificPatientt  extends AppCompatActivity {
 
             mediadapter = new MedicineListAdapter(ViewSpecificPatientt.this, R.layout.activity_view_specific, medicinelist);
             listview.setAdapter(mediadapter);
-
         }
-
-
     }
 
     public class getMedicineName extends AsyncTask<String, String, String> {

@@ -99,7 +99,7 @@ public class ListViewAdapter extends ArrayAdapter<Doctor> {
 
         //Bitmap b = Bitmap.createScaledBitmap(ldoc.getImage(), 100, 100, false);
        // holder.image.setImageBitmap(ldoc.getImage());
-        holder.image.setImageResource(R.drawable.download);
+        holder.image.setImageResource(R.drawable.doc);
         holder.doctorfee.setText(ldoc.getDoctorfee());
         holder.followupfee.setText(ldoc.getFollowupfeee());
         holder.date.setText(ldoc.getChamberday());

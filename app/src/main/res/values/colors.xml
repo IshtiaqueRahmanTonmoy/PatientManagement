@@ -27,7 +27,7 @@
 
 
     <color name="colorWhite">#FFFFFF</color>
-
+    <color name="ColorShade">#d7dcdc</color>
 
     <color name="color_layout">#f0f1f5</color>
 
@@ -69,5 +69,12 @@
     <color name="gray">#808080</color>
     <color name="lightgrey">#778899</color>
 
+
+    <color name="deepblue">#1c3c4d</color>
+    <color name="PrimaryColor">#2196F3</color>
+    <color name="PrimaryDarkColor">#1976D2</color>
+    <color name="Orange">#d75a30</color>
+
+    <color name="foreground1">#ff355689</color>
 
 </resources>
